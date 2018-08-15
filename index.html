@@ -277,6 +277,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/Hexo之坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/15/Hexo之坑/" itemprop="url">
+                  Hexo之坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-15 21:45:50 / Modified: 21:45:41" itemprop="dateCreated datePublished" datetime="2018-08-15T21:45:50+08:00">2018-08-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误</p>
+<blockquote>
+<p>Error: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>: Permission denied (publickey).<br>fatal: 无法读取远程仓库。<br>请确认您有正确的访问权限并且仓库存在。</p>
+</blockquote>
+<p>当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误</p>
+<blockquote>
+<p>FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">http://hexo.io/docs/troubleshooting.html</a><br>Error: EACCES: permission denied, unlink ‘/home/zx/blog/.deploy_git/archives/index.html’</p>
+</blockquote>
+<p>正确做法:  </p>
+<ol>
+<li>sudo rm -rf .deploy_git</li>
+<li>hexo clean</li>
+<li>hexo g</li>
+<li>hexo d</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/安装完Ubuntu后/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -758,7 +912,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
