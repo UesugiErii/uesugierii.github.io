@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="翻墙electron-ssr proxychains-ng 这个不需要像网上说的那样编译安装,直接apt-get就行了,测试的时候不要用curl ip.cn这个方法,可以用proxychains4 wget https://geoiptool.com/zh/ Gnome Shell如何安装Gnome Shell扩展 推荐几款插件:    Dash to Dock Hide Top Bar Open">
-<meta name="keywords" content="系统优化">
+  <meta name="description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
+<meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装完Ubuntu后">
-<meta property="og:url" content="https://uesugierii.github.io/2018/08/15/安装完Ubuntu后/index.html">
+<meta property="og:title" content="Hexo之坑">
+<meta property="og:url" content="https://uesugierii.github.io/articles/Hexo之坑.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="翻墙electron-ssr proxychains-ng 这个不需要像网上说的那样编译安装,直接apt-get就行了,测试的时候不要用curl ip.cn这个方法,可以用proxychains4 wget https://geoiptool.com/zh/ Gnome Shell如何安装Gnome Shell扩展 推荐几款插件:    Dash to Dock Hide Top Bar Open">
+<meta property="og:description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-16T05:19:49.423Z">
+<meta property="og:updated_time" content="2018-08-17T11:16:35.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安装完Ubuntu后">
-<meta name="twitter:description" content="翻墙electron-ssr proxychains-ng 这个不需要像网上说的那样编译安装,直接apt-get就行了,测试的时候不要用curl ip.cn这个方法,可以用proxychains4 wget https://geoiptool.com/zh/ Gnome Shell如何安装Gnome Shell扩展 推荐几款插件:    Dash to Dock Hide Top Bar Open">
+<meta name="twitter:title" content="Hexo之坑">
+<meta name="twitter:description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/2018/08/15/安装完Ubuntu后/"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/Hexo之坑.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>安装完Ubuntu后 | zx's blog</title>
+  <title>Hexo之坑 | zx's blog</title>
   
 
 
@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/2018/08/15/安装完Ubuntu后/">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/Hexo之坑.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安装完Ubuntu后
+          <h1 class="post-title" itemprop="name headline">Hexo之坑
               
             
           </h1>
@@ -365,7 +365,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-16 13:19:49" itemprop="dateModified" datetime="2018-08-16T13:19:49+08:00">2018-08-16</time>
+                <time title="Modified: 2018-08-17 19:16:35" itemprop="dateModified" datetime="2018-08-17T19:16:35+08:00">2018-08-17</time>
               
             
           </span>
@@ -416,26 +416,21 @@
       
 
       
-        <h2 id="翻墙"><a href="#翻墙" class="headerlink" title="翻墙"></a>翻墙</h2><p><a href="https://github.com/erguotou520/electron-ssr" target="_blank" rel="noopener">electron-ssr</a></p>
-<p><a href="https://github.com/rofl0r/proxychains-ng" target="_blank" rel="noopener">proxychains-ng</a></p>
-<p>这个不需要像网上说的那样编译安装,直接apt-get就行了,测试的时候不要用curl ip.cn这个方法,可以用<br>proxychains4 wget <a href="https://geoiptool.com/zh/" target="_blank" rel="noopener">https://geoiptool.com/zh/</a></p>
-<h2 id="Gnome-Shell"><a href="#Gnome-Shell" class="headerlink" title="Gnome Shell"></a>Gnome Shell</h2><p><a href="https://www.linuxidc.com/Linux/2017-12/149813.htm" target="_blank" rel="noopener">如何安装Gnome Shell扩展</a></p>
-<p>推荐几款插件:  </p>
-<ul>
-<li>Dash to Dock</li>
-<li>Hide Top Bar</li>
-<li>OpenWeather</li>
-<li>System-monitor</li>
-</ul>
-<h2 id="conky"><a href="#conky" class="headerlink" title="conky"></a>conky</h2><p><a href="https://github.com/brndnmtthws/conky" target="_blank" rel="noopener">Light-weight system monitor for X.</a></p>
-<p>可以非常详细的看到系统各个数据,上面的System-monitor主要用来看cpu温度</p>
-<h2 id="ram-disk"><a href="#ram-disk" class="headerlink" title="ram disk"></a>ram disk</h2><p>一般人应该用不到(一般人也不会用linux吧…),可以在/etc/fstab添加类似下列语句<br>tmpfs /home/用户名/.cache tmpfs size=2G,defaults,noatime,mode=777    0     0<br>ram disk随机性能读写非常快.</p>
-<p><a href="https://github.com/UesugiErii/uesugierii.github.io/blob/master/_data/image/%E5%AE%89%E8%A3%85%E5%AE%8CUbuntu%E5%90%8E/ramdiskspeed.PNG" target="_blank" rel="noopener">测试结果</a></p>
-<p>当然如果有NVME或PCIE SSD的话就是另外一回事了.</p>
-<h2 id="下面是计算机专业方面的了"><a href="#下面是计算机专业方面的了" class="headerlink" title="下面是计算机专业方面的了"></a>下面是计算机专业方面的了</h2><h2 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h2><p>不知道为什么我只能安装9.0,安装9.1会无画面,虽然Tensorflow要求也是9.0</p>
-<p>直接安装官方方法按照,不要用什么CSDN的方法</p>
-<p><a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1704&amp;target_type=deblocal" target="_blank" rel="noopener">CUDA Toolkit 9.0 Downloads</a></p>
-<h2 id="编程软件"><a href="#编程软件" class="headerlink" title="编程软件"></a>编程软件</h2><p>jetbrains家的软件在Ubuntu上最好通过Toolbox App去安装管理,非常方便<br>如果Pycharm通过apt-get安装,之后更新时旧版本文件会一直存在,删都删不了</p>
+        <p>进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误</p>
+<blockquote>
+<p>Error: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>: Permission denied (publickey).<br>fatal: 无法读取远程仓库。<br>请确认您有正确的访问权限并且仓库存在。</p>
+</blockquote>
+<p>当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误</p>
+<blockquote>
+<p>FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">http://hexo.io/docs/troubleshooting.html</a><br>Error: EACCES: permission denied, unlink ‘/home/zx/blog/.deploy_git/archives/index.html’</p>
+</blockquote>
+<p>正确做法:  </p>
+<ol>
+<li>sudo rm -rf .deploy_git</li>
+<li>hexo clean</li>
+<li>hexo g</li>
+<li>hexo d</li>
+</ol>
 
       
     </div>
@@ -456,7 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/系统优化/" rel="tag"># 系统优化</a>
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
           
         </div>
       
@@ -469,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/15/远离国产软件/" rel="next" title="远离国产软件">
-                <i class="fa fa-chevron-left"></i> 远离国产软件
+              <a href="/articles/安装完Ubuntu后.html" rel="next" title="安装完Ubuntu后">
+                <i class="fa fa-chevron-left"></i> 安装完Ubuntu后
               </a>
             
           </div>
@@ -479,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/15/Hexo之坑/" rel="prev" title="Hexo之坑">
-                Hexo之坑 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/starblast入门.html" rel="prev" title="starblast入门">
+                starblast入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,17 +521,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -622,22 +608,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">1.</span> <span class="nav-text">翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">2.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">3.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ram-disk"><span class="nav-number">4.</span> <span class="nav-text">ram disk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面是计算机专业方面的了"><span class="nav-number">5.</span> <span class="nav-text">下面是计算机专业方面的了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA"><span class="nav-number">6.</span> <span class="nav-text">CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程软件"><span class="nav-number">7.</span> <span class="nav-text">编程软件</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
