@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="zx&#39;s blog">
 <meta property="og:description" content="这篇文章主要讲解STL源码剖析 P.224 P.229 中的find()和insert_unique()函数 . 这两个函数写的很巧妙 , 理解有点绕 . 网上都找不到讲解 , 都TM一堆抄书的. 注意事项 所使用的代码非书上代码 , 使用gcc代码/usr/include/c++/7/bits/stl_tree.h来说明(基本原理没变)  说明时我会把变量的前两个下划线去掉 , 打起来太烦了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T10:42:51.482Z">
+<meta property="og:updated_time" content="2018-08-23T11:03:37.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL源码剖析之RB_tree之insert_unique()与find()函数">
 <meta name="twitter:description" content="这篇文章主要讲解STL源码剖析 P.224 P.229 中的find()和insert_unique()函数 . 这两个函数写的很巧妙 , 理解有点绕 . 网上都找不到讲解 , 都TM一堆抄书的. 注意事项 所使用的代码非书上代码 , 使用gcc代码/usr/include/c++/7/bits/stl_tree.h来说明(基本原理没变)  说明时我会把变量的前两个下划线去掉 , 打起来太烦了">
@@ -348,7 +348,7 @@
                 
               
 
-              <time title="Created: 2018-08-23 00:00:00 / Modified: 18:42:51" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
+              <time title="Created: 2018-08-23 00:00:00 / Modified: 19:03:37" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
             
 
             
@@ -423,7 +423,7 @@
 <p>find()函数第9行 , 第一个判断 j == end() , 我们可以知道只有当不存在 x 使 k ≤ x 时 , j 才为 end() , 即要寻找的值大于整个树的最大值 , 那当然不存在这样的值 , 返回 end().</p>
 <p>第10和第11行第二个判断 , 此时 j 不为 end() . 下面就是精彩的地方了.</p>
 <p>分为两种情况.</p>
-<p><font color="#CD5C5C">当 _M_key_compare(__k,_S_key(__j._M_node)) 返回 1 时 , 可知 j &gt; k , 从_M_lower_bound()函数中 k ≤ j , 那么一定不存在 k (有些人可能考虑 j 的父结点是否可能等于 k , 见特殊情况1).</font></p>
+<p><font color="#CD5C5C">当 _M_key_compare(__k,_S_key(__j._M_node)) 返回 1 时 , 可知 j &gt; k , 从_M_lower_bound()函数中 k ≤ j , 那么一定不存在 k (有些人可能考虑 j 的父结点是否可能等于 k , 见特殊说明1).</font></p>
 
 <p><font color="#CD5C5C">当 _M_key_compare(__k,_S_key(__j._M_node)) 返回 0 时 , 可知 j ≤ k , 从_M_lower_bound()函数中 k ≤ j , k 既大于等于 j , 又小于等于 j , 那么唯一的可能就是 k == j . 返回 j 所在的结点的迭代器.</font></p>
 
@@ -431,17 +431,17 @@
 <p>这个函数逻辑上和find()很相似 , 上面懂了的话这个应该也能看懂.</p>
 <p>在第14到19行中一直在比较大小 , 我们可以看到 y 是插入点的父结点 , comp 存储了 k 与 x 的大小关系.</p>
 <p>这里同样也要分为两种情况.</p>
-<p><font color="#CD5C5C">当 comp 为 1 时 , 如果 j == begin() , 即 k 比整个树最小值还小 , 那么可以插入 . 如果不等于begin() , 将 j 变为 j– , 即比 j 小的那个数(j– 与 j 整体大小上相邻) . 此时再比较 j– 与 k 的大小 , 如果 k &gt; j– , 又根据 comp 为 1 可以看出 j &gt; k , 也就是说 k 位于 j– 与 j 之间 , 那么必然是唯一的 . 如果 j– ≥ k , 见特殊情况3.</font></p>
+<p><font color="#CD5C5C">当 comp 为 1 时 , 如果 j == begin() , 即 k 比整个树最小值还小 , 那么可以插入 . 如果不等于begin() , 将 j 变为 j- - , 即比 j 小的那个数(j- - 与 j 整体大小上相邻) . 此时再比较 j- - 与 k 的大小 , 如果 k &gt; j- - , 又根据 comp 为 1 可以看出 j &gt; k , 也就是说 k 位于 j- - 与 j 之间 , 那么必然是唯一的 . 如果 j- - ≥ k , 见特殊说明3.</font></p>
 
-<p><font color="#CD5C5C">当 comp 为 0 时 . 即 k ≥ j , 此时再比较 j 与 k 大小 , 如果 k &gt; j , 那么唯一(有些人可能会考虑 j 的父结点等于 k , 见特殊情况2). 否则的话即 j ≥ k , 此时 j == k , 不唯一.</font></p>
+<p><font color="#CD5C5C">当 comp 为 0 时 . 即 k ≥ j , 此时再比较 j 与 k 大小 , 如果 k &gt; j , 那么唯一(有些人可能会考虑 j 的父结点等于 k , 见特殊说明2). 否则的话即 j ≥ k , 此时 j == k , 不唯一.</font></p>
 
 
-<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><ol>
+<h2 id="特殊说明"><a href="#特殊说明" class="headerlink" title="特殊说明"></a>特殊说明</h2><ol>
 <li><p>如果 j 的某个父结点等于 k , 那么那个时候会向左 , 而左边的所有结点都比 k 小 , 最后比较时不可能出现 j &gt; k 的情况 . 即一路上不重复且正确方向到底.</p>
 </li>
 <li><p>如果 j 的某个父结点等于 k , 那么那个时候会向右 , 而右边的所有结点都比 k 大 , 最后比较时不可能出现 k &gt; j 的情况 . 即一路上不重复且正确方向到底.</p>
 </li>
-<li><p>j ≥ k &nbsp;and&nbsp; j– ≥ k , 比 j 小的 j– 只能出现在 j 的左子树和不为左结点的父结点的父结点(设为 M ) , 因为 x == 0 , 所以左子树为空 , 而 j 是在 M 的右结点的左结点下 , 即 k ≥ j– , 此时可得 k 不唯一.</p>
+<li><p>j ≥ k &nbsp;and&nbsp; j- - ≥ k , 比 j 小的 j- - 只能出现在 j 的左子树和不为左结点的父结点的父结点(设为 M ) , 因为 x == 0 , 所以左子树为空 , 而 j 是在 M 的右结点的左结点下 , 即 k ≥ j- - , 此时可得 k 不唯一.</p>
 </li>
 </ol>
 
@@ -642,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#M-get-insert-unique-pos"><span class="nav-number">2.1.</span> <span class="nav-text">_M_get_insert_unique_pos()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">2.2.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-lower-bound"><span class="nav-number">2.3.</span> <span class="nav-text">_M_lower_bound()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-insert-node"><span class="nav-number">2.4.</span> <span class="nav-text">_M_insert_node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-函数"><span class="nav-number">3.</span> <span class="nav-text">find()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-unique"><span class="nav-number">4.</span> <span class="nav-text">insert_unique()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊情况"><span class="nav-number">5.</span> <span class="nav-text">特殊情况</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#M-get-insert-unique-pos"><span class="nav-number">2.1.</span> <span class="nav-text">_M_get_insert_unique_pos()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">2.2.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-lower-bound"><span class="nav-number">2.3.</span> <span class="nav-text">_M_lower_bound()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-insert-node"><span class="nav-number">2.4.</span> <span class="nav-text">_M_insert_node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-函数"><span class="nav-number">3.</span> <span class="nav-text">find()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-unique"><span class="nav-number">4.</span> <span class="nav-text">insert_unique()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊说明"><span class="nav-number">5.</span> <span class="nav-text">特殊说明</span></a></li></ol></div>
             
 
           </div>
