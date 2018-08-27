@@ -109,14 +109,14 @@
 
 
   <meta name="description" content="这篇文章主要讲解STL源码剖析 P.224 P.229 中的find()和insert_unique()函数 . 这两个函数写的很巧妙 , 理解有点绕 . 网上都找不到讲解 , 都TM一堆抄书的. 注意事项 所使用的代码非书上代码 , 使用gcc代码/usr/include/c++/7/bits/stl_tree.h来说明(基本原理没变)  说明时我会把变量的前两个下划线去掉 , 打起来太烦了">
-<meta name="keywords" content="编程,C++">
+<meta name="keywords" content="STL源码剖析,RB_Tree,insert_unique(),find()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STL源码剖析之RB_tree之insert_unique()与find()函数">
-<meta property="og:url" content="https://uesugierii.github.io/articles/STL源码剖析之RB_tree之insert_unique()与find()函数.html">
+<meta property="og:url" content="https://uesugierii.github.io/articles/6.html">
 <meta property="og:site_name" content="zx&#39;s blog">
 <meta property="og:description" content="这篇文章主要讲解STL源码剖析 P.224 P.229 中的find()和insert_unique()函数 . 这两个函数写的很巧妙 , 理解有点绕 . 网上都找不到讲解 , 都TM一堆抄书的. 注意事项 所使用的代码非书上代码 , 使用gcc代码/usr/include/c++/7/bits/stl_tree.h来说明(基本原理没变)  说明时我会把变量的前两个下划线去掉 , 打起来太烦了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T11:03:37.452Z">
+<meta property="og:updated_time" content="2018-08-27T11:47:46.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL源码剖析之RB_tree之insert_unique()与find()函数">
 <meta name="twitter:description" content="这篇文章主要讲解STL源码剖析 P.224 P.229 中的find()和insert_unique()函数 . 这两个函数写的很巧妙 , 理解有点绕 . 网上都找不到讲解 , 都TM一堆抄书的. 注意事项 所使用的代码非书上代码 , 使用gcc代码/usr/include/c++/7/bits/stl_tree.h来说明(基本原理没变)  说明时我会把变量的前两个下划线去掉 , 打起来太烦了">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/STL源码剖析之RB_tree之insert_unique()与find()函数.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/6.html"/>
 
 
 
@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/STL源码剖析之RB_tree之insert_unique()与find()函数.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/6.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -348,12 +348,24 @@
                 
               
 
-              <time title="Created: 2018-08-23 00:00:00 / Modified: 19:03:37" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
+              <time title="Created: 2018-08-23 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-27 19:47:46" itemprop="dateModified" datetime="2018-08-27T19:47:46+08:00">2018-08-27</time>
               
             
           </span>
@@ -410,7 +422,7 @@
 </li>
 <li><p>说明时我会把变量的前两个下划线去掉 , 打起来太烦了</p>
 </li>
-<li><font color="#CD5C5C">在比较结点大小时 , 会使用_M_key_compare函数 , 这是一个仿函数 , 这里做一个约定 , 当这个函数返回 1 时 , 定义为前者比后者”小” , 这个”小”是抽象的小 , 下文表示&gt;或&lt;时都表示抽象的大或小 , 具体实现取决于_Key_compare . 如果将 1 定义为大的话 , - - 和 ++ 会使反向的.</font>
+<li><font color="#CD5C5C">在比较结点大小时 , 会使用_M_key_compare函数 , 这是一个仿函数 , 这里做一个约定 , 当这个函数返回 1 时 , 定义为前者比后者”小” , 这个”小”是抽象的小 , 下文表示&gt;或&lt;时都表示抽象的大或小 , 具体实现取决于_Key_compare . 如果将 1 定义为大的话 , - - 和 ++ 会是反向的.</font>
 
 </li>
 </ol>
@@ -479,7 +491,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/Windows使用技巧.html" rel="next" title="Windows使用技巧">
+              <a href="/articles/5.html" rel="next" title="Windows使用技巧">
                 <i class="fa fa-chevron-left"></i> Windows使用技巧
               </a>
             
