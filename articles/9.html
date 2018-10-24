@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="编程,技巧,杂谈">
+  <meta name="description" content="概述这个文章主要讲解实现Natural Policy Gradient算法的一些要点和一些坑. 讲解中以  https://github.com/studywolf/blog/blob/master/tensorflow_models/npg_cartpole/natural_policy_gradient.py    来讲解 坑数值溢出我们可以看到这上面这个人的代码中,每次强制要200步之后才开">
+<meta name="keywords" content="Natural Policy Gradient,强化学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0">
-<meta property="og:url" content="https://uesugierii.github.io/articles/0.html">
+<meta property="og:title" content="Natural Policy Gradient实现要点">
+<meta property="og:url" content="https://uesugierii.github.io/articles/9.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="编程,技巧,杂谈">
+<meta property="og:description" content="概述这个文章主要讲解实现Natural Policy Gradient算法的一些要点和一些坑. 讲解中以  https://github.com/studywolf/blog/blob/master/tensorflow_models/npg_cartpole/natural_policy_gradient.py    来讲解 坑数值溢出我们可以看到这上面这个人的代码中,每次强制要200步之后才开">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-11T10:08:58.992Z">
+<meta property="og:updated_time" content="2018-10-24T12:57:39.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="0">
-<meta name="twitter:description" content="编程,技巧,杂谈">
+<meta name="twitter:title" content="Natural Policy Gradient实现要点">
+<meta name="twitter:description" content="概述这个文章主要讲解实现Natural Policy Gradient算法的一些要点和一些坑. 讲解中以  https://github.com/studywolf/blog/blob/master/tensorflow_models/npg_cartpole/natural_policy_gradient.py    来讲解 坑数值溢出我们可以看到这上面这个人的代码中,每次强制要200步之后才开">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/0.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/9.html"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>0 | zx's blog</title>
+  <title>Natural Policy Gradient实现要点 | zx's blog</title>
   
 
 
@@ -305,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/0.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -322,7 +323,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">0
+          <h2 class="post-title" itemprop="name headline">Natural Policy Gradient实现要点
               
             
           </h2>
@@ -347,28 +348,34 @@
                 
               
 
-              <time title="Created: 2018-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-30T00:00:00+08:00">2018-08-30</time>
+              <time title="Created: 2018-10-24 00:00:00 / Modified: 20:57:39" itemprop="dateCreated datePublished" datetime="2018-10-24T00:00:00+08:00">2018-10-24</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-11 18:08:58" itemprop="dateModified" datetime="2018-09-11T18:08:58+08:00">2018-09-11</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -397,7 +404,41 @@
       
 
       
-        
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这个文章主要讲解实现Natural Policy Gradient算法的一些要点和一些坑.</p>
+<p>讲解中以</p>
+<blockquote>
+<p><a href="https://github.com/studywolf/blog/blob/master/tensorflow_models/npg_cartpole/natural_policy_gradient.py" target="_blank" rel="noopener">https://github.com/studywolf/blog/blob/master/tensorflow_models/npg_cartpole/natural_policy_gradient.py</a>  </p>
+</blockquote>
+<p>来讲解</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="数值溢出"><a href="#数值溢出" class="headerlink" title="数值溢出"></a>数值溢出</h3><p>我们可以看到这上面这个人的代码中,每次强制要200步之后才开始学习  </p>
+<p>如果你每次done了以后就开始学习,那么会数值溢出  </p>
+<p>个人猜测原因是前几次agnet并不能产生很多样本,一般在11左右,这就导致了不稳定  </p>
+<p>所以前期一定要大量样本一起喂入</p>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><h3 id="计算advantages"><a href="#计算advantages" class="headerlink" title="计算advantages"></a>计算advantages</h3><p>用另外一个network去estimate state value<br>real value 等于真实reward计算出来的state value<br>advantages = real value - estimate value </p>
+<h3 id="矩阵乘法问题"><a href="#矩阵乘法问题" class="headerlink" title="矩阵乘法问题"></a>矩阵乘法问题</h3><p>在那个链接的代码中,参数大小是(4,2),如果不reshape为(8,1),那么你会发现Fischer information matrix与gradient无法相乘,因为矩阵大小不匹配</p>
+<h3 id="求逆矩阵"><a href="#求逆矩阵" class="headerlink" title="求逆矩阵"></a>求逆矩阵</h3><p>这上述代码中,他采用了直接求伪逆矩阵,这种方法相对来说计算量比较大,CG方法可以减少计算量.</p>
+<p>同时,不能使用tensorflow直接求逆矩阵,因为有时Fischer information matrix的行列式的值为0</p>
+<h2 id="优化提高"><a href="#优化提高" class="headerlink" title="优化提高"></a>优化提高</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>一个自然而然的问题出现了,我们现在不想要固定步数的agent怎么办.  </p>
+<p>当你尝试修改的时候你会发现在计算gradient的时候迭代时必须是一个固定的int值,否则就报错</p>
+<p>也就是说不能再使用之前的方法计算g了</p>
+<p>用过tensorflow的人都知道求gradient时是会自动求和的,而这不是我们想要的,我们想要的是jacobian matrix</p>
+<p>有些人可能想到split将样本切割然后依次求梯度,但在切割时候必须提供如何切割,需要具体值,不能用tf.cast(tf.shape(self.tf_a)[0], tf.float32)这样的语句来生成</p>
+<p>查了很久以后我终于找到了这个</p>
+<blockquote>
+<p><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/ops/parallel_for/gradients.py#L28" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/ops/parallel_for/gradients.py#L28</a></p>
+</blockquote>
+<p>导入方法</p>
+<blockquote>
+<p>from tensorflow.python.ops.parallel_for import jacobian</p>
+</blockquote>
+<p>有了这个就可以很方便的求梯度了</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>另外一个可以改进的点是乘以advantages的地方,这个方法会使代码更好看,性能我没有进行测试.</p>
+<blockquote>
+<p>g = tf.gradients(self.action_log_prob_flat, self.policy_parameter, grad_ys=self.tf_adv)</p>
+</blockquote>
+<p>这样就直接相当于对梯度加了一个权重</p>
+<p>以上两个提高都可以面对不定长的样本.</p>
+
       
     </div>
 
@@ -418,7 +459,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/0.html" title="0">https://uesugierii.github.io/articles/0.html</a>
+    <a href="https://uesugierii.github.io/articles/9.html" title="Natural Policy Gradient实现要点">https://uesugierii.github.io/articles/9.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -429,6 +470,18 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/编程/" rel="tag"># 编程</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
+          
+        </div>
+      
 
       
       
@@ -438,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/7.html" rel="next" title="STL源码剖析之rotare的数学原理">
-                <i class="fa fa-chevron-left"></i> STL源码剖析之rotare的数学原理
+              <a href="/articles/8.html" rel="next" title="ubuntu挂载windows分区或磁盘">
+                <i class="fa fa-chevron-left"></i> ubuntu挂载windows分区或磁盘
               </a>
             
           </div>
@@ -447,10 +500,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/8.html" rel="prev" title="ubuntu挂载windows分区或磁盘">
-                ubuntu挂载windows分区或磁盘 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -495,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,6 +656,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑"><span class="nav-number">2.</span> <span class="nav-text">坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值溢出"><span class="nav-number">2.1.</span> <span class="nav-text">数值溢出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要点"><span class="nav-number">3.</span> <span class="nav-text">要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算advantages"><span class="nav-number">3.1.</span> <span class="nav-text">计算advantages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵乘法问题"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵乘法问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求逆矩阵"><span class="nav-number">3.3.</span> <span class="nav-text">求逆矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化提高"><span class="nav-number">4.</span> <span class="nav-text">优化提高</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1"><span class="nav-number">4.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2"><span class="nav-number">4.2.</span> <span class="nav-text">2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
