@@ -108,25 +108,28 @@
 
 
 
-  <meta name="description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
-<meta name="keywords" content="windows,ubuntu,只读">
+  <meta name="description" content="近几年来,bt下载越来越慢,百度云直接全是下载失败,迅雷也不行了,国内bt也被限制,当然这都是我们伟大的党的功劳 现在我感觉最好的下载方法就是国外vps上bt下载,然后再传回本地 下面放两个速度对比,国外20MB/s,国内1MB/s,呵呵">
+<meta name="keywords" content="BT下载,迅雷,百度云">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu挂载windows分区或磁盘">
-<meta property="og:url" content="https://uesugierii.github.io/articles/8.html">
+<meta property="og:title" content="谈谈中国BT下载">
+<meta property="og:url" content="https://uesugierii.github.io/articles/15.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
+<meta property="og:description" content="近几年来,bt下载越来越慢,百度云直接全是下载失败,迅雷也不行了,国内bt也被限制,当然这都是我们伟大的党的功劳 现在我感觉最好的下载方法就是国外vps上bt下载,然后再传回本地 下面放两个速度对比,国外20MB/s,国内1MB/s,呵呵">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T04:54:18.432Z">
+<meta property="og:image" content="https://uesugierii.github.io/images/15/1.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/15/2.png">
+<meta property="og:updated_time" content="2019-02-27T07:42:34.368Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu挂载windows分区或磁盘">
-<meta name="twitter:description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
+<meta name="twitter:title" content="谈谈中国BT下载">
+<meta name="twitter:description" content="近几年来,bt下载越来越慢,百度云直接全是下载失败,迅雷也不行了,国内bt也被限制,当然这都是我们伟大的党的功劳 现在我感觉最好的下载方法就是国外vps上bt下载,然后再传回本地 下面放两个速度对比,国外20MB/s,国内1MB/s,呵呵">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/15/1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/8.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/15.html"/>
 
 
 
@@ -136,7 +139,7 @@
   };
 </script>
 
-  <title>ubuntu挂载windows分区或磁盘 | zx's blog</title>
+  <title>谈谈中国BT下载 | zx's blog</title>
   
 
 
@@ -306,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/8.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/15.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +326,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ubuntu挂载windows分区或磁盘
+          <h2 class="post-title" itemprop="name headline">谈谈中国BT下载
               
             
           </h2>
@@ -348,7 +351,7 @@
                 
               
 
-              <time title="Created: 2018-09-10 00:00:00 / Modified: 12:54:18" itemprop="dateCreated datePublished" datetime="2018-09-10T00:00:00+08:00">2018-09-10</time>
+              <time title="Created: 2019-02-27 00:00:00 / Modified: 15:42:34" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">2019-02-27</time>
             
 
             
@@ -370,7 +373,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2019/" itemprop="url" rel="index"><span itemprop="name">2019</span></a></span>
 
                 
                 
@@ -404,19 +407,11 @@
       
 
       
-        <p>当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况.</p>
-<p>即使强行挂载为rw也是无法创建文件的.</p>
-<p>原因就在于windows的关机并没有完全关闭.</p>
-<p><a href="https://askubuntu.com/questions/145902/unable-to-mount-windows-ntfs-filesystem-due-to-hibernation" target="_blank" rel="noopener">参考资料</a></p>
-<p>解决方案:</p>
-<ol>
-<li>关闭快速启动</li>
-<li>管理员权限运行<blockquote>
-<p>powercfg /h off</p>
-</blockquote>
-</li>
-</ol>
-<p>我反正还没看到过有其他哪篇文章讲到第二点的</p>
+        <p>近几年来,bt下载越来越慢,百度云直接全是下载失败,迅雷也不行了,国内bt也被限制,当然这都是我们伟大的党的功劳</p>
+<p>现在我感觉最好的下载方法就是国外vps上bt下载,然后再传回本地</p>
+<p>下面放两个速度对比,国外20MB/s,国内1MB/s,呵呵</p>
+<p><img src="/images/15/1.png" alt=""></p>
+<p><img src="/images/15/2.png" alt=""></p>
 
       
     </div>
@@ -438,7 +433,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/8.html" title="ubuntu挂载windows分区或磁盘">https://uesugierii.github.io/articles/8.html</a>
+    <a href="https://uesugierii.github.io/articles/15.html" title="谈谈中国BT下载">https://uesugierii.github.io/articles/15.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -449,6 +444,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+          
+        </div>
+      
 
       
       
@@ -458,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/0.html" rel="next" title="0">
-                <i class="fa fa-chevron-left"></i> 0
+              <a href="/articles/14.html" rel="next" title="破解wifi">
+                <i class="fa fa-chevron-left"></i> 破解wifi
               </a>
             
           </div>
@@ -467,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/9.html" rel="prev" title="Natural Policy Gradient 实现要点">
-                Natural Policy Gradient 实现要点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
