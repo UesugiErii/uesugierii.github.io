@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="1984">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zx&#39;s blog">
-<meta property="og:url" content="https://uesugierii.github.io/interesting_things/中国政府人脸识别监视人民/readme.html">
+  <meta name="description" content="简写:A.EFI代表A硬盘的EFI分区 场景我电脑已经有一个主系统A(ubuntu)和副系统B(windows),现在我又需要一个移动系统C(ubuntu),为了在学校机器上进行编程 问题问题1当我完成C的安装后,A的引导无法被BIOS发现,只能从C的引导进入A 问题2当我解决A,C的引导,使其能被BIOS发现后,C在别的主板上无法成功进入系统 解决解决问题1分别进入A,C系统内,执行以下代码 s">
+<meta name="keywords" content="多硬盘,多ubuntu系统,UEFI,EFI分区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多硬盘多ubuntu系统UEFI引导问题">
+<meta property="og:url" content="https://uesugierii.github.io/articles/21.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="1984">
+<meta property="og:description" content="简写:A.EFI代表A硬盘的EFI分区 场景我电脑已经有一个主系统A(ubuntu)和副系统B(windows),现在我又需要一个移动系统C(ubuntu),为了在学校机器上进行编程 问题问题1当我完成C的安装后,A的引导无法被BIOS发现,只能从C的引导进入A 问题2当我解决A,C的引导,使其能被BIOS发现后,C在别的主板上无法成功进入系统 解决解决问题1分别进入A,C系统内,执行以下代码 s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-16T14:02:03.000Z">
+<meta property="og:updated_time" content="2019-05-27T10:06:44.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zx&#39;s blog">
-<meta name="twitter:description" content="1984">
+<meta name="twitter:title" content="多硬盘多ubuntu系统UEFI引导问题">
+<meta name="twitter:description" content="简写:A.EFI代表A硬盘的EFI分区 场景我电脑已经有一个主系统A(ubuntu)和副系统B(windows),现在我又需要一个移动系统C(ubuntu),为了在学校机器上进行编程 问题问题1当我完成C的安装后,A的引导无法被BIOS发现,只能从C的引导进入A 问题2当我解决A,C的引导,使其能被BIOS发现后,C在别的主板上无法成功进入系统 解决解决问题1分别进入A,C系统内,执行以下代码 s">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/interesting_things/中国政府人脸识别监视人民/readme.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/21.html"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title> | zx's blog</title>
+  <title>多硬盘多ubuntu系统UEFI引导问题 | zx's blog</title>
   
 
 
@@ -285,135 +286,219 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/21.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h2 class="post-title" itemprop="name headline"></h2>
-
-<div class="post-meta">
-  
-  
-
-
-  
-  
-  <ul class="breadcrumb">
-    
-      
-      
         
-          <li><a href="/interesting_things/">INTERESTING_THINGS</a></li>
+        
+          <h2 class="post-title" itemprop="name headline">多硬盘多ubuntu系统UEFI引导问题
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">2019-05-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-27 18:06:44" itemprop="dateModified" datetime="2019-05-27T18:06:44+08:00">2019-05-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2019/" itemprop="url" rel="index"><span itemprop="name">2019</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
           
             
           
-        
-      
-    
-      
-      
-        
-          <li>中国政府人脸识别监视人民</li>
-        
-      
-    
-      
-      
-        
-          <li><a href="/interesting_things/readme.html/">README.HTML</a></li>
+
           
-            
           
-        
-      
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-  </ul>
 
-
-</div>
-
-</header>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
-      <div class="post-body">
-        
-        
-          <p>1984</p>
 
-        
-      </div>
       
-      
+        <p>简写:A.EFI代表A硬盘的EFI分区</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>我电脑已经有一个主系统A(ubuntu)和副系统B(windows),现在我又需要一个移动系统C(ubuntu),为了在学校机器上进行编程</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>当我完成C的安装后,A的引导无法被BIOS发现,只能从C的引导进入A</p>
+<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>当我解决A,C的引导,使其能被BIOS发现后,C在别的主板上无法成功进入系统</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="解决问题1"><a href="#解决问题1" class="headerlink" title="解决问题1"></a>解决问题1</h3><p>分别进入A,C系统内,执行以下代码</p>
+<p><code>sudo update-grub</code></p>
+<p><code>sudo grub-install (disk eg. /dev/sda1)</code></p>
+<h3 id="解决问题2"><a href="#解决问题2" class="headerlink" title="解决问题2"></a>解决问题2</h3><h4 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h4><p>即使将bootloader安装进C.EFI后,但是C的/etc/fstab中还是会尝试加载A.EFI来进行引导</p>
+<h4 id="修改fstab"><a href="#修改fstab" class="headerlink" title="修改fstab"></a>修改fstab</h4><p><code>sudo vim /etc/fstab</code></p>
+<p>将EFI分区挂载改为C.EFI,只需修改UUID即可</p>
+
       
     </div>
+
     
 
+    
+    
+    
 
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://uesugierii.github.io/articles/21.html" title="多硬盘多ubuntu系统UEFI引导问题">https://uesugierii.github.io/articles/21.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+            <a href="/tags/Debug/" rel="tag"># Debug</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/20.html" rel="next" title="纪念starblast登顶">
+                <i class="fa fa-chevron-left"></i> 纪念starblast登顶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
   
   
-  <ul class="breadcrumb">
-    
-      
-      
-        
-          <li><a href="/interesting_things/">INTERESTING_THINGS</a></li>
-          
-            
-          
-        
-      
-    
-      
-      
-        
-          <li>中国政府人脸识别监视人民</li>
-        
-      
-    
-      
-      
-        
-          <li><a href="/interesting_things/readme.html/">README.HTML</a></li>
-          
-            
-          
-        
-      
-    
-  </ul>
+  
+  </article>
 
 
-    
-    
-    
   </div>
 
 
@@ -443,8 +528,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -550,6 +644,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-number">2.1.</span> <span class="nav-text">问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2"><span class="nav-number">2.2.</span> <span class="nav-text">问题2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题1"><span class="nav-number">3.1.</span> <span class="nav-text">解决问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题2"><span class="nav-number">3.2.</span> <span class="nav-text">解决问题2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#产生原因"><span class="nav-number">3.2.1.</span> <span class="nav-text">产生原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改fstab"><span class="nav-number">3.2.2.</span> <span class="nav-text">修改fstab</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
