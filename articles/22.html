@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="zx&#39;s blog">
 <meta property="og:description" content="问题在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory 解决参考: Pycharm environment different than command line 直接从命令行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-31T12:35:55.197Z">
+<meta property="og:updated_time" content="2019-05-31T13:08:13.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pycharm运行tensorflow找不到libcublas.so.10.0">
 <meta name="twitter:description" content="问题在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory 解决参考: Pycharm environment different than command line 直接从命令行">
@@ -348,7 +348,7 @@
                 
               
 
-              <time title="Created: 2019-05-31 00:00:00 / Modified: 20:35:55" itemprop="dateCreated datePublished" datetime="2019-05-31T00:00:00+08:00">2019-05-31</time>
+              <time title="Created: 2019-05-31 00:00:00 / Modified: 21:08:13" itemprop="dateCreated datePublished" datetime="2019-05-31T00:00:00+08:00">2019-05-31</time>
             
 
             
@@ -408,7 +408,10 @@
 <p><code>ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory</code></p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>参考: <a href="https://stackoverflow.com/questions/19715724/pycharm-environment-different-than-command-line/19717016#19717016" target="_blank" rel="noopener">Pycharm environment different than command line</a></p>
 <p>直接从命令行启动Pycharm即可</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm无法找到LD_LIBRARY_PATH路径,即使在运行的地方手动加上这个路径也不行</p>
+<p>或者</p>
+<p>在Run/Debug Configurations中path里手动加入LD_LIBRARY_PATH路径</p>
+<p><code>LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64</code></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm无法找到LD_LIBRARY_PATH路径</p>
 
       
     </div>
