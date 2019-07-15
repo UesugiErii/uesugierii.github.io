@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="zx&#39;s blog">
 <meta property="og:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T21:08:55.616Z">
+<meta property="og:updated_time" content="2019-07-15T08:28:08.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装完Ubuntu后">
 <meta name="twitter:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
@@ -365,7 +365,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-02 05:08:55" itemprop="dateModified" datetime="2019-06-02T05:08:55+08:00">2019-06-02</time>
+                <time title="Modified: 2019-07-15 16:28:08" itemprop="dateModified" datetime="2019-07-15T16:28:08+08:00">2019-07-15</time>
               
             
           </span>
@@ -434,15 +434,12 @@
 <p><code>fcitx-config-gtk3</code></p>
 <p>配置,此时应该默认就是google pinyin了</p>
 <h3 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h3><p>我自己的电脑出现选择google pinyin但无法使用的情况,然后我通过把ibus卸载解决</p>
-<h2 id="翻墙"><a href="#翻墙" class="headerlink" title="翻墙"></a>翻墙</h2><p><code>sudo apt install libgtk2.0-0:i386</code></p>
-<p><a href="https://github.com/erguotou520/electron-ssr" target="_blank" rel="noopener">electron-ssr</a></p>
+<h2 id="翻墙"><a href="#翻墙" class="headerlink" title="翻墙"></a>翻墙</h2><p><a href="https://github.com/erguotou520/electron-ssr" target="_blank" rel="noopener">electron-ssr</a></p>
 <p>上面软件作者已删除软件,需要者自己找备份</p>
 <p><a href="https://github.com/rofl0r/proxychains-ng" target="_blank" rel="noopener">proxychains-ng</a></p>
 <p><code>sudo apt install proxychains4</code></p>
 <p>配置文件在/etc/proxychains4.conf,修改最后一行即可</p>
 <p>测试的时候不要用curl ip.cn这个方法,可以用<br>proxychains4 wget <a href="https://geoiptool.com/zh/" target="_blank" rel="noopener">https://geoiptool.com/zh/</a><br>然后cat文件</p>
-<h2 id="sshfs"><a href="#sshfs" class="headerlink" title="sshfs"></a>sshfs</h2><p><a href="https://github.com/libfuse/sshfs" target="_blank" rel="noopener">sshfs</a></p>
-<p>性能太差,不推荐了</p>
 <h2 id="Gnome-Shell"><a href="#Gnome-Shell" class="headerlink" title="Gnome Shell"></a>Gnome Shell</h2><p><a href="https://www.linuxidc.com/Linux/2017-12/149813.htm" target="_blank" rel="noopener">如何安装Gnome Shell扩展</a></p>
 <p><code>sudo apt install gnome-tweak-tool</code></p>
 <p><code>sudo apt install chrome-gnome-shell</code></p>
@@ -469,10 +466,14 @@
 <h3 id="Python3包"><a href="#Python3包" class="headerlink" title="Python3包"></a>Python3包</h3><p><code>sudo apt install python3-pip</code></p>
 <p><code>pip3 install ipython</code></p>
 <p><code>pip3 install numpy</code></p>
-<p><code>pip3 install panda</code></p>
 <h3 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h3><p>run文件是我感觉最好的安装方法了(需要build-essential)</p>
+<p>如果提示<code>ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory</code></p>
+<p>则在/etc/profile最后一行加上export LD_LIBRARY_PATH=/usr/local/cuda/lib64然后运行source /etc/profile</p>
 <h3 id="重建引导-一些sb情况下"><a href="#重建引导-一些sb情况下" class="headerlink" title="重建引导(一些sb情况下)"></a>重建引导(一些sb情况下)</h3><p><code>sudo update-grub</code></p>
 <p><code>sudo grub-install (/dev/nvme0n1 自行修改)</code></p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title=".ssh"></a>.ssh</h3><p>.ssh 700</p>
+<p>私钥 600</p>
+<p>pub  644</p>
 
       
     </div>
@@ -520,18 +521,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2.html" rel="next" title="Hexo之坑">
-                <i class="fa fa-chevron-left"></i> Hexo之坑
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/3.html" rel="prev" title="starblast攻略">
-                starblast攻略 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/1.html" rel="prev" title="远离国产软件">
+                远离国产软件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -703,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">1.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">2.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">2.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">3.</span> <span class="nav-text">翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sshfs"><span class="nav-number">4.</span> <span class="nav-text">sshfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">5.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">6.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">7.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">8.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">9.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">9.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">9.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA"><span class="nav-number">9.3.</span> <span class="nav-text">CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">9.4.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">1.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">2.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">2.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">3.</span> <span class="nav-text">翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">4.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">5.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">6.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">7.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">8.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">8.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">8.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA"><span class="nav-number">8.3.</span> <span class="nav-text">CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">8.4.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">8.5.</span> <span class="nav-text">.ssh</span></a></li></ol></li></ol></div>
             
 
           </div>
