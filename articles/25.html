@@ -108,28 +108,30 @@
 
 
 
-  <meta name="description" content="一个国外很牛逼的黑客0xDUDE让世界人民知道了中国政府保存人们的聊天记录,而且还放在公网明文保存,再加上之前的新疆人脸识别,让我相信如果未来有1984,那么中国一定是第一个   之前有个华为的间谍被抓了,不知道哪天有没有天才实锤华为的产品">
-<meta name="keywords" content="QQ,微信,监控,监视,共产党,中国">
+  <meta name="description" content="问题PPO不收敛 , 准确说是当我使用全batch一个epoch时收敛 , 但多个epoch时必定不收敛 , 收敛与不收敛见下图(横坐标是小时 , 实验环境是BreakoutDeterministic-v4) 全batch 1epcoh 多epoch 原因在我每个agent到达horizen时或done时就发送之前的horizen个数据 问题就出在这里 , 因为当你done时发送的前horizen">
+<meta name="keywords" content="PPO,tensorflow,reinforcement learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="中国政府监视人民">
-<meta property="og:url" content="https://uesugierii.github.io/articles/16.html">
+<meta property="og:title" content="PPO Debug">
+<meta property="og:url" content="https://uesugierii.github.io/articles/25.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="一个国外很牛逼的黑客0xDUDE让世界人民知道了中国政府保存人们的聊天记录,而且还放在公网明文保存,再加上之前的新疆人脸识别,让我相信如果未来有1984,那么中国一定是第一个   之前有个华为的间谍被抓了,不知道哪天有没有天才实锤华为的产品">
+<meta property="og:description" content="问题PPO不收敛 , 准确说是当我使用全batch一个epoch时收敛 , 但多个epoch时必定不收敛 , 收敛与不收敛见下图(横坐标是小时 , 实验环境是BreakoutDeterministic-v4) 全batch 1epcoh 多epoch 原因在我每个agent到达horizen时或done时就发送之前的horizen个数据 问题就出在这里 , 因为当你done时发送的前horizen">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uesugierii.github.io/images/16/1.png">
-<meta property="og:image" content="https://uesugierii.github.io/images/16/2.png">
-<meta property="og:updated_time" content="2019-03-05T14:30:57.000Z">
+<meta property="og:image" content="https://uesugierii.github.io/images/25/1.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/25/2.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/25/4.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/25/3.png">
+<meta property="og:updated_time" content="2019-09-06T15:59:35.697Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="中国政府监视人民">
-<meta name="twitter:description" content="一个国外很牛逼的黑客0xDUDE让世界人民知道了中国政府保存人们的聊天记录,而且还放在公网明文保存,再加上之前的新疆人脸识别,让我相信如果未来有1984,那么中国一定是第一个   之前有个华为的间谍被抓了,不知道哪天有没有天才实锤华为的产品">
-<meta name="twitter:image" content="https://uesugierii.github.io/images/16/1.png">
+<meta name="twitter:title" content="PPO Debug">
+<meta name="twitter:description" content="问题PPO不收敛 , 准确说是当我使用全batch一个epoch时收敛 , 但多个epoch时必定不收敛 , 收敛与不收敛见下图(横坐标是小时 , 实验环境是BreakoutDeterministic-v4) 全batch 1epcoh 多epoch 原因在我每个agent到达horizen时或done时就发送之前的horizen个数据 问题就出在这里 , 因为当你done时发送的前horizen">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/25/1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/16.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/25.html"/>
 
 
 
@@ -139,7 +141,7 @@
   };
 </script>
 
-  <title>中国政府监视人民 | zx's blog</title>
+  <title>PPO Debug | zx's blog</title>
   
 
 
@@ -309,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/16.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/25.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -326,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">中国政府监视人民
+          <h2 class="post-title" itemprop="name headline">PPO Debug
               
             
           </h2>
@@ -351,12 +353,24 @@
                 
               
 
-              <time title="Created: 2019-03-05 00:00:00 / Modified: 22:30:57" itemprop="dateCreated datePublished" datetime="2019-03-05T00:00:00+08:00">2019-03-05</time>
+              <time title="Created: 2019-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-04T00:00:00+08:00">2019-09-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-06 23:59:35" itemprop="dateModified" datetime="2019-09-06T23:59:35+08:00">2019-09-06</time>
               
             
           </span>
@@ -407,10 +421,17 @@
       
 
       
-        <p>一个国外很牛逼的黑客0xDUDE让世界人民知道了中国政府保存人们的聊天记录,而且还放在公网明文保存,再加上之前的新疆人脸识别,让我相信如果未来有1984,那么中国一定是第一个</p>
-<p><img src="/images/16/1.png" alt=""></p>
-<p><img src="/images/16/2.png" alt=""></p>
-<p>之前有个华为的间谍被抓了,不知道哪天有没有天才实锤华为的产品</p>
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>PPO不收敛 , 准确说是当我使用全batch一个epoch时收敛 , 但多个epoch时必定不收敛 , 收敛与不收敛见下图(横坐标是小时 , 实验环境是BreakoutDeterministic-v4)</p>
+<h3 id="全batch-1epcoh"><a href="#全batch-1epcoh" class="headerlink" title="全batch 1epcoh"></a>全batch 1epcoh</h3><p><img src="/images/25/1.png" alt=""></p>
+<h3 id="多epoch"><a href="#多epoch" class="headerlink" title="多epoch"></a>多epoch</h3><p><img src="/images/25/2.png" alt=""></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>在我每个agent到达horizen时或done时就发送之前的horizen个数据</p>
+<p>问题就出在这里 , 因为当你done时发送的前horizen个数据有可能已经涉及了多个版本的theta</p>
+<p>用图解释的话如下</p>
+<p><img src="/images/25/4.png" alt=""></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>修改代码 , 当agent done的时候继续执行 , 直到达到horizen为止</p>
+<p>修正后的效果如下 , 深红色和淡蓝色是RMSprop , 紫红色是Adam</p>
+<p><img src="/images/25/3.png" alt=""></p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>这个错误实在是太隐蔽了 , 而且即使这样居然也能达到30分</p>
 
       
     </div>
@@ -432,7 +453,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/16.html" title="中国政府监视人民">https://uesugierii.github.io/articles/16.html</a>
+    <a href="https://uesugierii.github.io/articles/25.html" title="PPO Debug">https://uesugierii.github.io/articles/25.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -445,7 +466,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+            <a href="/tags/Debug/" rel="tag"># Debug</a>
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
           
         </div>
       
@@ -458,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/15.html" rel="next" title="谈谈中国BT下载">
-                <i class="fa fa-chevron-left"></i> 谈谈中国BT下载
+              <a href="/articles/24.html" rel="next" title="AMD YES">
+                <i class="fa fa-chevron-left"></i> AMD YES
               </a>
             
           </div>
@@ -467,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/17.html" rel="prev" title="200M路由达成">
-                200M路由达成 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -515,8 +534,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -622,6 +650,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全batch-1epcoh"><span class="nav-number">1.1.</span> <span class="nav-text">全batch 1epcoh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多epoch"><span class="nav-number">1.2.</span> <span class="nav-text">多epoch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
