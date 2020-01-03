@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
-<meta name="keywords" content="hexo,linux">
+  <meta name="description" content="仍存问题在登录后无法使用Log out正常退出 查了很多资料, 都无法实现 reverse_proxy_configuration 官方最后一句话不知道怎么弄, 不打算搞了 只能通过清除cookies退出 安装ownCloud如过你在意上面的问题, 应该手动安装, 如果你懒, 可以用Docker安装 官方安装教程 获取SSL证书let’s encrypt快速入门 因为证书3个月有效, 需要不断续签">
+<meta name="keywords" content="Nginx,Docker,ownCloud,反向代理,SSL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo之坑">
-<meta property="og:url" content="https://uesugierii.github.io/articles/2.html">
+<meta property="og:title" content="Nginx反向Https代理ownCloud">
+<meta property="og:url" content="https://uesugierii.github.io/articles/31.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
+<meta property="og:description" content="仍存问题在登录后无法使用Log out正常退出 查了很多资料, 都无法实现 reverse_proxy_configuration 官方最后一句话不知道怎么弄, 不打算搞了 只能通过清除cookies退出 安装ownCloud如过你在意上面的问题, 应该手动安装, 如果你懒, 可以用Docker安装 官方安装教程 获取SSL证书let’s encrypt快速入门 因为证书3个月有效, 需要不断续签">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-19T22:46:30.000Z">
+<meta property="og:updated_time" content="2020-01-03T13:33:36.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo之坑">
-<meta name="twitter:description" content="进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误  Error: git@github.com: Permission denied (publickey).fatal: 无法读取远程仓库。请确认您有正确的访问权限并且仓库存在。  当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误  FATAL Somethi">
+<meta name="twitter:title" content="Nginx反向Https代理ownCloud">
+<meta name="twitter:description" content="仍存问题在登录后无法使用Log out正常退出 查了很多资料, 都无法实现 reverse_proxy_configuration 官方最后一句话不知道怎么弄, 不打算搞了 只能通过清除cookies退出 安装ownCloud如过你在意上面的问题, 应该手动安装, 如果你懒, 可以用Docker安装 官方安装教程 获取SSL证书let’s encrypt快速入门 因为证书3个月有效, 需要不断续签">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/2.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/31.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>Hexo之坑 | zx's blog</title>
+  <title>Nginx反向Https代理ownCloud | zx's blog</title>
   
 
 
@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/2.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/31.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +323,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Hexo之坑
+          <h2 class="post-title" itemprop="name headline">Nginx反向Https代理ownCloud
               
             
           </h2>
@@ -348,24 +348,12 @@
                 
               
 
-              <time title="Created: 2018-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-15T00:00:00+08:00">2018-08-15</time>
+              <time title="Created: 2020-01-03 00:00:00 / Modified: 21:33:36" itemprop="dateCreated datePublished" datetime="2020-01-03T00:00:00+08:00">2020-01-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-20 06:46:30" itemprop="dateModified" datetime="2019-04-20T06:46:30+08:00">2019-04-20</time>
               
             
           </span>
@@ -382,7 +370,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
 
                 
                 
@@ -416,21 +404,23 @@
       
 
       
-        <p>进行部署的时候,即(hexo d)不能使用root权限(用了之后就会去/root/.ssh中找密钥),会报以下错误</p>
-<blockquote>
-<p>Error: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>: Permission denied (publickey).<br>fatal: 无法读取远程仓库。<br>请确认您有正确的访问权限并且仓库存在。</p>
-</blockquote>
-<p>当报了以上错误时,不管你更新密钥还是以非root权限部署,会报另一个错误</p>
-<blockquote>
-<p>FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">http://hexo.io/docs/troubleshooting.html</a><br>Error: EACCES: permission denied, unlink ‘/home/zx/blog/.deploy_git/archives/index.html’</p>
-</blockquote>
-<p>正确做法:  </p>
-<ol>
-<li>sudo rm -rf .deploy_git</li>
-<li>hexo clean</li>
-<li>hexo g</li>
-<li>hexo d</li>
-</ol>
+        <h2 id="仍存问题"><a href="#仍存问题" class="headerlink" title="仍存问题"></a>仍存问题</h2><p>在登录后无法使用Log out正常退出</p>
+<p>查了很多资料, 都无法实现</p>
+<p><a href="https://doc.owncloud.com/server/admin_manual/configuration/server/reverse_proxy_configuration.html" target="_blank" rel="noopener">reverse_proxy_configuration</a></p>
+<p>官方最后一句话不知道怎么弄, 不打算搞了</p>
+<p>只能通过清除cookies退出</p>
+<h2 id="安装ownCloud"><a href="#安装ownCloud" class="headerlink" title="安装ownCloud"></a>安装ownCloud</h2><p>如过你在意上面的问题, 应该手动安装, 如果你懒, 可以用Docker安装</p>
+<p><a href="https://doc.owncloud.org/server/10.3/admin_manual/installation/docker/" target="_blank" rel="noopener">官方安装教程</a></p>
+<h2 id="获取SSL证书"><a href="#获取SSL证书" class="headerlink" title="获取SSL证书"></a>获取SSL证书</h2><p><a href="https://letsencrypt.org/zh-cn/getting-started/" target="_blank" rel="noopener">let’s encrypt快速入门</a></p>
+<p>因为证书3个月有效, 需要不断续签</p>
+<p><code>crontab -e</code></p>
+<p>添加</p>
+<p><code>1 1 * * * certbot renew --dry-run</code></p>
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>在/etc/nginx/conf.d目录下创建一个以.conf结尾的文件保存以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">	# 强制http转https</span><br><span class="line">	listen 80; # 监听80</span><br><span class="line">	server_name ri.rs11.xyz; # 服务器名</span><br><span class="line">	rewrite ^(.*)$  https://ri.rs11.xyz/$1 permanent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 443; # 监听443</span><br><span class="line">	ssl on; </span><br><span class="line">	server_name ri.rs11.xyz; #服务器名</span><br><span class="line">	ssl_certificate /etc/letsencrypt/live/ri.rs11.xyz/cert.pem; # 证书位置</span><br><span class="line">	ssl_certificate_key /etc/letsencrypt/live/ri.rs11.xyz/privkey.pem; # 私钥位置</span><br><span class="line">	#ssl_session_cache shared:SSL:1m; # 大小限制</span><br><span class="line">	#ssl_session_timeout 5m; # 超时时间</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">        proxy_pass http://localhost:8080; # 重定向到哪</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>md有些网上的配置文件有毒的, 就是不停的报错, 真tm的sb浪费别人时间, 发文章自己不做测试的吗</p>
+<p><a href="https://stackoverflow.com/questions/19165976/nginx-emerg-unknown-directive-in-etc-nginx-sites-enabled-example-com3" target="_blank" rel="noopener">nginx: [emerg] unknown directive “ ”</a></p>
+<p>解决方案, 一个有用的工具:<a href="https://www.textfixer.com/tools/remove-line-breaks.php" target="_blank" rel="noopener">remove-line-breaks</a></p>
 
       
     </div>
@@ -452,7 +442,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/2.html" title="Hexo之坑">https://uesugierii.github.io/articles/2.html</a>
+    <a href="https://uesugierii.github.io/articles/31.html" title="Nginx反向Https代理ownCloud">https://uesugierii.github.io/articles/31.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -465,7 +455,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Debug/" rel="tag"># Debug</a>
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+            <a href="/tags/ownCloud/" rel="tag"># ownCloud</a>
           
         </div>
       
@@ -478,15 +470,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/articles/30.html" rel="next" title="量子计算笔记Week1(coursera)">
+                <i class="fa fa-chevron-left"></i> 量子计算笔记Week1(coursera)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/4.html" rel="prev" title="安装完Ubuntu后">
-                安装完Ubuntu后 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -648,6 +649,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#仍存问题"><span class="nav-number">1.</span> <span class="nav-text">仍存问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ownCloud"><span class="nav-number">2.</span> <span class="nav-text">安装ownCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取SSL证书"><span class="nav-number">3.</span> <span class="nav-text">获取SSL证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx"><span class="nav-number">4.</span> <span class="nav-text">配置Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS"><span class="nav-number">5.</span> <span class="nav-text">PS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
