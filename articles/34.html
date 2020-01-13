@@ -117,7 +117,7 @@
 <meta property="og:description" content="第三周将学习量子计算的一些算法和DIY 本文只记录官方笔记中没有的或我觉得重要的内容 官方笔记我放在最后 量子计算平台IBM 本源量子 中科院 最后一个死活无法注册 本人更推荐第一个IBM, 量子比特数上限最高, 操作种类多, 而且我感觉IBM更靠谱 注意IBM与本源量子的最后结果的表达形式是反的, IBM结果低位是寄存器低位, 本源量子结果低位是寄存器高位  注意黑盒子Uf是一种固定操作, 相当">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uesugierii.github.io/images/34/3.png">
-<meta property="og:updated_time" content="2020-01-12T02:20:15.862Z">
+<meta property="og:updated_time" content="2020-01-13T12:25:47.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="量子计算笔记Week3(coursera)">
 <meta name="twitter:description" content="第三周将学习量子计算的一些算法和DIY 本文只记录官方笔记中没有的或我觉得重要的内容 官方笔记我放在最后 量子计算平台IBM 本源量子 中科院 最后一个死活无法注册 本人更推荐第一个IBM, 量子比特数上限最高, 操作种类多, 而且我感觉IBM更靠谱 注意IBM与本源量子的最后结果的表达形式是反的, IBM结果低位是寄存器低位, 本源量子结果低位是寄存器高位  注意黑盒子Uf是一种固定操作, 相当">
@@ -367,7 +367,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-01-12 10:20:15" itemprop="dateModified" datetime="2020-01-12T10:20:15+08:00">2020-01-12</time>
+                <time title="Modified: 2020-01-13 20:25:47" itemprop="dateModified" datetime="2020-01-13T20:25:47+08:00">2020-01-13</time>
               
             
           </span>
@@ -429,11 +429,12 @@
 <font color="#CD5C5C">注意IBM与本源量子的最后结果的表达形式是反的, IBM结果低位是寄存器低位, 本源量子结果低位是寄存器高位</font>
 
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>黑盒子Uf是一种固定操作, 相当与一个大型量子门, 输入为$x, y$, 输出为$x, y\oplus f(x)$</p>
-<p>对于黑盒子Uf, 注意以下两种称呼</p>
-<p>constant function: 返回结果永远相同</p>
+<p><a href="https://docs.microsoft.com/en-us/quantum/concepts/oracles?view=qsharp-preview" target="_blank" rel="noopener">Quantum Oracles</a></p>
+<h2 id="Deutsch’s-Problem"><a href="#Deutsch’s-Problem" class="headerlink" title="Deutsch’s Problem"></a>Deutsch’s Problem</h2><p>constant function: 返回结果永远相同</p>
 <p>balanced function: 一半输入的结果为1, 另一半为0</p>
-<h2 id="Deutsch’s-Problem"><a href="#Deutsch’s-Problem" class="headerlink" title="Deutsch’s Problem"></a>Deutsch’s Problem</h2><p>为什么有多余的1个qubit输入(y)?</p>
+<p>为什么有多余的1个qubit输入(y)?</p>
 <p>如果没有, thus it is not unitary, 只有像官方笔记(2)那个公式那样定义才行, 此时maps orthonormal basis to orthonormal basis</p>
+<p>其实y可以是m个比特, 上面微软的<a href="https://docs.microsoft.com/en-us/quantum/concepts/oracles?view=qsharp-preview" target="_blank" rel="noopener">Quantum Oracles</a>链接里解释的蛮详细的</p>
 <p>其余见最后的官方笔记</p>
 <p>经典计算机需要2次, 量子计算机只需1次</p>
 <h2 id="Quantum-Computer-Prototype-DIY"><a href="#Quantum-Computer-Prototype-DIY" class="headerlink" title="Quantum Computer Prototype, DIY"></a>Quantum Computer Prototype, DIY</h2><p>理解下面这个公式和官方笔记公式(7)很重要</p>
@@ -519,6 +520,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/articles/35.html" rel="prev" title="量子计算笔记Week4(coursera)">
+                量子计算笔记Week4(coursera) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -591,7 +596,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

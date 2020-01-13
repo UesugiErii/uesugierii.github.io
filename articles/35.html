@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="这篇文章主要是谈一谈如何在windows下使用技巧,一些通过软件来弥补windows的一些问题,一些是系统本身的设置,还有一些注册表的优化(玄学).有些技巧可以让你操作windows更快,一些则能减少磁盘损耗.(部分软件或设置需要电脑配置高) 使用习惯(KEY)这其实才是最关键的,如果你电脑装N多全家桶,那再怎么优化都是徒劳的. 不要直接使用官网的QQ,要用就用UBP QQ(就是微软商店里的那个)">
-<meta name="keywords" content="windows,技巧">
+  <meta name="description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
+<meta name="keywords" content="shor算法,量子计算,Quantum Computing,Coursera,笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows使用技巧">
-<meta property="og:url" content="https://uesugierii.github.io/articles/5.html">
+<meta property="og:title" content="量子计算笔记Week4(coursera)">
+<meta property="og:url" content="https://uesugierii.github.io/articles/35.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="这篇文章主要是谈一谈如何在windows下使用技巧,一些通过软件来弥补windows的一些问题,一些是系统本身的设置,还有一些注册表的优化(玄学).有些技巧可以让你操作windows更快,一些则能减少磁盘损耗.(部分软件或设置需要电脑配置高) 使用习惯(KEY)这其实才是最关键的,如果你电脑装N多全家桶,那再怎么优化都是徒劳的. 不要直接使用官网的QQ,要用就用UBP QQ(就是微软商店里的那个)">
+<meta property="og:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-08T13:29:12.933Z">
+<meta property="og:image" content="https://uesugierii.github.io/images/35/4.png">
+<meta property="og:updated_time" content="2020-01-13T11:43:08.932Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows使用技巧">
-<meta name="twitter:description" content="这篇文章主要是谈一谈如何在windows下使用技巧,一些通过软件来弥补windows的一些问题,一些是系统本身的设置,还有一些注册表的优化(玄学).有些技巧可以让你操作windows更快,一些则能减少磁盘损耗.(部分软件或设置需要电脑配置高) 使用习惯(KEY)这其实才是最关键的,如果你电脑装N多全家桶,那再怎么优化都是徒劳的. 不要直接使用官网的QQ,要用就用UBP QQ(就是微软商店里的那个)">
+<meta name="twitter:title" content="量子计算笔记Week4(coursera)">
+<meta name="twitter:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/35/4.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/5.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/35.html"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>Windows使用技巧 | zx's blog</title>
+  <title>量子计算笔记Week4(coursera) | zx's blog</title>
   
 
 
@@ -306,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/5.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/35.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +325,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Windows使用技巧
+          <h2 class="post-title" itemprop="name headline">量子计算笔记Week4(coursera)
               
             
           </h2>
@@ -348,24 +350,12 @@
                 
               
 
-              <time title="Created: 2018-08-20 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-20T00:00:00+08:00">2018-08-20</time>
+              <time title="Created: 2020-01-13 00:00:00 / Modified: 19:43:08" itemprop="dateCreated datePublished" datetime="2020-01-13T00:00:00+08:00">2020-01-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-01-08 21:29:12" itemprop="dateModified" datetime="2020-01-08T21:29:12+08:00">2020-01-08</time>
               
             
           </span>
@@ -382,7 +372,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
 
                 
                 
@@ -416,45 +406,13 @@
       
 
       
-        <p>这篇文章主要是谈一谈如何在windows下使用技巧,一些通过软件来弥补windows的一些问题,一些是系统本身的设置,还有一些注册表的优化(玄学).有些技巧可以让你操作windows更快,一些则能减少磁盘损耗.(部分软件或设置需要电脑配置高)</p>
-<h1 id="使用习惯-KEY"><a href="#使用习惯-KEY" class="headerlink" title="使用习惯(KEY)"></a>使用习惯(KEY)</h1><p>这其实才是最关键的,如果你电脑装N多全家桶,那再怎么优化都是徒劳的.</p>
-<p>不要直接使用官网的QQ,要用就用UBP QQ(就是微软商店里的那个),UBP的应用非常干净,其他软件也同理</p>
-<p>远离任何电脑管家或安全卫士(widnows defender够厉害了),打个比方,你不希望你家有个人天天待着吧,而且不管你干什么他都知道(包括上WC)</p>
-<p>不要下载安装不明来源软件,尤其是需要管理员权限的</p>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="ram-disk"><a href="#ram-disk" class="headerlink" title="ram disk"></a>ram disk</h2><p><a href="http://www.romexsoftware.com/zh-cn/index.html" target="_blank" rel="noopener">官方中文网站</a></p>
-<p><a href="http://www.carrotchou.blog/14828.html" target="_blank" rel="noopener">盗版</a></p>
-<p>这个有什么用就不用多说了</p>
-<h2 id="PrimoCache"><a href="#PrimoCache" class="headerlink" title="PrimoCache"></a>PrimoCache</h2><p><a href="http://www.romexsoftware.com/zh-cn/" target="_blank" rel="noopener">官方中文网站</a></p>
-<p><a href="http://www.carrotchou.blog/12755.html" target="_blank" rel="noopener">盗版</a></p>
-<p>官方介绍:”功能是将物理内存、SSD硬盘或闪存盘等高速存储设备用作相对低速硬盘的缓存，使低速硬盘的读写性能可以得到大幅提升”</p>
-<p>使用一部分内存来存经常需要读写的文件,可以有效加快磁盘速度和延长磁盘寿命</p>
-<p>ps:<a href="http://www.carrotchou.blog/" target="_blank" rel="noopener">胡萝卜周</a>里有大量盗版软件,比如adobe全家等等</p>
-<h2 id="IDM"><a href="#IDM" class="headerlink" title="IDM"></a>IDM</h2><p><a href="https://www.internetdownloadmanager.com/" target="_blank" rel="noopener">官方网站</a></p>
-<p>windows下我认为最好的下载器</p>
-<h2 id="Everything"><a href="#Everything" class="headerlink" title="Everything"></a>Everything</h2><p><a href="https://www.voidtools.com/" target="_blank" rel="noopener">下载地址(不知道是不是官方的)</a></p>
-<p>windows里想要找一个文件有多痛苦不必多说,这个软件可以快速找到你想要的文件.</p>
-<p>ps.当你删除一个软件后,可以用这个软件来搜索卸载残留</p>
-<h2 id="CCleaner"><a href="#CCleaner" class="headerlink" title="CCleaner"></a>CCleaner</h2><p><a href="https://www.ccleaner.com/" target="_blank" rel="noopener">官方网站</a></p>
-<p>windows下我认为最好的清洁软件,最主要可以清洁注册表</p>
-<h2 id="hashtab"><a href="#hashtab" class="headerlink" title="hashtab"></a>hashtab</h2><p><a href="http://implbits.com/products/hashtab/" target="_blank" rel="noopener">下载地址</a></p>
-<p>在文件的属性栏中查看sha1,sha256等值,防止下载到非官网文件</p>
-<h1 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h1><p>superfetch 毒瘤中的毒瘤,电脑有ssd的话完全没必要这个.</p>
-<p>家庭组,打印机,xbox,这些服务大部分用户都用不到,其实还有很多服务用不到,大家可以根据需求关闭</p>
-<p>关闭磁盘索引(磁盘右键属性里),没必要,反正有Everything</p>
-<p>电源管理里的快速启动,这个主要是关机时把下次开机的内容准备好,但实际上有ssd(尤其是nvme)的话一点用都没有,还向你的磁盘里写数据</p>
-<p>高级系统设置,高级,性能选项,视觉效果除了平滑开头的都可以关了,高级里如果内存多,可以把虚拟内存设为0,增加磁盘寿命,</p>
-<p>控制面板-&gt;程序与功能-&gt;打开或关闭Windows功能,没用的都可以关了</p>
-<p>windows10里隐藏了一个叫 卓越性能 的模式,打开可以提升3%-10%左右</p>
-<p><a href="http://www.gamersky.com/tech/201806/1054939.shtml" target="_blank" rel="noopener">如何打开卓越性能</a></p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p><a href="http://www.cfan.com.cn/2018/1102/131575.shtml" target="_blank" rel="noopener">默认画质不给力 连接HDMI要注意</a></p>
-<h1 id="注册表-玄学"><a href="#注册表-玄学" class="headerlink" title="注册表(玄学)"></a>注册表(玄学)</h1><p>都是我从<a href="http://www.cfan.com.cn/" target="_blank" rel="noopener">电脑爱好者</a>里弄下来的,我感觉提升就那样吧,直接放连接.</p>
-<p><a href="http://www.cfan.com.cn/2018/0727/131229.shtml" target="_blank" rel="noopener">加内存桌面图标还是刷新慢 改这个设置就对了</a></p>
-<p><a href="http://www.cfan.com.cn/2018/0709/131122.shtml" target="_blank" rel="noopener">加内存感觉系统没变化？ 改这几项再说话</a></p>
-<p><a href="http://www.cfan.com.cn/2018/0328/130488.shtml" target="_blank" rel="noopener">为了SSD长命百岁 阻止Win自删图片缓存吧</a></p>
-<p><a href="http://www.cfan.com.cn/2018/0326/130468.shtml" target="_blank" rel="noopener">一点关闭就卡顿？ Windows的默认设置要这么改</a></p>
-<p><a href="http://www.cfan.com.cn/2018/0206/130251.shtml" target="_blank" rel="noopener">注册表狂魔来了！电脑提速竟可以这样做</a></p>
-<p>本来有更多的,当我想总结的时候发现那个网站最多索引50页.</p>
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
+        <p>第四周将学习shor算法</p>
+<p>官方笔记我放在最后</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了</p>
+<h2 id="官方笔记错误"><a href="#官方笔记错误" class="headerlink" title="官方笔记错误"></a>官方笔记错误</h2><p>公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复)</p>
+<h2 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h2><p>在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1} - \frac{k}{r_2}\right| = \frac{k|r_2-r_1|}{r_1 * r_2} \geq \frac{1}{r_1 * r_2} = \frac{1}{N}$$从而证明了r的唯一性</p>
+<p>对于官方笔记的证明方法, 如果$a = 3, r_1=10, b=6, r_2=20$不就为0了?</p>
+<h2 id="官方笔记"><a href="#官方笔记" class="headerlink" title="官方笔记"></a>官方笔记</h2><p><img src="/images/35/4.png" alt=""></p>
 
       
     </div>
@@ -476,7 +434,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/5.html" title="Windows使用技巧">https://uesugierii.github.io/articles/5.html</a>
+    <a href="https://uesugierii.github.io/articles/35.html" title="量子计算笔记Week4(coursera)">https://uesugierii.github.io/articles/35.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -489,7 +447,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Windows/" rel="tag"># Windows</a>
+            <a href="/tags/量子计算/" rel="tag"># 量子计算</a>
           
         </div>
       
@@ -502,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/3.html" rel="next" title="starblast攻略">
-                <i class="fa fa-chevron-left"></i> starblast攻略
+              <a href="/articles/34.html" rel="next" title="量子计算笔记Week3(coursera)">
+                <i class="fa fa-chevron-left"></i> 量子计算笔记Week3(coursera)
               </a>
             
           </div>
@@ -511,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/6.html" rel="prev" title="STL源码剖析之RB_tree之insert_unique()与find()函数">
-                STL源码剖析之RB_tree之insert_unique()与find()函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -693,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用习惯-KEY"><span class="nav-number">1.</span> <span class="nav-text">使用习惯(KEY)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件"><span class="nav-number">2.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ram-disk"><span class="nav-number">2.1.</span> <span class="nav-text">ram disk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PrimoCache"><span class="nav-number">2.2.</span> <span class="nav-text">PrimoCache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDM"><span class="nav-number">2.3.</span> <span class="nav-text">IDM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Everything"><span class="nav-number">2.4.</span> <span class="nav-text">Everything</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CCleaner"><span class="nav-number">2.5.</span> <span class="nav-text">CCleaner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashtab"><span class="nav-number">2.6.</span> <span class="nav-text">hashtab</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统设置"><span class="nav-number">3.</span> <span class="nav-text">系统设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册表-玄学"><span class="nav-number">5.</span> <span class="nav-text">注册表(玄学)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记错误"><span class="nav-number">2.</span> <span class="nav-text">官方笔记错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人思考"><span class="nav-number">3.</span> <span class="nav-text">个人思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记"><span class="nav-number">4.</span> <span class="nav-text">官方笔记</span></a></li></ol></div>
             
 
           </div>
@@ -853,7 +807,65 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -872,41 +884,7 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 
