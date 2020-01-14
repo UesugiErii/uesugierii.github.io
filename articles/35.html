@@ -108,19 +108,19 @@
 
 
 
-  <meta name="description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
+  <meta name="description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
 <meta name="keywords" content="shor算法,量子计算,Quantum Computing,Coursera,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="量子计算笔记Week4(coursera)">
 <meta property="og:url" content="https://uesugierii.github.io/articles/35.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
+<meta property="og:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uesugierii.github.io/images/35/4.png">
-<meta property="og:updated_time" content="2020-01-13T11:43:08.932Z">
+<meta property="og:updated_time" content="2020-01-14T13:52:38.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="量子计算笔记Week4(coursera)">
-<meta name="twitter:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 官方笔记错误公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复) 个人思考在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1}">
+<meta name="twitter:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
 <meta name="twitter:image" content="https://uesugierii.github.io/images/35/4.png">
 
 
@@ -350,12 +350,24 @@
                 
               
 
-              <time title="Created: 2020-01-13 00:00:00 / Modified: 19:43:08" itemprop="dateCreated datePublished" datetime="2020-01-13T00:00:00+08:00">2020-01-13</time>
+              <time title="Created: 2020-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-13T00:00:00+08:00">2020-01-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-01-14 21:52:38" itemprop="dateModified" datetime="2020-01-14T21:52:38+08:00">2020-01-14</time>
               
             
           </span>
@@ -409,9 +421,83 @@
         <p>第四周将学习shor算法</p>
 <p>官方笔记我放在最后</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了</p>
+<p>对于RSA算法部分, 看wiki的<a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">RSA加密算法</a>理解起来更快</p>
+<font color="#CD5C5C">官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的<a href="https://en.wikipedia.org/wiki/Quantum_Fourier_transform" target="_blank" rel="noopener">Quantum Fourier transform</a>是正的, x0变换后是y0, 最后的shor算法例子中的QFT也是正的</font>
+
 <h2 id="官方笔记错误"><a href="#官方笔记错误" class="headerlink" title="官方笔记错误"></a>官方笔记错误</h2><p>公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复)</p>
 <h2 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h2><p>在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1} - \frac{k}{r_2}\right| = \frac{k|r_2-r_1|}{r_1 * r_2} \geq \frac{1}{r_1 * r_2} = \frac{1}{N}$$从而证明了r的唯一性</p>
 <p>对于官方笔记的证明方法, 如果$a = 3, r_1=10, b=6, r_2=20$不就为0了?</p>
+<h2 id="第三页证明"><a href="#第三页证明" class="headerlink" title="第三页证明"></a>第三页证明</h2><p>关于第三页, 我用自己的话重新讲一遍证明过程, 官方笔记和课件感觉有点难理解</p>
+<p>官方笔记第三页对a的概率证明应该是本章最难的东西了</p>
+<h3 id="数学知识预备"><a href="#数学知识预备" class="headerlink" title="数学知识预备"></a>数学知识预备</h3><h4 id="Multiplicative-order"><a href="#Multiplicative-order" class="headerlink" title="Multiplicative order"></a>Multiplicative order</h4><p><a href="https://en.wikipedia.org/wiki/Multiplicative_order" target="_blank" rel="noopener">Multiplicative order</a></p>
+<p>比如对于下面这句话的理解(第三页第三行)</p>
+<p>$r_1$ and $r_2$ are the orders of $a_1$ and $a_2$ in the rings $\mathbb{Z_p}$ and $\mathbb{Z_q}$.</p>
+<p>即, 使$a_1^{r} \equiv 1 (mod\ n)$成立的最小的正整数为$r_1$, r2同理</p>
+<h3 id="Fermat’s-little-theorem"><a href="#Fermat’s-little-theorem" class="headerlink" title="Fermat’s little theorem"></a>Fermat’s little theorem</h3><p><a href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">费马小定理</a></p>
+<p>看上面链接公式就可以理解第三页倒数第二行中间的话了(The order of b is $2^{k_p}s_p$)</p>
+<h4 id="Primitive-root-modulo-n"><a href="#Primitive-root-modulo-n" class="headerlink" title="Primitive root modulo n"></a>Primitive root modulo n</h4><p><a href="https://en.wikipedia.org/wiki/Primitive_root_modulo_n" target="_blank" rel="noopener">Primitive root modulo n</a></p>
+<p>比如对于下面这句话的理解(第三页倒数第三行)</p>
+<p>Let $b$ be the primitive element of the field $\mathbb{Z_p}$</p>
+<p>即当$b^{m_p}$中的${m_p}$从1到$p-1$取一遍时, 那么$b^{m_p}(mod\ p)$的值也从1到$p-1$取一遍, 顺序会乱(想要直观一点可以直接看上面wiki链接里的例子)</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当我们随机取一个a时, 满足下列条件(3)(4)的概率是多少?</p>
+<p>$$r = 0(2) \tag{3}$$</p>
+<p>$$(a^{r/2}+1)\neq0(N) \tag{4}$$</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>下面证明中用$(p)$表示$(mod\ p)$, $r\mid s$表示s能整除r</p>
+<p>现在我们已经随机选择了a</p>
+<p>已知</p>
+<p>r is the order of the element a in the ring $\mathbb{Z_n}$</p>
+<p>$$a^r = 1(N)\tag{1}$$</p>
+<p>$$N=pq$$</p>
+<p>开始求概率</p>
+<p>$$a_1 = a(p)\tag{2}$$</p>
+<p>$$a_2 = a(q)$$</p>
+<p>$r_1$ and $r_2$ are the orders of $a_1$ and $a_2$ in the rings $\mathbb{Z_p}$ and $\mathbb{Z_q}$.</p>
+<p>即</p>
+<p>$$a_1^{r_1}(p) = 1\tag{3x}$$</p>
+<p>$$a_2^{r_2}(q) = 1$$</p>
+<p>由(1)可知, $a^r(p) = 1$</p>
+<p>由(2)可知, $a = pk_1 + a_1$, 将其带入上一行的式子</p>
+<p>$$(pk_1+a_1)^r(p) = 1 \Longrightarrow a_1^r(p) = 1$$</p>
+<p>又因为$r_1$和$r_2$是order, 故r是$r_1$的倍数, 同理r是$r_2$的倍数</p>
+<p>构造$s = kr_1r_2$</p>
+<p>$$a^s(p) = (pk_1 + a_1)^s(p) = a_1^{kr_1r_2}(p) = (a^{r_1})^{kr_2}(p)$$</p>
+<p>又因为(3x)</p>
+<p>所以$a^s(p) = 1$, 等价于</p>
+<p>$$a^s = pk_1+1 \tag{5}$$</p>
+<p>同理</p>
+<p>$$a^s = qk_2+1 \tag{6}$$</p>
+<p>(5)(6)左边相等, 所以右边相等, 即</p>
+<p>$$pk_1 = qk_2 \tag{7}$$</p>
+<p>p,q 互质, 所以k1一定是q的倍数</p>
+<p>将(5)改写为</p>
+<p>$$a^s = pq\frac{k_1}{q} + 1 \Longrightarrow a^s = 1(pq) \Longrightarrow r\mid s$$</p>
+<p>即对于任意s都能整除r, 又因为s和r都是$r_1$和$r_2$的倍数, 且对任意s成立, 所以</p>
+<p>$$r = LCM(r_1, r_2)$$</p>
+<p>我们接下来把$r_1$和$r_2$进行分解(把里面的2提出来, 比如$5 = 2^0<em>5$, $28 = 2^2</em>7$)</p>
+<p>$$r_1 = 2^{c_1}odd_1, c_1\geq0 \tag{8}$$</p>
+<p>$$r_2 = 2^{c_2}odd_2, c_2\geq0 \tag{9}$$</p>
+<p>如果$c_1 \neq c_2$(比如$c_1 &gt; c_2$), 则同时满足了(3)(4)</p>
+<p>$$r = 2r_2int$$</p>
+<p>$$a^{r/2}=a^{r_2int}=1(q) \Longrightarrow a^{r/2}\neq-1(q) \Longrightarrow a^{r/2}\neq-1(pq)$$</p>
+<p>$c_1$和$c_2$取决与a, 下面让我们来计算$c_1 \neq c_2$的概率</p>
+<p>首先将p用另外一种形式表达</p>
+<p>$$p=2^{k_p}s_p+1,\ \ s_p=1(2)$$</p>
+<p>令$b$ be the primitive element of the field $\mathbb{Z_p}$, 由上面的<a href="https://en.wikipedia.org/wiki/Primitive_root_modulo_n" target="_blank" rel="noopener">Primitive root modulo n</a>知, 可将$a_1$用另外一种方法表示出来</p>
+<p>$$a_1 = b^{m_p}(p),\ \ m_p \in {1,\cdots,2^{k_p}s_p}$$</p>
+<p>将上面这个式子带入(3x)</p>
+<p>$$b^{m_pr_1} = 1(p)$$</p>
+<p>由费马小定理可知</p>
+<p>$$b^{p-1} \equiv 1(p) \Longrightarrow b^{2^{k_p}s_p} \equiv 1(p)$$</p>
+<p>再根据Primitive root modulo n可知$2^{k_p}s_p$是order(因为只有当指数为p-1时才为1, 其余时为其他数字, 而p-1就是最小的正整数, 即为order)</p>
+<p>故$m_pr_1 = 0(2^{k_p}s_p)$</p>
+<p>同理可得$m_qr_2 = 0(2^{k_q}s_q)$</p>
+<p>$$\begin{cases}<br>m_pr_1 = k_12^{k_p}s_p\\<br>m_qr_2 = k_22^{k_q}s_q\\<br>\end{cases}<br>$$</p>
+<p>回忆一下, 我们只是想知道(8)(9)中含有不同的2个数的概率</p>
+<p>最糟糕的情况, 也就是$r_1$和$r_2$有相同2个数的概率最大时候, 此时右边$k_1 = k_2 = k_q = k_p = 1$, 即右边只有一个2, 如果右边有很多个2, 那么$r_1$和$r_2$有相同2个数的概率会非常小</p>
+<p>在最糟糕的情况下, $r_1$和$r_2$都分到2和$r_1$和$r_2$都没分到时$c_1$和$c_2$相等, $m_p$和$r_2$分到或$m_q$和$r_1$分到时$c_1$和$c_2$不相等</p>
+<p>最糟糕的情况下概率为1/2</p>
+<p>为什么$k_p$或$k_q$不能为0?</p>
+<p>如果为0, 即p或q为2, 不用量子计算机也能快速分解, 所以$k_p \geq 1$, $k_q \geq 1$</p>
 <h2 id="官方笔记"><a href="#官方笔记" class="headerlink" title="官方笔记"></a>官方笔记</h2><p><img src="/images/35/4.png" alt=""></p>
 
       
@@ -647,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记错误"><span class="nav-number">2.</span> <span class="nav-text">官方笔记错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人思考"><span class="nav-number">3.</span> <span class="nav-text">个人思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记"><span class="nav-number">4.</span> <span class="nav-text">官方笔记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记错误"><span class="nav-number">2.</span> <span class="nav-text">官方笔记错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人思考"><span class="nav-number">3.</span> <span class="nav-text">个人思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三页证明"><span class="nav-number">4.</span> <span class="nav-text">第三页证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学知识预备"><span class="nav-number">4.1.</span> <span class="nav-text">数学知识预备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiplicative-order"><span class="nav-number">4.1.1.</span> <span class="nav-text">Multiplicative order</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fermat’s-little-theorem"><span class="nav-number">4.2.</span> <span class="nav-text">Fermat’s little theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Primitive-root-modulo-n"><span class="nav-number">4.2.1.</span> <span class="nav-text">Primitive root modulo n</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">4.3.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">4.4.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记"><span class="nav-number">5.</span> <span class="nav-text">官方笔记</span></a></li></ol></div>
             
 
           </div>
