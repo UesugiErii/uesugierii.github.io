@@ -108,25 +108,30 @@
 
 
 
-  <meta name="description" content="问题在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory 解决参考: Pycharm environment different than command line 直接从命令行">
-<meta name="keywords" content="libcublas.so.10.0,pycharm,tensorflow,ubuntu">
+  <meta name="description" content="第五周将学习Grover算法 官方笔记我放在最后 Grover’s AlgorithmIntro第一个问题, 量子计算机一定比经典计算机好吗? 不一定, 见最后一节 第二个问题, 量子计算机能有效的解决所有NP问题吗? 能, 就是我们将要学习的Grover算法 电话簿(phone book problem)如果我们要通过电话查找人名(即在未排序的数据)中找到(暴力破解 brute force se">
+<meta name="keywords" content="Grover算法,量子计算,Quantum Computing,Coursera,笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pycharm运行tensorflow找不到libcublas.so.10.0">
-<meta property="og:url" content="https://uesugierii.github.io/articles/22.html">
+<meta property="og:title" content="量子计算笔记Week5(coursera)">
+<meta property="og:url" content="https://uesugierii.github.io/articles/36.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="问题在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory 解决参考: Pycharm environment different than command line 直接从命令行">
+<meta property="og:description" content="第五周将学习Grover算法 官方笔记我放在最后 Grover’s AlgorithmIntro第一个问题, 量子计算机一定比经典计算机好吗? 不一定, 见最后一节 第二个问题, 量子计算机能有效的解决所有NP问题吗? 能, 就是我们将要学习的Grover算法 电话簿(phone book problem)如果我们要通过电话查找人名(即在未排序的数据)中找到(暴力破解 brute force se">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-08T13:27:53.023Z">
+<meta property="og:image" content="https://uesugierii.github.io/images/36/1.jpg">
+<meta property="og:image" content="https://uesugierii.github.io/images/36/Uw.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/36/Us.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/36/5.png">
+<meta property="og:updated_time" content="2020-01-16T12:10:02.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pycharm运行tensorflow找不到libcublas.so.10.0">
-<meta name="twitter:description" content="问题在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory 解决参考: Pycharm environment different than command line 直接从命令行">
+<meta name="twitter:title" content="量子计算笔记Week5(coursera)">
+<meta name="twitter:description" content="第五周将学习Grover算法 官方笔记我放在最后 Grover’s AlgorithmIntro第一个问题, 量子计算机一定比经典计算机好吗? 不一定, 见最后一节 第二个问题, 量子计算机能有效的解决所有NP问题吗? 能, 就是我们将要学习的Grover算法 电话簿(phone book problem)如果我们要通过电话查找人名(即在未排序的数据)中找到(暴力破解 brute force se">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/36/1.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/22.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/36.html"/>
 
 
 
@@ -136,7 +141,7 @@
   };
 </script>
 
-  <title>Pycharm运行tensorflow找不到libcublas.so.10.0 | zx's blog</title>
+  <title>量子计算笔记Week5(coursera) | zx's blog</title>
   
 
 
@@ -306,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/22.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/36.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Pycharm运行tensorflow找不到libcublas.so.10.0
+          <h2 class="post-title" itemprop="name headline">量子计算笔记Week5(coursera)
               
             
           </h2>
@@ -348,24 +353,12 @@
                 
               
 
-              <time title="Created: 2019-05-31 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-31T00:00:00+08:00">2019-05-31</time>
+              <time title="Created: 2020-01-16 00:00:00 / Modified: 20:10:02" itemprop="dateCreated datePublished" datetime="2020-01-16T00:00:00+08:00">2020-01-16</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-01-08 21:27:53" itemprop="dateModified" datetime="2020-01-08T21:27:53+08:00">2020-01-08</time>
               
             
           </span>
@@ -382,7 +375,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2019/" itemprop="url" rel="index"><span itemprop="name">2019</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
 
                 
                 
@@ -416,14 +409,59 @@
       
 
       
-        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在bash中可以运行Python来正确导入tensorflow,在pycharm中运行提示错误</p>
-<p><code>ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory</code></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>参考: <a href="https://stackoverflow.com/questions/19715724/pycharm-environment-different-than-command-line/19717016#19717016" target="_blank" rel="noopener">Pycharm environment different than command line</a></p>
-<p>直接从命令行启动Pycharm即可</p>
-<p>或者</p>
-<p>在Run/Debug Configurations中path里手动加入LD_LIBRARY_PATH路径</p>
-<p><code>LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64</code></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm无法找到LD_LIBRARY_PATH路径</p>
+        <p>第五周将学习Grover算法</p>
+<p>官方笔记我放在最后</p>
+<h2 id="Grover’s-Algorithm"><a href="#Grover’s-Algorithm" class="headerlink" title="Grover’s Algorithm"></a>Grover’s Algorithm</h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>第一个问题, 量子计算机一定比经典计算机好吗?</p>
+<p>不一定, 见最后一节</p>
+<p>第二个问题, 量子计算机能有效的解决所有NP问题吗?</p>
+<p>能, 就是我们将要学习的Grover算法</p>
+<h4 id="电话簿-phone-book-problem"><a href="#电话簿-phone-book-problem" class="headerlink" title="电话簿(phone book problem)"></a>电话簿(phone book problem)</h4><p>如果我们要通过电话查找人名(即在未排序的数据)中找到(暴力破解 brute force search)需要$O(n)$时间</p>
+<h4 id="旅行者问题-traveling-salesman-problem"><a href="#旅行者问题-traveling-salesman-problem" class="headerlink" title="旅行者问题(traveling salesman problem)"></a>旅行者问题(traveling salesman problem)</h4><p>暴力破解找路径需要$O(n!)$</p>
+<h4 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h4><p>对于旅行者问题问题, 你可能可以根据图的信息对暴力破解做一些优化, 但对于电话簿问题, 暴力破解没有任何可以优化的地方</p>
+<p>如果你有办法使电话簿的暴力破解变简单, 那么你就能简化任何可以被暴力破解解决的问题中的暴力破解这一步(if you can simplify this brute force search which is applicable to the phone book problem, then you will simplify the brute force search for any problem which is solvable with the brute force search)</p>
+<p>对于一个未知函数$f(a)=b$, 我们需要根据$b$找到$a$, 使用量子计算机可以加速暴力破解过程</p>
+<p><a href="https://zh.wikipedia.org/wiki/Grover%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Grover算法</a></p>
+<h3 id="Grover’s-Algorithm-A-Closer-Look"><a href="#Grover’s-Algorithm-A-Closer-Look" class="headerlink" title="Grover’s Algorithm. A Closer Look"></a>Grover’s Algorithm. A Closer Look</h3><p>为什么把初始状态弄成$s$?</p>
+<p>因为$s$蕴含了所有的可能性</p>
+<p>如果我们有多个$\omega$会怎么样?</p>
+<p>我们必须精确的知道具体有多少个, 并以此来计算迭代数</p>
+<p>如果我们不知道有几个, 那么我们有可能会过头或不到, 那么测量得到正确结果的可能性会降低</p>
+<p>为什么我们选择$U_s$?</p>
+<p>we need some point, some vector to reflect it in the desired direction, but we don’t know which direction is desired</p>
+<p>说白了就是只知道这些信息, 所以只能这样</p>
+<p>考虑一件事, 如果我们知道正好45度右上角的向量, 那么我们可以只需一次迭代</p>
+<p>对于一个需要12次迭代的来说, 这个向量就是$s_6$, 同理$s_6$可以由$s$关于$s_3$对称直接得到, 这可以将算法的时间复杂度从$O(\sqrt{N})$优化为$O(\log_2 N)$(实现了量子计算机的指数级加速)</p>
+<p>为了实现上面所说的, 我们需要一个叫做von neumann architecture的东西, 但这个东西仍是个问题(is still under the question)</p>
+<p>另外, Grover算法被证明是最优的搜索算法, 下一节会讨论这个</p>
+<h2 id="Grover’s-Algorithm-Optimality"><a href="#Grover’s-Algorithm-Optimality" class="headerlink" title="Grover’s Algorithm Optimality"></a>Grover’s Algorithm Optimality</h2><h3 id="part1"><a href="#part1" class="headerlink" title="part1"></a>part1</h3><p>我们能设计一个更优的算法吗?</p>
+<p>Lov Grover证明了不可能, 换言之, Grover算法是最优的了</p>
+<p>如果我们能找到满足(2)的$\mid \phi\rangle$, 那么(3)也将满足, 从而证明至少需要$O(\sqrt{N})$(即其他方法的时间复杂度一定大于等于$O(\sqrt{N})$, 而Grover算法的时间复杂度就是$O(\sqrt{N})$, 即为最优)</p>
+<p>对于不同的正交的$\omega$, 经过迭代后的最终的$\phi_\omega$我们将他们也近似的看作是正交的, since the algorithm is so effective</p>
+<p>我的理解是最终的误差($\phi_\omega$与$\omega$的角度)一定是小于等于$\theta$, 而</p>
+<p>$$sin\theta = \frac{1}{2^{n/2}}$$</p>
+<p>当$n$很大时, 这个夹角会很小, 即</p>
+<p>$$\lim_{n\to \infty}\theta =0$$</p>
+<h3 id="part2"><a href="#part2" class="headerlink" title="part2"></a>part2</h3><p>无</p>
+<h3 id="part3"><a href="#part3" class="headerlink" title="part3"></a>part3</h3><font color="#CD5C5C">md视频看完了告诉我这整个视频是错的, pdf过程也是错的</font>
+
+<p>正确证明过程如下, E和f定义没变</p>
+<p><img src="/images/36/1.jpg" alt=""></p>
+<h2 id="Quantum-Computer-Application-Boundaries"><a href="#Quantum-Computer-Application-Boundaries" class="headerlink" title="Quantum Computer Application Boundaries"></a>Quantum Computer Application Boundaries</h2><p>看不懂</p>
+<p>结论回答了第一个问题</p>
+<p>在文中新构造的问题上, 量子计算机不可能比经典计算机快一倍以上</p>
+<p>即, 量子计算机不是万能的</p>
+<h2 id="自己笔记"><a href="#自己笔记" class="headerlink" title="自己笔记"></a>自己笔记</h2><h3 id="第一页"><a href="#第一页" class="headerlink" title="第一页"></a>第一页</h3><p>笔记中的 ∃! 表示只存在一个</p>
+<p>$f_\omega(x)=\delta_{x=\omega}$意味着当$x=\omega$时, 右边为1, $x \neq \omega$时右边为0</p>
+<p>$U_\omega$变换相当于超平面(hyperplane)对称</p>
+<p><img src="/images/36/Uw.png" alt=""></p>
+<p>$U_s$变换相当于关于$s$对称</p>
+<p><img src="/images/36/Us.png" alt=""></p>
+<p>Each Grover’s iteration rotates the system in the direction $\mid\omega\rangle$ by the angle $2\theta$</p>
+<h3 id="第二页"><a href="#第二页" class="headerlink" title="第二页"></a>第二页</h3><p>在官方笔记图1中，垂直轴为我们要求的向量，水平轴是其余向量组成的超平面，因为初始状态$s$含有所有可能的向量，所以有一个微小的夹角</p>
+<p>1.2开始定义一些新的符号, 对于2, 即定义了新的操作$U_t$, 当$t=s$时, 即$U_s$</p>
+<p>对于(4), 前两项为单位向量</p>
+<h3 id="第五页"><a href="#第五页" class="headerlink" title="第五页"></a>第五页</h3><p>(9)和最后一行直接删掉的东西都是unitary</p>
+<h2 id="官方笔记"><a href="#官方笔记" class="headerlink" title="官方笔记"></a>官方笔记</h2><p><img src="/images/36/5.png" alt=""></p>
 
       
     </div>
@@ -445,7 +483,7 @@
     <strong>Post author:  </strong>zx</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://uesugierii.github.io/articles/22.html" title="Pycharm运行tensorflow找不到libcublas.so.10.0">https://uesugierii.github.io/articles/22.html</a>
+    <a href="https://uesugierii.github.io/articles/36.html" title="量子计算笔记Week5(coursera)">https://uesugierii.github.io/articles/36.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
@@ -458,11 +496,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
-          
-            <a href="/tags/Debug/" rel="tag"># Debug</a>
-          
-            <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
+            <a href="/tags/量子计算/" rel="tag"># 量子计算</a>
           
         </div>
       
@@ -475,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/21.html" rel="next" title="多硬盘多ubuntu系统UEFI引导问题">
-                <i class="fa fa-chevron-left"></i> 多硬盘多ubuntu系统UEFI引导问题
+              <a href="/articles/35.html" rel="next" title="量子计算笔记Week4(coursera)">
+                <i class="fa fa-chevron-left"></i> 量子计算笔记Week4(coursera)
               </a>
             
           </div>
@@ -484,10 +518,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/23.html" rel="prev" title="AMD YES?">
-                AMD YES? <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -666,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">3.</span> <span class="nav-text">原因</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Grover’s-Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Grover’s Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#电话簿-phone-book-problem"><span class="nav-number">1.1.1.</span> <span class="nav-text">电话簿(phone book problem)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#旅行者问题-traveling-salesman-problem"><span class="nav-number">1.1.2.</span> <span class="nav-text">旅行者问题(traveling salesman problem)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.3.</span> <span class="nav-text">提出问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grover’s-Algorithm-A-Closer-Look"><span class="nav-number">1.2.</span> <span class="nav-text">Grover’s Algorithm. A Closer Look</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grover’s-Algorithm-Optimality"><span class="nav-number">2.</span> <span class="nav-text">Grover’s Algorithm Optimality</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#part1"><span class="nav-number">2.1.</span> <span class="nav-text">part1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#part2"><span class="nav-number">2.2.</span> <span class="nav-text">part2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#part3"><span class="nav-number">2.3.</span> <span class="nav-text">part3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quantum-Computer-Application-Boundaries"><span class="nav-number">3.</span> <span class="nav-text">Quantum Computer Application Boundaries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己笔记"><span class="nav-number">4.</span> <span class="nav-text">自己笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一页"><span class="nav-number">4.1.</span> <span class="nav-text">第一页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二页"><span class="nav-number">4.2.</span> <span class="nav-text">第二页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五页"><span class="nav-number">4.3.</span> <span class="nav-text">第五页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记"><span class="nav-number">5.</span> <span class="nav-text">官方笔记</span></a></li></ol></div>
             
 
           </div>
@@ -826,7 +856,65 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -845,41 +933,7 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 
