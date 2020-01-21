@@ -2,3 +2,6 @@ Initializing a empty array does not need much time
 
 In [3]: %timeit np.empty((1, 1024 * 1024, 256), dtype=np.float32)
 8.68 µs ± 35 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+
+In [18]: %timeit data[:,:,:] = arr[:,:,:]
+70 ms ± 577 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)

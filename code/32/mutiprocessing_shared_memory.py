@@ -16,7 +16,7 @@ def s(p, sharr, return_dict):  # send
 def r(p, sharr, return_dict):  # recv
     a = np.empty((1, 1024 * 1024, 256), dtype=np.float32)
     p.recv()  # use to sync
-    a[:, :, :] = sharr[:, :, :]
+    # a[:, :, :] = sharr[:, :, :] # read out
     end_recv = time.time()
     return_dict['end_recv'] = end_recv
 
@@ -49,4 +49,8 @@ shm.close()
 shm.unlink()
 print(sum(res_l) / 3)
 
-# 0.43116529782613117
+# no read out
+# 0.25899219512939453
+
+# read out
+# 0.46038611729939777
