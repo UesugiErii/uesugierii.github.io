@@ -82,6 +82,8 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [量子计算笔记Week5(coursera)](https://rs11.xyz/articles/36.html)
 
+[Linux安装android SDK及Appium配置](https://rs11.xyz/articles/37.html)
+
 ## gist
 
 [pure number dictionary](https://gist.github.com/UesugiErii/59f3ebda10fef40848d932a8d902fb51)
@@ -103,6 +105,8 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [conky config share](https://gist.github.com/UesugiErii/9425a84e72f851439f2d9cbd2b9232b1)
 
+[aria2.conf](https://gist.github.com/UesugiErii/d70dfe09f531ba47a0c5c3c9505f33bf)
+
 ## interesting_things
 
 [QQ安卓版强制获取通话记录](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/QQ%E5%AE%89%E5%8D%93%E7%89%88%E5%BC%BA%E5%88%B6%E8%8E%B7%E5%8F%96%E9%80%9A%E8%AF%9D%E8%AE%B0%E5%BD%95)
@@ -123,5 +127,6 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [骗子华为](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E9%AA%97%E5%AD%90%E5%8D%8E%E4%B8%BA)
 
+[Fuck_Red_Cross_Society_of_China](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/Fuck_Red_Cross_Society_of_China)
 
 
