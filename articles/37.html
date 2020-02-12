@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo apt-get install qemu-">
+  <meta name="description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用supersu不支持7.1.1(不含)以上  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo">
 <meta name="keywords" content="android SDK,linux,Appium,emulator">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux安装android SDK及Appium配置">
 <meta property="og:url" content="https://uesugierii.github.io/articles/37.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo apt-get install qemu-">
+<meta property="og:description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用supersu不支持7.1.1(不含)以上  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-08T14:37:45.242Z">
+<meta property="og:updated_time" content="2020-02-12T04:37:35.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux安装android SDK及Appium配置">
-<meta name="twitter:description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo apt-get install qemu-">
+<meta name="twitter:description" content="本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium 警告不要使用 apt 安装android-sdk不要在需要root权限的文件夹下进行操作(例如/opt)安卓10不自带计算器应用supersu不支持7.1.1(不含)以上  前言下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK) 参考资料 安装KVM这是x86安卓必须要装的 sudo">
 
 
 
@@ -348,12 +348,24 @@
                 
               
 
-              <time title="Created: 2020-02-08 00:00:00 / Modified: 22:37:45" itemprop="dateCreated datePublished" datetime="2020-02-08T00:00:00+08:00">2020-02-08</time>
+              <time title="Created: 2020-02-08 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-08T00:00:00+08:00">2020-02-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-02-12 12:37:35" itemprop="dateModified" datetime="2020-02-12T12:37:35+08:00">2020-02-12</time>
               
             
           </span>
@@ -405,7 +417,7 @@
 
       
         <p>本文将介绍如何在linux上配置android SDK, 运行模拟器和Appium</p>
-<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><font color="#CD5C5C">不要使用 apt 安装android-sdk</font><br><br><font color="#CD5C5C">不要在需要root权限的文件夹下进行操作(例如/opt)</font><br><br><font color="#CD5C5C">安卓10不自带计算器应用</font>
+<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><font color="#CD5C5C">不要使用 apt 安装android-sdk</font><br><br><font color="#CD5C5C">不要在需要root权限的文件夹下进行操作(例如/opt)</font><br><br><font color="#CD5C5C">安卓10不自带计算器应用</font><br><br><font color="#CD5C5C">supersu不支持7.1.1(不含)以上</font>
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>下面所有介绍均在一个SDK文件夹下操作(我自己的路径是/home/zx/SDK)</p>
 <p><a href="http://www.testclass.net/appium" target="_blank" rel="noopener">参考资料</a></p>
@@ -420,11 +432,17 @@
 <h3 id="sdkmanager"><a href="#sdkmanager" class="headerlink" title="sdkmanager"></a>sdkmanager</h3><p><a href="https://developer.android.com/studio/command-line/sdkmanager#options" target="_blank" rel="noopener">官方文档</a></p>
 <p>这是一个包管理器, 位于tools/bin下, 可以用来下载images或者各种各样的包, 下载后会存放在SDK文件夹下, 比如你下载了platform-tools, 那么在SDK目录下就会多一个platform-tools文件夹</p>
 <p>根据自己需要自行下载, 有些是必要的, 后面会提到</p>
+<p>例子, 下载7.1.1版本的镜像</p>
+<p><code>sdkmanager  &quot;system-images;android-25;google_apis;x86_64&quot;</code></p>
 <h3 id="avdmanager"><a href="#avdmanager" class="headerlink" title="avdmanager"></a>avdmanager</h3><p><a href="https://developer.android.com/studio/command-line/avdmanager" target="_blank" rel="noopener">官方文档</a></p>
 <p>使用它, 通过命令行创建和管理 Android 虚拟设备</p>
+<p>例子, 创建一个7.1.1版本的名字叫root的avd(安卓虚拟设备)</p>
+<p><code>avdmanager create avd -n root -k &quot;system-images;android-25;google_apis;x86_64&quot;</code></p>
 <h3 id="emulator"><a href="#emulator" class="headerlink" title="emulator"></a>emulator</h3><p><a href="https://developer.android.com/studio/run/emulator-commandline?hl=zh-cn#starting" target="_blank" rel="noopener">官方文档</a></p>
 <p>启动模拟器</p>
 <p>使用 -skin 720x1280 可以指定分辨率</p>
+<p>例子, 以分辨率720P启动名称为root的虚拟设备</p>
+<p><code>emulator -avd root -skin 720x1280</code></p>
 <h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
 <li>PANIC: Broken AVD system path. Check your ANDROID_SDK_ROOT value</li>
 </ol>
@@ -436,6 +454,9 @@
 <p><code>./sdkmanager &quot;system-images;android-25;google_apis;x86&quot;</code></p>
 <p><code>./sdkmanager --licenses</code></p>
 <p>重新接受一遍所有证书</p>
+<h3 id="杂七杂八"><a href="#杂七杂八" class="headerlink" title="杂七杂八"></a>杂七杂八</h3><p><a href="https://stackoverflow.com/questions/5095234/how-to-get-root-access-on-android-emulator" target="_blank" rel="noopener">How to get root access on Android emulator?</a></p>
+<p><a href="https://blog.csdn.net/LuvSnow/article/details/79963025" target="_blank" rel="noopener">android emulator 获取 Root权限</a></p>
+<p><a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element.html" target="_blank" rel="noopener">api与版本对应关系</a></p>
 <h2 id="安装Appium"><a href="#安装Appium" class="headerlink" title="安装Appium"></a>安装Appium</h2><h3 id="安装java8"><a href="#安装java8" class="headerlink" title="安装java8"></a>安装java8</h3><p>官方要求java8, 别装11, 要不然会报错”Original error: Could not sign with default certificate”</p>
 <p><code>sudo apt install openjdk-8-jdk</code></p>
 <p>配置java环境变量</p>
@@ -682,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告"><span class="nav-number">1.</span> <span class="nav-text">警告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装KVM"><span class="nav-number">3.</span> <span class="nav-text">安装KVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装android-SDK"><span class="nav-number">4.</span> <span class="nav-text">安装android SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">4.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ANDROID-SDK-ROOT环境变量"><span class="nav-number">4.2.</span> <span class="nav-text">配置ANDROID_SDK_ROOT环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sdkmanager"><span class="nav-number">4.3.</span> <span class="nav-text">sdkmanager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#avdmanager"><span class="nav-number">4.4.</span> <span class="nav-text">avdmanager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emulator"><span class="nav-number">4.5.</span> <span class="nav-text">emulator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题"><span class="nav-number">4.6.</span> <span class="nav-text">常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Appium"><span class="nav-number">5.</span> <span class="nav-text">安装Appium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装java8"><span class="nav-number">5.1.</span> <span class="nav-text">安装java8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Appium"><span class="nav-number">5.2.</span> <span class="nav-text">下载Appium</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">5.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-number">6.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#uiautomatorviewer"><span class="nav-number">6.1.</span> <span class="nav-text">uiautomatorviewer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单例子"><span class="nav-number">7.</span> <span class="nav-text">简单例子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告"><span class="nav-number">1.</span> <span class="nav-text">警告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装KVM"><span class="nav-number">3.</span> <span class="nav-text">安装KVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装android-SDK"><span class="nav-number">4.</span> <span class="nav-text">安装android SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">4.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ANDROID-SDK-ROOT环境变量"><span class="nav-number">4.2.</span> <span class="nav-text">配置ANDROID_SDK_ROOT环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sdkmanager"><span class="nav-number">4.3.</span> <span class="nav-text">sdkmanager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#avdmanager"><span class="nav-number">4.4.</span> <span class="nav-text">avdmanager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emulator"><span class="nav-number">4.5.</span> <span class="nav-text">emulator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题"><span class="nav-number">4.6.</span> <span class="nav-text">常见问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂七杂八"><span class="nav-number">4.7.</span> <span class="nav-text">杂七杂八</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Appium"><span class="nav-number">5.</span> <span class="nav-text">安装Appium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装java8"><span class="nav-number">5.1.</span> <span class="nav-text">安装java8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Appium"><span class="nav-number">5.2.</span> <span class="nav-text">下载Appium</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">5.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-number">6.</span> <span class="nav-text">其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#uiautomatorviewer"><span class="nav-number">6.1.</span> <span class="nav-text">uiautomatorviewer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单例子"><span class="nav-number">7.</span> <span class="nav-text">简单例子</span></a></li></ol></div>
             
 
           </div>
