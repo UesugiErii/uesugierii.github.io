@@ -107,26 +107,5 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [aria2.conf](https://gist.github.com/UesugiErii/d70dfe09f531ba47a0c5c3c9505f33bf)
 
-## interesting_things
-
-[QQ安卓版强制获取通话记录](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/QQ%E5%AE%89%E5%8D%93%E7%89%88%E5%BC%BA%E5%88%B6%E8%8E%B7%E5%8F%96%E9%80%9A%E8%AF%9D%E8%AE%B0%E5%BD%95)
-
-[上传不雅视频“仅自己可见”被民警抓获](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E4%B8%8A%E4%BC%A0%E4%B8%8D%E9%9B%85%E8%A7%86%E9%A2%91%E2%80%9C%E4%BB%85%E8%87%AA%E5%B7%B1%E5%8F%AF%E8%A7%81%E2%80%9D%E8%A2%AB%E6%B0%91%E8%AD%A6%E6%8A%93%E8%8E%B7)
-
-[中国政府人脸识别监视人民](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E4%B8%AD%E5%9B%BD%E6%94%BF%E5%BA%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%9B%91%E8%A7%86%E4%BA%BA%E6%B0%91)
-
-[共产党官方木马](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E5%85%B1%E4%BA%A7%E5%85%9A%E5%AE%98%E6%96%B9%E6%9C%A8%E9%A9%AC)
-
-[微信一度出现大故障](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E5%BE%AE%E4%BF%A1%E4%B8%80%E5%BA%A6%E5%87%BA%E7%8E%B0%E5%A4%A7%E6%95%85%E9%9A%9C)
-
-[无限法则收集ss信息](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E6%97%A0%E9%99%90%E6%B3%95%E5%88%99%E6%94%B6%E9%9B%86ss%E4%BF%A1%E6%81%AF)
-
-[百度py政府搞bing(mis)](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E7%99%BE%E5%BA%A6py%E6%94%BF%E5%BA%9C%E6%90%9Ebing(mis))
-
-[碗豆荚请求root权限](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E7%A2%97%E8%B1%86%E8%8D%9A%E8%AF%B7%E6%B1%82root%E6%9D%83%E9%99%90)
-
-[骗子华为](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/%E9%AA%97%E5%AD%90%E5%8D%8E%E4%B8%BA)
-
-[Fuck_Red_Cross_Society_of_China](https://github.com/UesugiErii/uesugierii.github.io/tree/master/interesting_things/Fuck_Red_Cross_Society_of_China)
 
 
