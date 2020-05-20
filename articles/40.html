@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文不是什么经验文章，仅仅只是为了记录一些印象深刻的事罢了 经验初试数学，计算机如果基础好的话建议直接刷题而不是看课本或视频学习。英语使用墨墨背单词，每天不停的背单词刷真题。政治我真的走了不少弯路，七八月看完肖大书，感觉一点都没学会，然后看徐涛视频，才慢慢的开始懂起来 复试北京邮电大学计算机考研信息汇总 北邮我的考研笔记集 计算机组成与结构 记录为什么考研理想层面，我的兴趣主要就是深度学习，强化学">
+<meta name="keywords" content="考研,北京邮电大学,北邮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="考研记录">
+<meta property="og:url" content="https://uesugierii.github.io/articles/40.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="本文不是什么经验文章，仅仅只是为了记录一些印象深刻的事罢了 经验初试数学，计算机如果基础好的话建议直接刷题而不是看课本或视频学习。英语使用墨墨背单词，每天不停的背单词刷真题。政治我真的走了不少弯路，七八月看完肖大书，感觉一点都没学会，然后看徐涛视频，才慢慢的开始懂起来 复试北京邮电大学计算机考研信息汇总 北邮我的考研笔记集 计算机组成与结构 记录为什么考研理想层面，我的兴趣主要就是深度学习，强化学">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-20T14:06:11.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="考研记录">
+<meta name="twitter:description" content="本文不是什么经验文章，仅仅只是为了记录一些印象深刻的事罢了 经验初试数学，计算机如果基础好的话建议直接刷题而不是看课本或视频学习。英语使用墨墨背单词，每天不停的背单词刷真题。政治我真的走了不少弯路，七八月看完肖大书，感觉一点都没学会，然后看徐涛视频，才慢慢的开始懂起来 复试北京邮电大学计算机考研信息汇总 北邮我的考研笔记集 计算机组成与结构 记录为什么考研理想层面，我的兴趣主要就是深度学习，强化学">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/40.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>考研记录 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/40.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">考研记录
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-05-20 00:00:00 / Modified: 22:06:11" itemprop="dateCreated datePublished" datetime="2020-05-20T00:00:00+08:00">2020-05-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><font color="#CD5C5C">本文不是什么经验文章，仅仅只是为了记录一些印象深刻的事罢了</font><br></p>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><h3 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h3><p>数学，计算机如果基础好的话建议直接刷题而不是看课本或视频学习。英语使用墨墨背单词，每天不停的背单词刷真题。政治我真的走了不少弯路，七八月看完肖大书，感觉一点都没学会，然后看徐涛视频，才慢慢的开始懂起来</p>
+<h3 id="复试"><a href="#复试" class="headerlink" title="复试"></a>复试</h3><p><a href="https://ningzimu.github.io/See_you_in_BUPT/" target="_blank" rel="noopener">北京邮电大学计算机考研信息汇总</a></p>
+<p><a href="https://www.ihewro.com/archives/916/?btwaf=95290138" target="_blank" rel="noopener">北邮我的考研笔记集</a></p>
+<p><a href="http://staff.ustc.edu.cn/~hdrq/jsjzcyl/text2/content.html" target="_blank" rel="noopener">计算机组成与结构</a></p>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><h3 id="为什么考研"><a href="#为什么考研" class="headerlink" title="为什么考研"></a>为什么考研</h3><p>理想层面，我的兴趣主要就是深度学习，强化学习，量子计算，网络安全（黑），而这些几乎不可能在本科深入学习</p>
+<p>现实层面，我本科双非，而我本科主要使用语言还是Python，找工作有点难，而且工资也不会给的很高</p>
+<h3 id="最初"><a href="#最初" class="headerlink" title="最初"></a>最初</h3><p>听别人（尤其是叔叔，说的好像不可能考上一样的）各种说考研难考，当时我什么都不懂还是有点怕的，而且那时自己也不知道怎么看学校，不知道要考哪些，怎么复试，导致自己心里很没底，但是既然选择了，那也只能选择走下去了</p>
+<h3 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h3><p>经过一段时间的复习，自己也开始懂起来了，觉得考研并不是很难，于是把目标直接定在了浙大(后来换成了北邮，后面说原因)。现在还记得当我和班里同学第一次说我要考浙大时的对话，大概就是你知道多难吗，我说140，140，60，60，不就400稳稳的了，他们说你知道140多难吗，我说感觉不是很难啊</p>
+<p>还记得的事就是每节课基本上都不听，要么看书要么玩玩手机什么的</p>
+<h3 id="暑假"><a href="#暑假" class="headerlink" title="暑假"></a>暑假</h3><p>暑假心态崩溃了一次，主要原因是数学学了这么久，还是遇到一道题不会一道(难道是因为当时题目太难了)，还有就是政治，我七月开始看肖的那本大书，真的难，一点都记不住，选择题还做不对，当时崩溃了两天左右吧，反正就是觉得自己各种考不上了，完蛋了</p>
+<p>还有就是那只烦了我一个月的苍蝇，最后终于抓住然后关塑料袋里闷死了</p>
+<p>然后就是毕业设计，md遇到需要换cpu的问题，整整一个月没有电脑玩，用树莓派刷了一个月的pat</p>
+<p>还有那两只蟑螂，大半夜的边debug边追杀他们，真tm刺激</p>
+<p>每天最爽的事就是顶着大太阳去吃晚饭然后吃完后回到寝室坐在空调下看小桀直播</p>
+<h3 id="中期"><a href="#中期" class="headerlink" title="中期"></a>中期</h3><p>考浙大就先考pat，然后因为我是Python做的，md17分超时，3分不知道错哪了，这成绩如果去考研已经算差的了，然后就是政治的问题，学了两个月，感觉什么都没学会，然后了解到浙大政治线55，感觉更没自信了，遂更换学校，换成了北邮(事实证明我是对的，最后政治只考了54分)</p>
+<h3 id="插曲"><a href="#插曲" class="headerlink" title="插曲"></a>插曲</h3><p>我记得大四上的时候还搞了一个两周的大数据的课，不仅让我很烦躁，也让我见识到了别人的高科技，各种什么平板surface这些，像我这种穷人只能靠纸笔，感觉和别人不是同一个年代的了</p>
+<h3 id="十一月"><a href="#十一月" class="headerlink" title="十一月"></a>十一月</h3><p>十一月天气之子上映，完全没想到能如此的感动自己，一个月的学习都受到了影响，尤其是前两周，真的是几乎一点没学，每天强迫自己学习，看就是静不下心，明明是个HE，但整个人超级抑郁，甚至洗澡的时候都害怕水声，觉得这个世界好无聊，不可能像动漫里那样美好</p>
+<h3 id="十二月"><a href="#十二月" class="headerlink" title="十二月"></a>十二月</h3><p>真不知道当时怎么想的，明明都最后一个月了，还在那玩游戏和看直播，starblast就不说了，我居然还找了极品飞车的新作来玩，这里要感谢一下shj，多亏你提醒我用修改器，要不然我估计我会花更多时间在游戏上</p>
+<p>明明英语真题都做不完了，我还天天下午看直播。。。</p>
+<p>还有一件事，为什么我当时没去做803真题，居然真题都没做就上考场了</p>
+<h3 id="考试"><a href="#考试" class="headerlink" title="考试"></a>考试</h3><p>考试前一直怕要是手机闹钟不响怎么办，睡过头怎么办，实际上多虑了，醒的比闹钟还早，5:30醒，6点多吃完早饭天一点都没亮，早饭也不敢吃多，生怕影响考试</p>
+<p>政治考的没啥感觉，就是写写写，英语考完有点慌了，阅读两篇没看懂，完型也有点难</p>
+<p>然后回去一对答案，政治选择题猜哪个哪个错，预估选择只有20多，慌得一批，英语倒算运气好，阅读只有一个和网上不一样</p>
+<p>数学，我初上考场做了一遍下来也是吃了一惊，好多题目居然不能第一反应就出答案，然后就是不停的死磕难题，做到后面头皮都发麻了，整个脑子感觉就已经是极限速度运转了</p>
+<p>计算机803，上考场我又一次想到，我tm为什么不做真题啊，这题目和408相差也太大了吧，做了一个半小时后就更加感觉不对了，不停的加速，幸好在最后几分钟内写完了</p>
+<p>考完后就是释然，第二天估了估分，340左右，当时蛮慌得，毕竟去年分数线356，要是没考上，真想打自己，最后了还天天玩</p>
+<p>这个时候我其实预估自己是上不了的，所以开始学一些找工作的东西了</p>
+<h3 id="出成绩"><a href="#出成绩" class="headerlink" title="出成绩"></a>出成绩</h3><p>查成绩，本来还想录屏发B站的，结果成绩直接就出来了，都还没准备好录像</p>
+<p>政治54，英语67，数学127，计算机116，英语数学和我估计的差不多，政治比我预估的高了，计算机比预估的低了</p>
+<p>本来想复查成绩的，但是看到网上有人说可能查了成绩会变低然后就没敢查</p>
+<p>364这个成绩其实我当时还是很害怕的，因为去年线356再加上考研人数的大幅增长，这分数都不知道够不够</p>
+<p>之后就是加那组的复试群，看了看成绩还算高，然后就开始准备复试，打消了找工作的念头</p>
+<h3 id="准备复试"><a href="#准备复试" class="headerlink" title="准备复试"></a>准备复试</h3><p>复试主要3部分，笔试，机试，面试，然后纵观网上所有的复试经验，都说笔试不重要，于是我把重点放在了机试上，每天就不断的刷Leetcode</p>
+<p>在初试的时候，天气之子让我致郁了一个月，而复试的时候，Darling in the franxx又让我致郁了半个月，啊啊啊啊，现实真无聊</p>
+<p>4月开始觉得平时无聊然后下载了CF想回忆回忆，结果居然还遇到了xyh，哈哈哈哈，如此小概率事件，一直玩到现在</p>
+<p>这疫情又导致复试时间大幅推迟，每天那种没有着地的感觉很让人烦躁，我就直接干别的事了，把《强化学习》给看完了</p>
+<h3 id="复试前"><a href="#复试前" class="headerlink" title="复试前"></a>复试前</h3><p>复试细则出来后，网上复试，其实我蛮反感的，因为2020年想要作弊太简单了，不过也没办法，因为这病毒</p>
+<p>网上复试不是让我最吃惊的，最吃惊的是居然没有机试，我靠，我准备了三个月啊，但也只能马上开始火急火燎的准备笔试和面试</p>
+<h3 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h3><p>笔试开始前，小米5终于扛不住了，不断的死机，卡住，我考试前十几分钟直接和负责人说我第一次不想考了，想直接参加第二次考试，那个负责人还不断劝我再试试，然后我重启手机勉勉强强的能进行，然后就是这蛋疼的题目了，和网上以前泄露的题目完全不一样，以前都是选择判断，今年全是大题，还很难，最后只得了36分(100满分)</p>
+<h3 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h3><p>英语考试很简单，就问了个自我介绍，当时好紧张，背的东西基本都忘了，只能现场想然后转成英文说</p>
+<p>面试先是政治审核，问各种各样问题，然后抽专业面试题，面试官像我确认信封的完整性，结果他tm脑抽说了句反正我也看不清，直接拆吧</p>
+<p>我抽到的题目里好几道是c++题目，基本都靠猜。问完10道题目后就直接提示你可以推出了。我感觉好快，不知道有没有20分钟</p>
+<p>其中还有一道送命题我也答错了，老师问我如果被刷这么办，我说那我考浙大去了</p>
+<h3 id="选导师"><a href="#选导师" class="headerlink" title="选导师"></a>选导师</h3><p>为了方便描述及保护隐私，下文中我想选的导师称为A，我被分配的不希望的导师称为B</p>
+<h4 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h4><p>面试完过了一个小时左右A导师打电话告诉我拟录取了，然后我被分配到了B导师那。然后我查了一下B导师的研究(无线网络)，发现当初和我想学(深度学习)的天差地别，然后我马上打电话给A询问是否能更换导师，然后被告知其他老师名额都满了，这个时候我就已经有点失望了。既然这样我就只能先打电话给B老师，然后询问了一下，的确和我想的一样，方向差别很大，然后我问了一句我能否自己单干什么的，然后就被一顿怼，大概就是你不读的话我们马上重招一个，我也只能连忙道歉，先稳住再说，和老师电话交谈之后也知道了她有一些机器学习和强化学习方面的工作</p>
+<p>B把我的情况告诉了A，A也给我打了电话，问了我想读什么，然后说B也是有这类项目的，要我快点决定</p>
+<p>到了晚上，我越想越绝望，查了B的各种工作，全是无线网络，我本科连通信原理这种课都没上过，如果跟着她干，那我可能要从零开始学了，而且还是自己不喜欢的领域，我直接哭了出来，然后也和父母说了这个情况，和他们说了这个我不想读了，我想调剂或者重考浙大了，父母的意见就是先读着，无线网络也不错，5G现在不很火什么之类的，反正就是读下去的意思，我之后有发了QQ给B想详细了解她的机器学习的项目是怎么样的，是纯机器学习还是与无线网络结合的</p>
+<p>一想到这么久的努力要白费了就很绝望</p>
+<h4 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h4><p>父母也向别人询问这种事应该这么办，然后和我说这没关系，和我说什么读无线网络出来找个国企一年20W不也很舒服吗，B第二天则发了篇她学生的论文(无线网络和Q学习结合)给我，问了我一些问题，然后我也做了个PPT表达了自己的一点看法。我也明确的和她表达了意见，一是我想搞新算法新架构这类东西而不是已有东西的结合，二是如果全都涉及无线网络的话那我可能需要好好考虑一下了</p>
+<p>之后又追问了两个问题，一个是询问项目是否都是与网络相关的，她回复目前是的，第二个问题问她如果认真和她学，就业有保障吗，她回复毕业生找工作良好</p>
+<p>后来A打电话中也谈到我最后这个问题很让人尴尬，在此解释一下为什么我会这么问。当我问完第一个问题时，在我面前几乎就是两条路了，放弃然后调剂或者重考，学自己不喜欢的东西然后不断的干下去，第二个问题就是为了后面那条路打探消息</p>
+<p>然后又问了问pxb，他的意见也是不要轻易放弃，再联系联系</p>
+<p>自己不断的内心挣扎，不断的看北邮本校调剂，自己感兴趣方向的组都不缺人了，剩下只有大数据这种不讨厌也不喜欢的方向了</p>
+<p>到了晚上，A也是又打来了电话，询问我想不想读，那时我已经绝望打算放弃了，然后问了问放弃本组能不能调剂其他组</p>
+<p>又过了一会，A打来了电话，说他们商量好了，今年B的一个名额给A，然后明年A还给B一个，这意味着我可以跟着A读了</p>
+<p>听到这个真的蛮开心的，不用调剂不用重考了</p>
+<p><font color="#CD5C5C">感谢A和B老师</font><br></p>
+<h2 id="尾记"><a href="#尾记" class="headerlink" title="尾记"></a>尾记</h2><p>说实话我觉得我的考研之路并不是很努力，明明知道考不上会很难受，但就是无法拼尽全力(要打分的话过去一年只能给个及格分了)，总感觉自己这么不努力还考上了有点亵渎别人的努力了</p>
+<p>不过考研路上的压力是绝对可以给100分，当我看到别人早早起来读书，别人各种视频笔记，别人在考研教室里集体复习(我一个人在寝室复习)，心里压力是真的大</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://uesugierii.github.io/articles/40.html" title="考研记录">https://uesugierii.github.io/articles/40.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/39.html" rel="next" title="软件测试整理">
+                <i class="fa fa-chevron-left"></i> 软件测试整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经验"><span class="nav-number">1.</span> <span class="nav-text">经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初试"><span class="nav-number">1.1.</span> <span class="nav-text">初试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复试"><span class="nav-number">1.2.</span> <span class="nav-text">复试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录"><span class="nav-number">2.</span> <span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么考研"><span class="nav-number">2.1.</span> <span class="nav-text">为什么考研</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最初"><span class="nav-number">2.2.</span> <span class="nav-text">最初</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期"><span class="nav-number">2.3.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暑假"><span class="nav-number">2.4.</span> <span class="nav-text">暑假</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中期"><span class="nav-number">2.5.</span> <span class="nav-text">中期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插曲"><span class="nav-number">2.6.</span> <span class="nav-text">插曲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一月"><span class="nav-number">2.7.</span> <span class="nav-text">十一月</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二月"><span class="nav-number">2.8.</span> <span class="nav-text">十二月</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#考试"><span class="nav-number">2.9.</span> <span class="nav-text">考试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出成绩"><span class="nav-number">2.10.</span> <span class="nav-text">出成绩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备复试"><span class="nav-number">2.11.</span> <span class="nav-text">准备复试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复试前"><span class="nav-number">2.12.</span> <span class="nav-text">复试前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笔试"><span class="nav-number">2.13.</span> <span class="nav-text">笔试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">2.14.</span> <span class="nav-text">面试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选导师"><span class="nav-number">2.15.</span> <span class="nav-text">选导师</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一天"><span class="nav-number">2.15.1.</span> <span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二天"><span class="nav-number">2.15.2.</span> <span class="nav-text">第二天</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾记"><span class="nav-number">3.</span> <span class="nav-text">尾记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
