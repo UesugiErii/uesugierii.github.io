@@ -4,8 +4,6 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [gist](#gist)
 
-[interesting_things](#interesting_things)
-
 ## blog
 
 [0](https://rs11.xyz/articles/0.html)
