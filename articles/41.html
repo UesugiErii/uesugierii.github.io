@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo docker run -it 镜像名 /bin/bash 启动守护式容器">
+  <meta name="description" content="如何安装docker docker设置代理 docker简明教程 镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo doc">
 <meta name="keywords" content="docker,命令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker命令总结">
 <meta property="og:url" content="https://uesugierii.github.io/articles/41.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo docker run -it 镜像名 /bin/bash 启动守护式容器">
+<meta property="og:description" content="如何安装docker docker设置代理 docker简明教程 镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo doc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-20T14:57:31.881Z">
+<meta property="og:updated_time" content="2020-06-17T14:11:55.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker命令总结">
-<meta name="twitter:description" content="镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo docker run -it 镜像名 /bin/bash 启动守护式容器">
+<meta name="twitter:description" content="如何安装docker docker设置代理 docker简明教程 镜像列出本地镜像sudo docker images -a 拉取镜像sudo docker pull 镜像名[:tag] 删除镜像sudo docker rmi 镜像id 容器查看所有容器sudo docker ps -a 启动容器启动某个已停止容器 sudo docker start 容器ID或容器名 交互式启动 sudo doc">
 
 
 
@@ -348,12 +348,24 @@
                 
               
 
-              <time title="Created: 2020-05-20 00:00:00 / Modified: 22:57:31" itemprop="dateCreated datePublished" datetime="2020-05-20T00:00:00+08:00">2020-05-20</time>
+              <time title="Created: 2020-05-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-20T00:00:00+08:00">2020-05-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-06-17 22:11:55" itemprop="dateModified" datetime="2020-06-17T22:11:55+08:00">2020-06-17</time>
               
             
           </span>
@@ -404,16 +416,19 @@
       
 
       
-        <h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="列出本地镜像"><a href="#列出本地镜像" class="headerlink" title="列出本地镜像"></a>列出本地镜像</h3><p><code>sudo docker images -a</code></p>
+        <p><a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">如何安装docker</a></p>
+<p><a href="https://www.serverlab.ca/tutorials/containers/docker/how-to-set-the-proxy-for-docker-on-ubuntu/" target="_blank" rel="noopener">docker设置代理</a></p>
+<p><a href="https://jiajially.gitbooks.io/dockerguide/content/index.html" target="_blank" rel="noopener">docker简明教程</a></p>
+<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="列出本地镜像"><a href="#列出本地镜像" class="headerlink" title="列出本地镜像"></a>列出本地镜像</h3><p><code>sudo docker images -a</code></p>
 <h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>sudo docker pull 镜像名[:tag]</code></p>
 <h3 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h3><p><code>sudo docker rmi 镜像id</code></p>
 <h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="查看所有容器"><a href="#查看所有容器" class="headerlink" title="查看所有容器"></a>查看所有容器</h3><p><code>sudo docker ps -a</code></p>
 <h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>启动某个已停止容器</p>
 <p><code>sudo docker start 容器ID或容器名</code></p>
 <p>交互式启动</p>
-<p><code>sudo docker run -it 镜像名 /bin/bash</code></p>
+<p><code>sudo docker run -it --name=test 镜像名[:tag] /bin/bash</code></p>
 <p>启动守护式容器</p>
-<p><code>sudo docker run -d 镜像名</code></p>
+<p><code>sudo docker run -d --name=test 镜像名[:tag]</code></p>
 <p>端口映射</p>
 <p>-p ip:hostPort:containerPort</p>
 <h3 id="进入正在运行的容器"><a href="#进入正在运行的容器" class="headerlink" title="进入正在运行的容器"></a>进入正在运行的容器</h3><p><code>sudo docker exec -it 容器ID /bin/bash</code></p>
