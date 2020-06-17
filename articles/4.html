@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="zx&#39;s blog">
 <meta property="og:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-02T14:15:09.393Z">
+<meta property="og:updated_time" content="2020-06-17T12:15:24.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装完Ubuntu后">
 <meta name="twitter:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
@@ -365,7 +365,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-04-02 22:15:09" itemprop="dateModified" datetime="2020-04-02T22:15:09+08:00">2020-04-02</time>
+                <time title="Modified: 2020-06-17 20:15:24" itemprop="dateModified" datetime="2020-06-17T20:15:24+08:00">2020-06-17</time>
               
             
           </span>
@@ -433,11 +433,13 @@
 <p>重启</p>
 <p><code>fcitx-config-gtk3</code></p>
 <p>配置,此时应该默认就是google pinyin了</p>
+<p><a href="https://rs11.xyz/articles/19.html" target="_blank" rel="noopener">ubuntu下google拼音中文模式默认使用英文符号</a></p>
 <h3 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h3><p>我自己的电脑出现选择google pinyin但无法使用的情况,然后我通过把ibus卸载解决</p>
 <h2 id="翻墙"><a href="#翻墙" class="headerlink" title="翻墙"></a>翻墙</h2><p><a href="https://github.com/erguotou520/electron-ssr" target="_blank" rel="noopener">electron-ssr</a></p>
 <p>上面软件作者已删除软件,需要者自己找备份</p>
 <p><a href="https://github.com/Qv2ray/Qv2ray" target="_blank" rel="noopener">Qv2ray</a></p>
 <p><a href="https://github.com/v2ray/v2ray-core" target="_blank" rel="noopener">v2ray-core</a></p>
+<p>Qv2ray只是一个界面, 需要下载v2ray-core并在Qv2ray里设置</p>
 <p>先使用http代理update，然后安装proxychains4</p>
 <p><code>sudo apt-get -o Acquire::http::proxy=&quot;http://127.0.0.1:8888/&quot; update</code></p>
 <p><a href="https://github.com/rofl0r/proxychains-ng" target="_blank" rel="noopener">proxychains-ng</a></p>
@@ -464,7 +466,7 @@
 <h2 id="有用的软件"><a href="#有用的软件" class="headerlink" title="有用的软件"></a>有用的软件</h2><p><code>sudo apt install vim</code></p>
 <p><code>sudo apt install git</code></p>
 <blockquote>
-<p><code>git config --global user.email &quot;email&quot;</code></p>
+<p><code>git config --global user.email &quot;your email&quot;</code></p>
 </blockquote>
 <p><code>sudo apt install exfat-fuse</code></p>
 <p><code>apt install unzip</code></p>
@@ -485,6 +487,10 @@
 <h3 id="ssh"><a href="#ssh" class="headerlink" title=".ssh"></a>.ssh</h3><p>.ssh 755</p>
 <p>私钥 600</p>
 <p>pub  644 -&gt; authorized_keys</p>
+<h2 id="重建博客"><a href="#重建博客" class="headerlink" title="重建博客"></a>重建博客</h2><p><code>sudo proxychains4 apt install nodejs</code></p>
+<p><code>sudo proxychains4 apt install npm</code></p>
+<p><code>sudo npm install hexo-cli -g</code></p>
+<p>其中已经集成了hexo-math</p>
 
       
     </div>
@@ -725,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">1.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">2.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">2.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">3.</span> <span class="nav-text">翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">4.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">5.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">6.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">7.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">8.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">8.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">8.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvidia驱动"><span class="nav-number">8.3.</span> <span class="nav-text">nvidia驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整显卡风扇转速"><span class="nav-number">8.4.</span> <span class="nav-text">调整显卡风扇转速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA"><span class="nav-number">8.5.</span> <span class="nav-text">CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">8.6.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">8.7.</span> <span class="nav-text">.ssh</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">1.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">2.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">2.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">3.</span> <span class="nav-text">翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">4.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">5.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">6.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">7.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">8.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">8.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">8.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvidia驱动"><span class="nav-number">8.3.</span> <span class="nav-text">nvidia驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整显卡风扇转速"><span class="nav-number">8.4.</span> <span class="nav-text">调整显卡风扇转速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA"><span class="nav-number">8.5.</span> <span class="nav-text">CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">8.6.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">8.7.</span> <span class="nav-text">.ssh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建博客"><span class="nav-number">9.</span> <span class="nav-text">重建博客</span></a></li></ol></div>
             
 
           </div>
