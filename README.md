@@ -1,9 +1,5 @@
 This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh) license.
 
-[blog](#blog)
-
-[gist](#gist)
-
 ## blog
 
 [0](https://rs11.xyz/articles/0.html)
@@ -82,28 +78,16 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [Linux安装android SDK及Appium配置](https://rs11.xyz/articles/37.html)
 
-## gist
+[强化学习 第二章练习答案](https://rs11.xyz/articles/38.html)
 
-[pure number dictionary](https://gist.github.com/UesugiErii/59f3ebda10fef40848d932a8d902fb51)
+[软件测试整理](https://rs11.xyz/articles/39.html)
 
-[letter and birthday combination dictionary](https://gist.github.com/UesugiErii/7621e620f28a84bf021f0e6f65336d8a)
+[考研记录](https://rs11.xyz/articles/40.html)
 
-[某种网站的自动签到领取流量](https://gist.github.com/UesugiErii/ebdffdca28002c9a03be98d3d44977bf)
+[docker命令总结](https://rs11.xyz/articles/41.html)
 
-[multiprocessing event](https://gist.github.com/UesugiErii/320a26fe4ced0ac1375c0cfc53ce09fd)
+[魅族16T刷机整理](https://rs11.xyz/articles/42.html)
 
-[change image size](https://gist.github.com/UesugiErii/36996c6249772cdd10759b1fe7a53259)
-[Timing restart the program](https://gist.github.com/UesugiErii/ef7c6f0376fb5ac5a37d20292a00d636)
-
-[pdf to one image](https://gist.github.com/UesugiErii/5bf3e3654cf5a174cc5e3102ede499e2)
-
-[tf2 template](https://gist.github.com/UesugiErii/562a577675f2776bec9dc607898b13dd)
-
-[Read tensor data from tensorboard file](https://gist.github.com/UesugiErii/b6970f87be3e79629d73993c3571df7d)
-
-[conky config share](https://gist.github.com/UesugiErii/9425a84e72f851439f2d9cbd2b9232b1)
-
-[aria2.conf](https://gist.github.com/UesugiErii/d70dfe09f531ba47a0c5c3c9505f33bf)
-
+[安卓删除无法删除的文件](https://rs11.xyz/articles/43.html)
 
 
