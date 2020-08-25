@@ -90,4 +90,5 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [安卓删除无法删除的文件](https://rs11.xyz/articles/43.html)
 
+[<<深度学习推荐系统>>笔记](https://rs11.xyz/articles/44.html)
 
