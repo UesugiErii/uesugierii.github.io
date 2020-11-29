@@ -475,6 +475,7 @@ class KGAT(object):
     def update_attentive_A(self, sess):
         # A_in == laplacian matrix == π (h,r,t)
         # 使用transR的得分来当做注意力的权重
+        # A_in 最开始是用归一化的出度来初始化的
         fold_len = len(self.all_h_list) // self.n_fold
         kg_score = []
 
