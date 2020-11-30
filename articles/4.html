@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
+  <meta name="description" content="设置硬件时间为系统时间timedatectl set-local-rtc 1 --adjust-system-clock 禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net">
 <meta name="keywords" content="ubuntu,技巧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装完Ubuntu后">
 <meta property="og:url" content="https://uesugierii.github.io/articles/4.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
+<meta property="og:description" content="设置硬件时间为系统时间timedatectl set-local-rtc 1 --adjust-system-clock 禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-15T12:27:22.997Z">
+<meta property="og:updated_time" content="2020-11-30T10:51:42.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装完Ubuntu后">
-<meta name="twitter:description" content="禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net.ipv6.conf.lo.disable_ipv6 =1 保存并退出,重启sysctl sudo sysctl -p 安">
+<meta name="twitter:description" content="设置硬件时间为系统时间timedatectl set-local-rtc 1 --adjust-system-clock 禁用Ipv6sudo nano /etc/sysctl.conf 在文件的最后加入下面的代码 1234# IPv6 disablednet.ipv6.conf.all.disable_ipv6 =1net.ipv6.conf.default.disable_ipv6 =1net">
 
 
 
@@ -231,7 +231,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Accueil</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
         
         
@@ -341,14 +341,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2018-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-15T00:00:00+08:00">2018-08-15</time>
+              <time title="Created: 2018-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-15T00:00:00+08:00">2018-08-15</time>
             
 
             
@@ -365,7 +365,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2020-11-15 20:27:22" itemprop="dateModified" datetime="2020-11-15T20:27:22+08:00">2020-11-15</time>
+                <time title="Modified: 2020-11-30 18:51:42" itemprop="dateModified" datetime="2020-11-30T18:51:42+08:00">2020-11-30</time>
               
             
           </span>
@@ -416,7 +416,8 @@
       
 
       
-        <h2 id="禁用Ipv6"><a href="#禁用Ipv6" class="headerlink" title="禁用Ipv6"></a>禁用Ipv6</h2><p><code>sudo nano /etc/sysctl.conf</code></p>
+        <h2 id="设置硬件时间为系统时间"><a href="#设置硬件时间为系统时间" class="headerlink" title="设置硬件时间为系统时间"></a>设置硬件时间为系统时间</h2><p><code>timedatectl set-local-rtc 1 --adjust-system-clock</code></p>
+<h2 id="禁用Ipv6"><a href="#禁用Ipv6" class="headerlink" title="禁用Ipv6"></a>禁用Ipv6</h2><p><code>sudo nano /etc/sysctl.conf</code></p>
 <p>在文件的最后加入下面的代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># IPv6 disabled</span></span><br><span class="line">net.ipv6.conf.all.disable_ipv6 =1</span><br><span class="line">net.ipv6.conf.default.disable_ipv6 =1</span><br><span class="line">net.ipv6.conf.lo.disable_ipv6 =1</span><br></pre></td></tr></table></figure>
 <p>保存并退出,重启sysctl</p>
@@ -488,6 +489,11 @@
 <p><code>sudo apt remove --purge gnome-shell</code></p>
 <p><code>sudo apt remove --purge gnome</code></p>
 <p><code>sudo apt autoremove</code></p>
+<h3 id="xfce4可选项"><a href="#xfce4可选项" class="headerlink" title="xfce4可选项"></a>xfce4可选项</h3><p>xfce4安装截图, <code>sudo apt install xfce4-screenshooter</code></p>
+<p>xfce4安装电源管理, <code>sudo apt install xfce4-power-manager</code></p>
+<p>xfce4安装蓝牙, <code>sudo apt install bluetooth pulseaudio-module-bluetooth blueman bluez-firmware</code></p>
+<p>Settings -&gt; Keyboard -&gt; Application Shortcuts 修改锁屏快捷键</p>
+<p>Settings -&gt; Window Manager -&gt; Keyboard 修改虚拟桌面切换快捷键</p>
 
       
     </div>
@@ -535,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/1.html" rel="next" title="远离国产"大"软件">
-                <i class="fa fa-chevron-left"></i> 远离国产"大"软件
+              <a href="/articles/2.html" rel="next" title="Hexo之坑">
+                <i class="fa fa-chevron-left"></i> Hexo之坑
               </a>
             
           </div>
@@ -594,10 +600,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Des Matières
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ensemble
+            Overview
           </li>
         </ul>
       
@@ -622,7 +628,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">48</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -730,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">1.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">2.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">2.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">3.</span> <span class="nav-text">翻墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件介绍"><span class="nav-number">3.1.</span> <span class="nav-text">软件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行使用代理"><span class="nav-number">3.2.</span> <span class="nav-text">命令行使用代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试代理"><span class="nav-number">3.3.</span> <span class="nav-text">测试代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qv2ray设置局域网共享"><span class="nav-number">3.4.</span> <span class="nav-text">Qv2ray设置局域网共享</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">4.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">5.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">6.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">7.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">8.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">8.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">8.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvidia驱动"><span class="nav-number">8.3.</span> <span class="nav-text">nvidia驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整显卡风扇转速"><span class="nav-number">8.4.</span> <span class="nav-text">调整显卡风扇转速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">8.5.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">8.6.</span> <span class="nav-text">.ssh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建博客"><span class="nav-number">9.</span> <span class="nav-text">重建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换桌面"><span class="nav-number">10.</span> <span class="nav-text">更换桌面</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置硬件时间为系统时间"><span class="nav-number">1.</span> <span class="nav-text">设置硬件时间为系统时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ipv6"><span class="nav-number">2.</span> <span class="nav-text">禁用Ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装谷歌拼音输入法"><span class="nav-number">3.</span> <span class="nav-text">安装谷歌拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS"><span class="nav-number">3.1.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻墙"><span class="nav-number">4.</span> <span class="nav-text">翻墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件介绍"><span class="nav-number">4.1.</span> <span class="nav-text">软件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行使用代理"><span class="nav-number">4.2.</span> <span class="nav-text">命令行使用代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试代理"><span class="nav-number">4.3.</span> <span class="nav-text">测试代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qv2ray设置局域网共享"><span class="nav-number">4.4.</span> <span class="nav-text">Qv2ray设置局域网共享</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gnome-Shell"><span class="nav-number">5.</span> <span class="nav-text">Gnome Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conky"><span class="nav-number">6.</span> <span class="nav-text">conky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ramdisk"><span class="nav-number">7.</span> <span class="nav-text">ramdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的软件"><span class="nav-number">8.</span> <span class="nav-text">有用的软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方面"><span class="nav-number">9.</span> <span class="nav-text">编程方面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装开发编译环境"><span class="nav-number">9.1.</span> <span class="nav-text">安装开发编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3包"><span class="nav-number">9.2.</span> <span class="nav-text">Python3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvidia驱动"><span class="nav-number">9.3.</span> <span class="nav-text">nvidia驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整显卡风扇转速"><span class="nav-number">9.4.</span> <span class="nav-text">调整显卡风扇转速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建引导-一些sb情况下"><span class="nav-number">9.5.</span> <span class="nav-text">重建引导(一些sb情况下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">9.6.</span> <span class="nav-text">.ssh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建博客"><span class="nav-number">10.</span> <span class="nav-text">重建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换桌面"><span class="nav-number">11.</span> <span class="nav-text">更换桌面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfce4可选项"><span class="nav-number">11.1.</span> <span class="nav-text">xfce4可选项</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -774,7 +780,7 @@
 
 
 
-  <div class="theme-info">Thème – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
 
 
 
