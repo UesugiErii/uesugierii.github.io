@@ -92,3 +92,11 @@ This blog uses [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 [<<深度学习推荐系统>>笔记](https://rs11.xyz/articles/44.html)
 
+[docker+tensorflow+pycharm完美配置](https://rs11.xyz/articles/45.html)
+
+[初入门 -> 知识图谱X推荐系统 -> KGAT](https://rs11.xyz/articles/46.html)
+
+[双系统连接蓝牙设备](https://rs11.xyz/articles/47.html)
+
+[spin5笔记本在linux下启用触摸屏和触摸板](https://rs11.xyz/articles/48.html)
+
