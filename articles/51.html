@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
-<meta name="keywords" content="windows,ubuntu,只读">
+  <meta name="description" content="本文主要补充一些官方可能不会提到的东西 官方教程设置帐号和 Cloud TPU 项目 快速入门 设置帐号和 Cloud TPU 项目 GCP gcloud SDK Use TPUs 强烈推荐上面链接的官方教程, 简单易懂  补充环境变量设置如果你需要在你的程序中使用 TPU, 那么你需要设置环境变量 export TPU_NAME={your-tpu-name} 关闭默认日志(可选)TPU 运行过">
+<meta name="keywords" content="GCP,TPU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu挂载windows分区或磁盘">
-<meta property="og:url" content="https://uesugierii.github.io/articles/8.html">
+<meta property="og:title" content="GCP TPU 笔记">
+<meta property="og:url" content="https://uesugierii.github.io/articles/51.html">
 <meta property="og:site_name" content="zx&#39;s blog">
-<meta property="og:description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
+<meta property="og:description" content="本文主要补充一些官方可能不会提到的东西 官方教程设置帐号和 Cloud TPU 项目 快速入门 设置帐号和 Cloud TPU 项目 GCP gcloud SDK Use TPUs 强烈推荐上面链接的官方教程, 简单易懂  补充环境变量设置如果你需要在你的程序中使用 TPU, 那么你需要设置环境变量 export TPU_NAME={your-tpu-name} 关闭默认日志(可选)TPU 运行过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-08T13:28:59.000Z">
+<meta property="og:updated_time" content="2021-07-27T15:20:07.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu挂载windows分区或磁盘">
-<meta name="twitter:description" content="当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况. 即使强行挂载为rw也是无法创建文件的. 原因就在于windows的关机并没有完全关闭. 参考资料 解决方案:  关闭快速启动 管理员权限运行 powercfg /h off    我反正还没看到过有其他哪篇文章讲到第二点的">
+<meta name="twitter:title" content="GCP TPU 笔记">
+<meta name="twitter:description" content="本文主要补充一些官方可能不会提到的东西 官方教程设置帐号和 Cloud TPU 项目 快速入门 设置帐号和 Cloud TPU 项目 GCP gcloud SDK Use TPUs 强烈推荐上面链接的官方教程, 简单易懂  补充环境变量设置如果你需要在你的程序中使用 TPU, 那么你需要设置环境变量 export TPU_NAME={your-tpu-name} 关闭默认日志(可选)TPU 运行过">
 
 
 
 
 
 
-  <link rel="canonical" href="https://uesugierii.github.io/articles/8.html"/>
+  <link rel="canonical" href="https://uesugierii.github.io/articles/51.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>ubuntu挂载windows分区或磁盘 | zx's blog</title>
+  <title>GCP TPU 笔记 | zx's blog</title>
   
 
 
@@ -306,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/8.html">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/51.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zx">
@@ -323,7 +323,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ubuntu挂载windows分区或磁盘
+          <h2 class="post-title" itemprop="name headline">GCP TPU 笔记
               
             
           </h2>
@@ -348,24 +348,12 @@
                 
               
 
-              <time title="作成された時間：2018-09-10 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-10T00:00:00+08:00">2018-09-10</time>
+              <time title="作成された時間：2021-07-27 00:00:00 / Updated at：23:20:07" itemprop="dateCreated datePublished" datetime="2021-07-27T00:00:00+08:00">2021-07-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">に編集されました</span>
-                
-                <time title="Updated at：2020-01-08 21:28:59" itemprop="dateModified" datetime="2020-01-08T21:28:59+08:00">2020-01-08</time>
               
             
           </span>
@@ -382,7 +370,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2021/" itemprop="url" rel="index"><span itemprop="name">2021</span></a></span>
 
                 
                 
@@ -416,19 +404,28 @@
       
 
       
-        <p>当在ubuntu中挂载windows磁盘或者分区时 , 可能会出现挂载后只读的情况.</p>
-<p>即使强行挂载为rw也是无法创建文件的.</p>
-<p>原因就在于windows的关机并没有完全关闭.</p>
-<p><a href="https://askubuntu.com/questions/145902/unable-to-mount-windows-ntfs-filesystem-due-to-hibernation" target="_blank" rel="noopener">参考资料</a></p>
-<p>解决方案:</p>
-<ol>
-<li>关闭快速启动</li>
-<li>管理员权限运行<blockquote>
-<p>powercfg /h off</p>
-</blockquote>
-</li>
-</ol>
-<p>我反正还没看到过有其他哪篇文章讲到第二点的</p>
+        <p>本文主要补充一些官方可能不会提到的东西</p>
+<h2 id="官方教程"><a href="#官方教程" class="headerlink" title="官方教程"></a>官方教程</h2><p><a href="https://cloud.google.com/tpu/docs/setup-gcp-account" target="_blank" rel="noopener">设置帐号和 Cloud TPU 项目</a></p>
+<p><a href="https://cloud.google.com/tpu/docs/quickstart" target="_blank" rel="noopener">快速入门</a></p>
+<p><a href="https://cloud.google.com/tpu/docs/storage-buckets#europe" target="_blank" rel="noopener">设置帐号和 Cloud TPU 项目</a></p>
+<p><a href="https://cloud.google.com/sdk/gcloud/reference" target="_blank" rel="noopener">GCP gcloud SDK</a></p>
+<p><a href="https://www.tensorflow.org/guide/tpu?hl=zh-cn" target="_blank" rel="noopener">Use TPUs</a></p>
+<font color="#CD5C5C">强烈推荐上面链接的官方教程, 简单易懂</font>
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="环境变量设置"><a href="#环境变量设置" class="headerlink" title="环境变量设置"></a>环境变量设置</h3><p>如果你需要在你的程序中使用 TPU, 那么你需要设置环境变量</p>
+<p><code>export TPU_NAME={your-tpu-name}</code></p>
+<h3 id="关闭默认日志-可选"><a href="#关闭默认日志-可选" class="headerlink" title="关闭默认日志(可选)"></a>关闭默认日志(可选)</h3><p>TPU 运行过程中会产生大量日志, 如果不关闭默认日志, 可能会花掉你很多钱</p>
+<p>左侧菜单 -&gt; Logging -&gt; 日志路由器 -&gt; 关闭名称为 _Default 的日志路由器接收器</p>
+<p>我自己几天时间就产生了74GiB的日志, 还是有点恐怖的</p>
+<h3 id="一些命令笔记-方便日后查找"><a href="#一些命令笔记-方便日后查找" class="headerlink" title="一些命令笔记(方便日后查找)"></a>一些命令笔记(方便日后查找)</h3><h4 id="修改机器配置"><a href="#修改机器配置" class="headerlink" title="修改机器配置"></a>修改机器配置</h4><p>gcloud compute instances set-machine-type instance1 –zone=europe-west4-a  –custom-cpu=1 –custom-memory=6656MB –custom-extensions  –custom-vm-type=n1</p>
+<h4 id="TPU管理"><a href="#TPU管理" class="headerlink" title="TPU管理"></a>TPU管理</h4><p><code>gcloud compute tpus create my-tpu --zone=europe-west4-a --accelerator-type=&#39;v3-8&#39; --version=&#39;2.4.1&#39;</code></p>
+<p><code>gcloud compute tpus stop my-tpu --zone=europe-west4-a</code></p>
+<h4 id="同时创建机器和TPU"><a href="#同时创建机器和TPU" class="headerlink" title="同时创建机器和TPU"></a>同时创建机器和TPU</h4><p><code>export PROJECT_ID={your-project-id}</code></p>
+<p><code>gcloud config set project $PROJECT_ID</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcloud compute tpus execution-groups create \</span><br><span class="line"> --disk-size=50GB \</span><br><span class="line"> --name=instance1 \</span><br><span class="line"> --zone=europe-west4-a \</span><br><span class="line"> --tf-version=2.4.1 \</span><br><span class="line"> --machine-type=n1-standard-1 \</span><br><span class="line"> --accelerator-type=v3-8</span><br></pre></td></tr></table></figure>
+<p><code>gcloud compute ssh mnist-tutorial --zone=europe-west4-a</code></p>
+<h2 id="杂七杂八"><a href="#杂七杂八" class="headerlink" title="杂七杂八"></a>杂七杂八</h2><h3 id="install-rar"><a href="#install-rar" class="headerlink" title="install rar"></a>install rar</h3><p><a href="https://www.rarlab.com/download.htm" target="_blank" rel="noopener">https://www.rarlab.com/download.htm</a></p>
+<p><code>unrar x test.rar</code></p>
 
       
     </div>
@@ -450,7 +447,7 @@
     <strong>著者： </strong>zx</li>
   <li class="post-copyright-link">
     <strong>記事へのリンク：</strong>
-    <a href="https://uesugierii.github.io/articles/8.html" title="ubuntu挂载windows分区或磁盘">https://uesugierii.github.io/articles/8.html</a>
+    <a href="https://uesugierii.github.io/articles/51.html" title="GCP TPU 笔记">https://uesugierii.github.io/articles/51.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>著作権表示： </strong>このブログ内のすべての記事は、特別な記載がない限り <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> の下のライセンスで保護されています。</li>
@@ -463,7 +460,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+            <a href="/tags/Note/" rel="tag"># Note</a>
           
         </div>
       
@@ -476,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/0.html" rel="next" title="0">
-                <i class="fa fa-chevron-left"></i> 0
+              <a href="/articles/49.html" rel="next" title="深度学习显卡损坏导致BUG">
+                <i class="fa fa-chevron-left"></i> 深度学习显卡损坏导致BUG
               </a>
             
           </div>
@@ -485,10 +482,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/9.html" rel="prev" title="Natural Policy Gradient 实现要点">
-                Natural Policy Gradient 实现要点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            見出し
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            概要
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -654,6 +656,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方教程"><span class="nav-number">1.</span> <span class="nav-text">官方教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">2.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量设置"><span class="nav-number">2.1.</span> <span class="nav-text">环境变量设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭默认日志-可选"><span class="nav-number">2.2.</span> <span class="nav-text">关闭默认日志(可选)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些命令笔记-方便日后查找"><span class="nav-number">2.3.</span> <span class="nav-text">一些命令笔记(方便日后查找)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改机器配置"><span class="nav-number">2.3.1.</span> <span class="nav-text">修改机器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TPU管理"><span class="nav-number">2.3.2.</span> <span class="nav-text">TPU管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同时创建机器和TPU"><span class="nav-number">2.3.3.</span> <span class="nav-text">同时创建机器和TPU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杂七杂八"><span class="nav-number">3.</span> <span class="nav-text">杂七杂八</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install-rar"><span class="nav-number">3.1.</span> <span class="nav-text">install rar</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
