@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="因为推荐系统中各个子领域的数据处理过程各不相同, 为防止遗忘, 作此笔记(本文应该会不停更新) 纯CTR预估我的模型的数据处理过程, 根据 AutoInt 修改首先原始数据大概是长这样的, 以下数据是我编造用来讲解的 1231 a1b paq 1 20 7h3     100 01     a1b -2 -0.5 原始数据集会告诉你每列所代表的意思以及该列是否为实值数据 以上述数据为例, 数据集提">
+<meta name="keywords" content="推荐系统,数据预处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统处理数据总结">
+<meta property="og:url" content="https://uesugierii.github.io/articles/52.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="因为推荐系统中各个子领域的数据处理过程各不相同, 为防止遗忘, 作此笔记(本文应该会不停更新) 纯CTR预估我的模型的数据处理过程, 根据 AutoInt 修改首先原始数据大概是长这样的, 以下数据是我编造用来讲解的 1231 a1b paq 1 20 7h3     100 01     a1b -2 -0.5 原始数据集会告诉你每列所代表的意思以及该列是否为实值数据 以上述数据为例, 数据集提">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-09-12T13:42:38.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统处理数据总结">
+<meta name="twitter:description" content="因为推荐系统中各个子领域的数据处理过程各不相同, 为防止遗忘, 作此笔记(本文应该会不停更新) 纯CTR预估我的模型的数据处理过程, 根据 AutoInt 修改首先原始数据大概是长这样的, 以下数据是我编造用来讲解的 1231 a1b paq 1 20 7h3     100 01     a1b -2 -0.5 原始数据集会告诉你每列所代表的意思以及该列是否为实值数据 以上述数据为例, 数据集提">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/52.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>推荐系统处理数据总结 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/52.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">推荐系统处理数据总结
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2021-09-12 00:00:00 / Updated at: 21:42:38" itemprop="dateCreated datePublished" datetime="2021-09-12T00:00:00+08:00">2021-09-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2021/" itemprop="url" rel="index"><span itemprop="name">2021</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因为推荐系统中各个子领域的数据处理过程各不相同, 为防止遗忘, 作此笔记(本文应该会不停更新)</p>
+<h2 id="纯CTR预估"><a href="#纯CTR预估" class="headerlink" title="纯CTR预估"></a>纯CTR预估</h2><h3 id="我的模型的数据处理过程-根据-AutoInt-修改"><a href="#我的模型的数据处理过程-根据-AutoInt-修改" class="headerlink" title="我的模型的数据处理过程, 根据 AutoInt 修改"></a>我的模型的数据处理过程, 根据 <a href="https://github.com/shichence/AutoInt" target="_blank" rel="noopener">AutoInt</a> 修改</h3><p>首先原始数据大概是长这样的, 以下数据是我编造用来讲解的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 a1b paq 1 2</span><br><span class="line">0 7h3     100 0</span><br><span class="line">1     a1b -2 -0.5</span><br></pre></td></tr></table></figure>
+<p>原始数据集会告诉你每列所代表的意思以及该列是否为实值数据</p>
+<p>以上述数据为例, 数据集提供方会告知第一列代表用户是否点击了, 0代表未点击, 1代表点击了, 其中第二三列为稀疏特征 ( sparse features ) , 值为特征 hash 后的值, 第四列为实值特征 ( dense feature )</p>
+<p>在 AutoInt 中, 稀疏特征和实值特征最后都会变成向量表示, 即 embedding, 这是最通用的做法, 如果你不需要实值特征的 embedding, 那么你可以使用下面讲解的方法进行数据处理但最后不使用实值特征的 embedding 即可</p>
+<p>对于实值特征, 每一列对于一个 embedding</p>
+<p>对于稀疏特征, 因为每一列是独立不相关的, 所以需要先对每一列进行 hash 到 index 的映射</p>
+<p>对于第二列, 我们可以得到以下映射 ( 用 python 的 dict 实现 )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">None:0</span><br><span class="line">a1b:1</span><br><span class="line">7h3:2</span><br></pre></td></tr></table></figure>
+<p>第三列我们可以得到以下映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">None:0</span><br><span class="line">paq:1</span><br><span class="line">a1b:2</span><br></pre></td></tr></table></figure>
+<p>于是原始数据变成了下面这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1 2</span><br><span class="line">0 2 0 100 0</span><br><span class="line">1 0 2 -2 -0.5</span><br></pre></td></tr></table></figure>
+<p>为了将第二列和第三列都存储在同一个 embedding 中, 我们可以在第三列的映射上加上一个偏移量offset, 第三列前面所有的列 ( field ) 共有 3 个特征, 于是 offset 为 3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 1 4 1 2</span><br><span class="line">0 2 3 100 0</span><br><span class="line">1 0 5 -2 -0.5</span><br></pre></td></tr></table></figure>
+<p>这样处理后, 我们就可以将不同列 ( field ) 的数据存储在同一个field中了 ( 因为不同列的数据通过 offset 实现了隔离 )</p>
+<p>对于实值特征, 你可以将它们的 embedding 的 index 放在最前面, 也可以放在最后面, 下面用放最前面来讨论</p>
+<p>此时对于两个实值特征的 embedding, 我们需要让它们对应列的 index 分别为 0, 1, 于是就需要处理后面 embedding 的 index, 即 offset 全部加2</p>
+<p>即第二列的 index 从 2 开始, 第三列的 index 从 5 ( 2 + 3 ) 开始, 于是数据变成了以下这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 3 6 1 2</span><br><span class="line">0 4 5 100 0</span><br><span class="line">1 2 7 -2 -0.5</span><br></pre></td></tr></table></figure>
+<p>如果将实值特征的 embedding 放在最后面, 那么就不需要添加相应的 offset</p>
+<p>自此数据就处理完毕, 直接输入模型使用即可</p>
+<p>模型最后的激活函数使用 sigmoid</p>
+<h4 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h4><p>打乱后 train : valid : test = 8 : 1 : 1</p>
+<h4 id="训练阶段"><a href="#训练阶段" class="headerlink" title="训练阶段"></a>训练阶段</h4><p>损失函数使用 logloss ( tf.compat.v1.losses.log_loss ) 进行训练</p>
+<h4 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h4><p>使用 logloss 和 AUC 作为评测标准</p>
+<h2 id="召回"><a href="#召回" class="headerlink" title="召回"></a>召回</h2><h3 id="ComiRec"><a href="#ComiRec" class="headerlink" title="ComiRec"></a><a href="https://github.com/THUDM/ComiRec" target="_blank" rel="noopener">ComiRec</a></h3><p><a href="http://jmcauley.ucsd.edu/data/amazon/index.html" target="_blank" rel="noopener">amazon book</a></p>
+<h4 id="生成用户点击数据"><a href="#生成用户点击数据" class="headerlink" title="生成用户点击数据"></a>生成用户点击数据</h4><p>下面用 amazon book 的数据进行讨论, 使用的具体文件为 <code>reviews_Books_5.json</code></p>
+<p>原始数据每行长这样</p>
+<p><code>{&quot;reviewerID&quot;: &quot;A2WVHIRDMLM82E&quot;, &quot;asin&quot;: &quot;000100039X&quot;, &quot;reviewerName&quot;: &quot;Amazon Customer&quot;, &quot;helpful&quot;: [0, 0], &quot;reviewText&quot;: &quot;This book has so much you can take out of it to use in your real life. Amazing, and one of my favorite reads of all time.&quot;, &quot;overall&quot;: 5.0, &quot;summary&quot;: &quot;Amazing&quot;, &quot;unixReviewTime&quot;: 1394928000, &quot;reviewTime&quot;: &quot;03 16, 2014&quot;}</code></p>
+<p>格式化后长这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;reviewerID&quot;: &quot;A2WVHIRDMLM82E&quot;,</span><br><span class="line">	&quot;asin&quot;: &quot;000100039X&quot;,</span><br><span class="line">	&quot;reviewerName&quot;: &quot;Amazon Customer&quot;,</span><br><span class="line">	&quot;helpful&quot;: [0, 0],</span><br><span class="line">	&quot;reviewText&quot;: &quot;This book has so much you can take out of it to use in your real life. Amazing, and one of my favorite reads of all time.&quot;,</span><br><span class="line">	&quot;overall&quot;: 5.0,</span><br><span class="line">	&quot;summary&quot;: &quot;Amazing&quot;,</span><br><span class="line">	&quot;unixReviewTime&quot;: 1394928000,</span><br><span class="line">	&quot;reviewTime&quot;: &quot;03 16, 2014&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里附上官方对各个字段的解释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reviewerID - ID of the reviewer, e.g. A2SUAM1J3GNN3B</span><br><span class="line">asin - ID of the product, e.g. 0000013714</span><br><span class="line">reviewerName - name of the reviewer</span><br><span class="line">helpful - helpfulness rating of the review, e.g. 2/3</span><br><span class="line">reviewText - text of the review</span><br><span class="line">overall - rating of the product</span><br><span class="line">summary - summary of the review</span><br><span class="line">unixReviewTime - time of the review (unix time)</span><br><span class="line">reviewTime - time of the review (raw)</span><br></pre></td></tr></table></figure>
+<p>主要用到 reviewerID, asin, unixReviewTime 这三个字段</p>
+<p>首先收集所有物品 id , 然后删除所有冷门物品 ( 至少出现过 <code>filter_size</code> 次 ) , 并进行重映射到数字 id</p>
+<p>然后收集所有用户 id , 只要那些至少浏览过 ( 去冷门 ) 物品集 <code>filter_size</code> 个的用户 , 并进行重映射到数字 id</p>
+<p>将每个用户序列按时间排序后以 <code>&lt;user_id&gt;,&lt;item_id&gt;,&lt;time_stamp&gt;</code> 格式写入文件即可</p>
+<p>处理完有五个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">book_user_map.txt</span><br><span class="line">book_item_map.txt</span><br><span class="line">book_test.txt</span><br><span class="line">book_train.txt</span><br><span class="line">book_valid.txt</span><br></pre></td></tr></table></figure>
+<p>前两个文件保留了原始 id 到新 id 的对应关系, 训练过程中用不到</p>
+<p>后三个文件包含 <code>&lt;user_id&gt;,&lt;item_id&gt;,&lt;time_stamp&gt;</code> 格式数据</p>
+<p>对于每个用户来说, 可能被分到 train, valid, test中的任意一个</p>
+<h4 id="生成物品类别数据"><a href="#生成物品类别数据" class="headerlink" title="生成物品类别数据"></a>生成物品类别数据</h4><p>下面依旧用 amazon book 的数据进行讨论, 使用的具体文件为 <code>meta_Books.json</code> 以及上一节生成的 <code>book_item_map.txt</code></p>
+<p>每行数据格式以后长这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;asin&quot;: &quot;0000031852&quot;,</span><br><span class="line">  &quot;title&quot;: &quot;Girls Ballet Tutu Zebra Hot Pink&quot;,</span><br><span class="line">  &quot;price&quot;: 3.17,</span><br><span class="line">  &quot;imUrl&quot;: &quot;http://ecx.images-amazon.com/images/I/51fAmVkTbyL._SY300_.jpg&quot;,</span><br><span class="line">  &quot;related&quot;:</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;also_bought&quot;: [&quot;B00JHONN1S&quot;, &quot;B002BZX8Z6&quot;, &quot;B00D2K1M3O&quot;, &quot;0000031909&quot;, &quot;B00613WDTQ&quot;, &quot;B00D0WDS9A&quot;, &quot;B00D0GCI8S&quot;, &quot;0000031895&quot;, &quot;B003AVKOP2&quot;, &quot;B003AVEU6G&quot;, &quot;B003IEDM9Q&quot;, &quot;B002R0FA24&quot;, &quot;B00D23MC6W&quot;, &quot;B00D2K0PA0&quot;, &quot;B00538F5OK&quot;, &quot;B00CEV86I6&quot;, &quot;B002R0FABA&quot;, &quot;B00D10CLVW&quot;, &quot;B003AVNY6I&quot;, &quot;B002GZGI4E&quot;, &quot;B001T9NUFS&quot;, &quot;B002R0F7FE&quot;, &quot;B00E1YRI4C&quot;, &quot;B008UBQZKU&quot;, &quot;B00D103F8U&quot;, &quot;B007R2RM8W&quot;],</span><br><span class="line">    &quot;also_viewed&quot;: [&quot;B002BZX8Z6&quot;, &quot;B00JHONN1S&quot;, &quot;B008F0SU0Y&quot;, &quot;B00D23MC6W&quot;, &quot;B00AFDOPDA&quot;, &quot;B00E1YRI4C&quot;, &quot;B002GZGI4E&quot;, &quot;B003AVKOP2&quot;, &quot;B00D9C1WBM&quot;, &quot;B00CEV8366&quot;, &quot;B00CEUX0D8&quot;, &quot;B0079ME3KU&quot;, &quot;B00CEUWY8K&quot;, &quot;B004FOEEHC&quot;, &quot;0000031895&quot;, &quot;B00BC4GY9Y&quot;, &quot;B003XRKA7A&quot;, &quot;B00K18LKX2&quot;, &quot;B00EM7KAG6&quot;, &quot;B00AMQ17JA&quot;, &quot;B00D9C32NI&quot;, &quot;B002C3Y6WG&quot;, &quot;B00JLL4L5Y&quot;, &quot;B003AVNY6I&quot;, &quot;B008UBQZKU&quot;, &quot;B00D0WDS9A&quot;, &quot;B00613WDTQ&quot;, &quot;B00538F5OK&quot;, &quot;B005C4Y4F6&quot;, &quot;B004LHZ1NY&quot;, &quot;B00CPHX76U&quot;, &quot;B00CEUWUZC&quot;, &quot;B00IJVASUE&quot;, &quot;B00GOR07RE&quot;, &quot;B00J2GTM0W&quot;, &quot;B00JHNSNSM&quot;, &quot;B003IEDM9Q&quot;, &quot;B00CYBU84G&quot;, &quot;B008VV8NSQ&quot;, &quot;B00CYBULSO&quot;, &quot;B00I2UHSZA&quot;, &quot;B005F50FXC&quot;, &quot;B007LCQI3S&quot;, &quot;B00DP68AVW&quot;, &quot;B009RXWNSI&quot;, &quot;B003AVEU6G&quot;, &quot;B00HSOJB9M&quot;, &quot;B00EHAGZNA&quot;, &quot;B0046W9T8C&quot;, &quot;B00E79VW6Q&quot;, &quot;B00D10CLVW&quot;, &quot;B00B0AVO54&quot;, &quot;B00E95LC8Q&quot;, &quot;B00GOR92SO&quot;, &quot;B007ZN5Y56&quot;, &quot;B00AL2569W&quot;, &quot;B00B608000&quot;, &quot;B008F0SMUC&quot;, &quot;B00BFXLZ8M&quot;],</span><br><span class="line">    &quot;bought_together&quot;: [&quot;B002BZX8Z6&quot;]</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;salesRank&quot;: &#123;&quot;Toys &amp; Games&quot;: 211836&#125;,</span><br><span class="line">  &quot;brand&quot;: &quot;Coxlures&quot;,</span><br><span class="line">  &quot;categories&quot;: [[&quot;Sports &amp; Outdoors&quot;, &quot;Other Sports&quot;, &quot;Dance&quot;]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成 <code>asin</code> 和 <code>categories[0][-1]</code> 间的对应关系, 将结果保存到<code>book_item_cate.txt</code></p>
+<p>其中 <code>book_item_cate.txt</code> 包含 <code>&lt;item_id&gt;,&lt;cate_id&gt;</code> 格式数据</p>
+<h4 id="划分数据集-1"><a href="#划分数据集-1" class="headerlink" title="划分数据集"></a>划分数据集</h4><p>所有用户中的 80% 当作 train 用户</p>
+<p>所有用户中的 10% 当作 valid 用户</p>
+<p>所有用户中的 10% 当作 test 用户</p>
+<h4 id="train阶段"><a href="#train阶段" class="headerlink" title="train阶段"></a>train阶段</h4><p>以下讨论只针对采样中的某个用户讨论</p>
+<p>为讨论方便, 我们假设某个用户按时间顺序访问过的序列为 <code>item_0, item_1, ..., item_n</code></p>
+<p>一次采样会在 <code>k = range(4, len(item_list))</code> 中采样得到需要预测的物品, 即第 k 个物品是需要预测的物品</p>
+<p>同时模型能看到的历史记录长度是有限制的</p>
+<p>当 <code>k &lt; self.maxlen</code> 时, 就需要用 0 进行填充, 考虑到 0 又的确代表某样商品, 于是 0 填充的地方和真实历史物品序列需要分别用一个 mask 数组用 0 和 1 进行遮挡 ( mask 为 1 的下标是模型能看到的, 感觉作者 mask 定义搞反了)</p>
+<p>当 <code>k &gt;= self.maxlen</code> 时, 则只取 k 前面的 maxlen 的物品当作用户历史</p>
+<p>具体到代码中</p>
+<p><code>user_id_list</code> 代表用户 id 列表, 数据结构为 <code>list[int]</code></p>
+<p><code>item_id_list</code> 代表每个用户需要预测的物品 id, 数据结构为 <code>list[int]</code></p>
+<p><code>hist_item_list</code> 代表每个用户需要预测的物品之前的历史点击物品序列, 数据结构为 <code>list[list[int]]</code></p>
+<p><code>hist_mask_list</code> 代表 <code>hist_item_list</code> 中的历史点击物品序列是否为真实物品还是 0 填充, 数据结构为 <code>list[list[int]]</code></p>
+<p>每个模型最终会输出一个代表用户兴趣的向量 ( 有些模型有多个用户兴趣向量, 则输出与要预测物品内积最大的向量 ), 然后使用负采样进行训练 ( tf.nn.sampled_softmax_loss ), 希望最大化要预测物品的概率, 目标函数为最小化负似然函数</p>
+<h4 id="valid和test阶段"><a href="#valid和test阶段" class="headerlink" title="valid和test阶段"></a>valid和test阶段</h4><p>与 train 阶段的不同, k稳定取 int(len(item_list) * 0.8)</p>
+<ol>
+<li><p><code>item_id_list</code> 不再代表需要预测的物品, 而是代表测试集物品集 (即第 k 后所有物品)</p>
+</li>
+<li><p><code>hist_item_list</code> 代表第 k 前的 maxlen 个物品</p>
+</li>
+</ol>
+<h4 id="指标介绍"><a href="#指标介绍" class="headerlink" title="指标介绍"></a>指标介绍</h4><p>对于点击率, 需要统计有多少比例用户的 TopN 集合和 <code>item_id_list</code> 有相同的物品</p>
+<p>对于召回率, 模型最终会输出 TopN 集合, 只需要比对 TopN 集合和 <code>item_id_list</code> 有多少物品是一样的, 然后将结果除以 <code>item_id_list</code> 的大小, 最后对所有用户取平均</p>
+<p>对于 NDCG, 详见公式和公式, 伪代码如下</p>
+<p>对每一个用户:<br>    recall = 0<br>    dcg = 0.0<br>    true_item_set = set(iid_list)<br>    for no, iid in enumerate(I[i]):<br>        if iid in true_item_set:<br>            recall += 1<br>            dcg += 1.0 / math.log(no+2, 2)  # 加2是因为代码从0开始数, 公式是从1开始数<br>    idcg = 0.0<br>    for no in range(recall):<br>        idcg += 1.0 / math.log(no+2, 2)<br>    total_recall += recall * 1.0 / len(iid_list)<br>    if recall &gt; 0:<br>        total_ndcg += dcg / idcg  # recall 为 0 时, dcg, idcg 都是 0<br>        total_hitrate += 1</p>
+<p>ndcg = total_ndcg / total  # 对所有用户求平均</p>
+<h2 id="知识图谱CTR"><a href="#知识图谱CTR" class="headerlink" title="知识图谱CTR"></a>知识图谱CTR</h2><p>具体数据是怎么预处理的我不清楚, 但是处理完是什么样的网上有很详细的数据集</p>
+<h3 id="KGAT"><a href="#KGAT" class="headerlink" title="KGAT"></a><a href="https://github.com/xiangwang1223/knowledge_graph_attention_network/tree/master" target="_blank" rel="noopener">KGAT</a></h3><p><a href="https://github.com/xiangwang1223/knowledge_graph_attention_network/tree/master/Data" target="_blank" rel="noopener">KGAT Dataset</a></p>
+<p>在上面这个页面中有很多文件, 但是在真正训练过程中只需要使用 3 个文件, 分别是 <code>train.txt</code>, <code>test.txt</code>, <code>kg_final.txt</code></p>
+<p><code>train.txt</code>, <code>test.txt</code> 每行开头数字为重映射后的用户 id , 后面的数字为用户访问的重映射后的物品 id</p>
+<p><code>kg_final.txt</code> 每行为三元组, 第一个和第三个数字代表重映射后的图谱结点 id, 第二个数字为关系重映射后的 id</p>
+<h4 id="划分数据集-2"><a href="#划分数据集-2" class="headerlink" title="划分数据集"></a>划分数据集</h4><p>TODO</p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p>TODO</p>
+<h4 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h4><p>TODO</p>
+<h2 id="序列预测CTR"><a href="#序列预测CTR" class="headerlink" title="序列预测CTR"></a>序列预测CTR</h2><h3 id="DIN"><a href="#DIN" class="headerlink" title="DIN"></a><a href="https://github.com/zhougr1993/DeepInterestNetwork" target="_blank" rel="noopener">DIN</a></h3><h4 id="预处理数据集"><a href="#预处理数据集" class="headerlink" title="预处理数据集"></a>预处理数据集</h4><p>在官方代码的 <code>utils</code> 文件夹下有三个文件, 依次执行后可以得到包含后续操作所需的数据文件 <code>remap.pkl</code></p>
+<p><code>remap.pkl</code> 文件中包含了四部分数据, 分别如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reviews_df : 按 reviewerID, unixReviewTime 排序, 用户点击了什么物品在什么时候</span><br><span class="line">cate_list : 商品id -&gt; 商品类别id</span><br><span class="line">user_count: 用户数量, item_count: 商品数量, cate_count: 商品类别数量, example_count: 数据总共多少条</span><br><span class="line">asin_key, cate_key, revi_key, 重映射前原来的值所组成的list</span><br></pre></td></tr></table></figure>
+<h3 id="生成训练所需数据集"><a href="#生成训练所需数据集" class="headerlink" title="生成训练所需数据集"></a>生成训练所需数据集</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">为每个用户的每个历史正样本序列生成一个对应的负样本序列, 负样本序列中的样本不得出现在正样本序列中</span><br><span class="line">比如id为10的用户 正样本序列为 [1,2,3,4]  那么假设生成对应的负样本序列 [9,7,8,6]</span><br><span class="line">最后的正训练数据为  (10, [1], 2, 1)   (10, [1,2], 3, 1)</span><br><span class="line">     负训练数据为  (10, [1], 7, 0)   (10, [1,2], 8, 0)</span><br><span class="line">最后的  测试数据为  (10, [1,2,3], (4,6))</span><br></pre></td></tr></table></figure>
+<p>训练数据第一个数字代表用户 id, 第二个列表代表采样的历史, 第三个数据代表下一个物品, 第四个数字决定是点击还是未点击 ( label )</p>
+<p>测试数据前两个意义与训练数据相同, 第三个元组的第一个为正样本, 第二个为负样本</p>
+<p>最后会将数据保存到 <code>dataset.pkl</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;dataset.pkl&apos;, &apos;wb&apos;) as f:</span><br><span class="line">  pickle.dump(train_set, f, pickle.HIGHEST_PROTOCOL)  # 包含正训练数据和负训练数据</span><br><span class="line">  pickle.dump(test_set, f, pickle.HIGHEST_PROTOCOL)</span><br><span class="line">  pickle.dump(cate_list, f, pickle.HIGHEST_PROTOCOL)  # 商品id -&gt; 商品类别id</span><br><span class="line">  pickle.dump((user_count, item_count, cate_count), f, pickle.HIGHEST_PROTOCOL)</span><br></pre></td></tr></table></figure>
+<h4 id="划分数据集-3"><a href="#划分数据集-3" class="headerlink" title="划分数据集"></a>划分数据集</h4><p>训练数据所采用的是从长度 1 到 len(pos_list) - 2 (含) 的历史数据, 比如上述例子中, 用户历史数据长度为 4, 那么训练数据长度为从 1 到 2 (4-2)</p>
+<p>历史数据的最后一个物品永远被当作测试集</p>
+<h4 id="训练阶段-1"><a href="#训练阶段-1" class="headerlink" title="训练阶段"></a>训练阶段</h4><p>对数据进行 padding 确保长度一致</p>
+<p>计算训练样本的点击率, 损失函数使用 logloss</p>
+<p>因为没有验证集, 所以通过计算测试集上的指标来保存最好的模型</p>
+<h4 id="测试阶段-1"><a href="#测试阶段-1" class="headerlink" title="测试阶段"></a>测试阶段</h4><p>对数据进行 padding 确保长度一致</p>
+<p>有两个指标, 一个是 gauc, 另一个是 auc</p>
+<p>论文和代码中只用到 gauc, auc在代码中只是程序输出看一下而已</p>
+<h5 id="AUC-计算过程"><a href="#AUC-计算过程" class="headerlink" title="AUC 计算过程"></a>AUC 计算过程</h5><p>对每个用户来说, 有一个正测试样本和负测试样本, 比如上面例子中 10 号用户的正样本为 4, 负样本为 6</p>
+<p>于是让模型分别计算正负样本的点击概率, 然后用所有用户的 predictions 和 labels 计算总 AUC 即可 </p>
+<h5 id="GAUC-计算过程"><a href="#GAUC-计算过程" class="headerlink" title="GAUC 计算过程"></a>GAUC 计算过程</h5><p>先介绍一下 GAUC</p>
+<p>推荐模型目前比较成熟的模式是训练分类模型, 这个分类模型的任务是预测用户是否会点击给定的商品, 因此, 推荐系统的核心, 仍然是一个二分类问题, 但是是更细力度的二分类</p>
+<p>传统的AUC有时表现不好, AUC 反映的是整体样本间的一个排序能力, 而在计算广告领域, 我们实际要衡量的是不同用户对不同广告之间的排序能力, 因此实际应该更关注的是同一个用户对不同广告间的排序能力</p>
+<p>GAUC（group auc）实际是计算每个用户的 AUC, 然后加权平均, 最后得到 group auc, 这样就能减少不同用户间的排序结果不太好比较这一影响</p>
+<p>因为每个用户的测试数据只有一条, 所以用 <code>Wilcoxon-Mann-Whitney U-statistic</code> 来代替 AUC 计算</p>
+<p>举例来说, 比如 100 个测试用户数据输入模型, 模型预测其中 72 个用户的正样本点击概率大于负样本点击概率, 于是此时 GAUC = 72 / 100 = 0.72</p>
+<p>注: 虽然在 DIN 的论文中对每个用户有一个 impression 的权重, 但是在实际的代码里每个用户权重都是 1</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://uesugierii.github.io/articles/52.html" title="推荐系统处理数据总结">https://uesugierii.github.io/articles/52.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Note/" rel="tag"># Note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/51.html" rel="next" title="GCP TPU 笔记">
+                <i class="fa fa-chevron-left"></i> GCP TPU 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#纯CTR预估"><span class="nav-number">1.</span> <span class="nav-text">纯CTR预估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我的模型的数据处理过程-根据-AutoInt-修改"><span class="nav-number">1.1.</span> <span class="nav-text">我的模型的数据处理过程, 根据 AutoInt 修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#划分数据集"><span class="nav-number">1.1.1.</span> <span class="nav-text">划分数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练阶段"><span class="nav-number">1.1.2.</span> <span class="nav-text">训练阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试阶段"><span class="nav-number">1.1.3.</span> <span class="nav-text">测试阶段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#召回"><span class="nav-number">2.</span> <span class="nav-text">召回</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ComiRec"><span class="nav-number">2.1.</span> <span class="nav-text">ComiRec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成用户点击数据"><span class="nav-number">2.1.1.</span> <span class="nav-text">生成用户点击数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成物品类别数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">生成物品类别数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#划分数据集-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">划分数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#train阶段"><span class="nav-number">2.1.4.</span> <span class="nav-text">train阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#valid和test阶段"><span class="nav-number">2.1.5.</span> <span class="nav-text">valid和test阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指标介绍"><span class="nav-number">2.1.6.</span> <span class="nav-text">指标介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识图谱CTR"><span class="nav-number">3.</span> <span class="nav-text">知识图谱CTR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KGAT"><span class="nav-number">3.1.</span> <span class="nav-text">KGAT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#划分数据集-2"><span class="nav-number">3.1.1.</span> <span class="nav-text">划分数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练过程"><span class="nav-number">3.1.2.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试过程"><span class="nav-number">3.1.3.</span> <span class="nav-text">测试过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列预测CTR"><span class="nav-number">4.</span> <span class="nav-text">序列预测CTR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DIN"><span class="nav-number">4.1.</span> <span class="nav-text">DIN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#预处理数据集"><span class="nav-number">4.1.1.</span> <span class="nav-text">预处理数据集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成训练所需数据集"><span class="nav-number">4.2.</span> <span class="nav-text">生成训练所需数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#划分数据集-3"><span class="nav-number">4.2.1.</span> <span class="nav-text">划分数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练阶段-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">训练阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试阶段-1"><span class="nav-number">4.2.3.</span> <span class="nav-text">测试阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AUC-计算过程"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">AUC 计算过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GAUC-计算过程"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">GAUC 计算过程</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
