@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文较长 , 建议根据目录观看 第一个问题问题现象运行毕业设计(一个多进程Python程序)不定时内核崩溃(kernel panic) , 鼠标键盘全没用 , magic键无效 错误日志这个错误日志是很难得才保存下来 , N次死机中唯一一个日志 12345622:14:50 kernel: BUG: unable to handle kernel NULL pointer dereference">
+<meta name="keywords" content="ryzen,segment fault,memory,python,kernel panic,multiprocessing,ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AMD YES?">
+<meta property="og:url" content="https://uesugierii.github.io/articles/23.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="本文较长 , 建议根据目录观看 第一个问题问题现象运行毕业设计(一个多进程Python程序)不定时内核崩溃(kernel panic) , 鼠标键盘全没用 , magic键无效 错误日志这个错误日志是很难得才保存下来 , N次死机中唯一一个日志 12345622:14:50 kernel: BUG: unable to handle kernel NULL pointer dereference">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-08T13:27:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AMD YES?">
+<meta name="twitter:description" content="本文较长 , 建议根据目录观看 第一个问题问题现象运行毕业设计(一个多进程Python程序)不定时内核崩溃(kernel panic) , 鼠标键盘全没用 , magic键无效 错误日志这个错误日志是很难得才保存下来 , N次死机中唯一一个日志 12345622:14:50 kernel: BUG: unable to handle kernel NULL pointer dereference">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/23.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>AMD YES? | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/23.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">AMD YES?
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-24T00:00:00+08:00">2019-08-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-08 21:27:48" itemprop="dateModified" datetime="2020-01-08T21:27:48+08:00">2020-01-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2019/" itemprop="url" rel="index"><span itemprop="name">2019</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文较长 , 建议根据目录观看</p>
+<h1 id="第一个问题"><a href="#第一个问题" class="headerlink" title="第一个问题"></a>第一个问题</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>运行毕业设计(一个多进程Python程序)不定时内核崩溃(kernel panic) , 鼠标键盘全没用 , magic键无效</p>
+<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3><p>这个错误日志是很难得才保存下来 , N次死机中唯一一个日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">22:14:50 kernel: BUG: unable to handle kernel NULL pointer dereference at 0000000000000080</span><br><span class="line">22:14:34 kernel: watchdog: BUG: soft lockup - CPU#3 stuck for 23s! [CompositorTileW:4417]</span><br><span class="line">22:13:55 kernel: BUG: unable to handle kernel NULL pointer dereference at 0000000000000080</span><br><span class="line">21:34:56 pulseaudio: [pulseaudio] bluez5-util.c: GetManagedObjects() failed: org.freedesktop.DBus.Error.TimedOut: Failed to activate service &apos;org.bluez&apos;: timed out (service_start_timeout=25000ms)</span><br><span class="line">21:34:42 spice-vdagent: Cannot access vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0</span><br><span class="line">21:34:25 gnome-session-b: Unrecoverable failure in required component org.gnome.Shell.desktop</span><br></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>第一反应就是程序哪里写错了 , 在我反复检查后确定程序没什么问题</p>
+<p>然后我曾想到过ryzen在特定情况下会产生segment fault , 但是当时我看的时候文章都是说编译情况下会出错 , 但是我用的是python , 我第一次否定了这种错误</p>
+<p>再一次检查程序 , 依旧没有任何问题</p>
+<p>后来尝试更新了一次bios , 结果死机的更频繁了</p>
+<p>这时我就又一次想到了CPU问题 , 于是我写了一个小脚本测试</p>
+<h2 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h2><p>这个程序的主要原理就是16个进程同时访问16个共享内存地址 , 不断读写 , 看是否会出错</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Value ,Array</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(i,states_list)</span>:</span></span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            n += <span class="number">1</span></span><br><span class="line">            print(n)</span><br><span class="line">        a = sum(states_list[<span class="number">1</span>:])</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">            states_list[j] = i</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test4</span><span class="params">()</span>:</span></span><br><span class="line">    states_list = Array(<span class="string">'i'</span>, [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">16</span>)])</span><br><span class="line"></span><br><span class="line">    envs_p = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">        envs_p.append(Process(target=f, args=(i,states_list,)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> envs_p:</span><br><span class="line">        i.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> envs_p:</span><br><span class="line">        i.join()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    test4()</span><br></pre></td></tr></table></figure>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">22:25:05 kernel: page-&gt;mem_cgroup:0000000800000000</span><br><span class="line">22:25:05 kernel: page dumped because: page still charged to cgroup</span><br><span class="line">22:25:05 kernel: raw: 0000000000000000 0000000000000000 00000000ffffffff 0000000800000000</span><br><span class="line">22:25:05 kernel: flags: 0x17ffffc0000000()</span><br><span class="line">22:25:05 kernel: page:ffffd6f50a7eb940 count:0 mapcount:0 mapping:0000000000000000 index:0x0</span><br><span class="line">22:25:05 kernel: BUG: Bad page state in process conky  pfn:29fae5</span><br><span class="line">20:28:12 kernel: page dumped because: nonzero _count</span><br><span class="line">20:28:12 kernel: raw: 0000000000000001 0000000000000000 00000080ffffffff 0000000000000000</span><br><span class="line">20:28:12 kernel: flags: 0x17ffffc0000000()</span><br><span class="line">20:28:12 kernel: page:ffffd6f50cd9c080 count:128 mapcount:0 mapping:0000000000000000 index:0x1</span><br><span class="line">20:28:12 kernel: BUG: Bad page state in process python3  pfn:336702</span><br><span class="line">19:28:31 systemd-rfkill: Failed to open device rfkill0: No such device</span><br><span class="line">14:51:54 pulseaudio: [pulseaudio] bluez5-util.c: GetManagedObjects() failed: org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.</span><br><span class="line">14:51:29 spice-vdagent: Cannot access vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0</span><br><span class="line">22:50:11 gnome-session-b: Unrecoverable failure in required component org.gnome.Shell.desktop</span><br></pre></td></tr></table></figure>
+<p>当我运行测试程序看到这个日志的时候我基本确定是CPU问题了 , 虽然此时并不会死机</p>
+<p>另外下文会有一个内存时序导致死机的问题 , 但这里不是 , 因为内存超频后我都是经过几小时的烤机的</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>换CPU , 幸好当时CPU是在京东买的盒装 , 要是淘宝就完蛋了……</p>
+<p>我没有选择RMA换CPU , 我直接在京东提出维修申请</p>
+<p>维修是真的慢 , 京东收到后很快就给厂家了 , 但是厂家修了一个月都没修好(公司效率真低) , 终于京东在我反复催促下 , 直接给我换新 , 感谢京东</p>
+<h2 id="换CPU后测试"><a href="#换CPU后测试" class="headerlink" title="换CPU后测试"></a>换CPU后测试</h2><p>样例程序如上 , 但这次就没有那些错误了</p>
+<h3 id="日志-1"><a href="#日志-1" class="headerlink" title="日志"></a>日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">12:41:19 pulseaudio: [pulseaudio] bluez5-util.c: GetManagedObjects() failed: org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.</span><br><span class="line">12:40:55 spice-vdagent: Cannot access vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0</span><br><span class="line">14:36:10 gnome-session-b: Unrecoverable failure in required component org.gnome.Shell.desktop</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>未知</p>
+<h1 id="第二个问题"><a href="#第二个问题" class="headerlink" title="第二个问题"></a>第二个问题</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h3 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h3><p>当我尝试在linux和windows下用obs录制4K视频直接黑屏重启</p>
+<h3 id="错误日志-1"><a href="#错误日志-1" class="headerlink" title="错误日志"></a>错误日志</h3><h4 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">12:56:11 kernel: Fixing recursive fault but reboot is needed!</span><br><span class="line">12:56:11 kernel: #PF error: [normal kernel read fault]</span><br><span class="line">12:56:11 kernel: BUG: unable to handle kernel paging request at ffffa0140e155a58</span><br><span class="line">12:55:56 kernel: rcu: 	 (t=15000 jiffies g=184845 q=110453)</span><br><span class="line">12:55:51 kernel: watchdog: BUG: soft lockup - CPU#5 stuck for 22s! [gdbus:23003]</span><br><span class="line">12:55:37 kernel: BUG: Bad page state in process kernel_oops  pfn:26b8fb</span><br><span class="line">12:55:23 kernel: watchdog: BUG: soft lockup - CPU#5 stuck for 23s! [gdbus:23003]</span><br><span class="line">12:25:43 pulseaudio: [pulseaudio] bluez5-util.c: GetManagedObjects() failed: org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.</span><br><span class="line">12:25:41 sudo: pam_unix(sudo:auth): auth could not identify password for [zx]</span><br><span class="line">12:25:19 spice-vdagent: Cannot access vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0</span><br><span class="line">20:24:00 gnome-session-b: Unrecoverable failure in required component org.gnome.Shell.desktop</span><br><span class="line">20:23:59 kernel: PKCS#7 signature not signed with a trusted key</span><br><span class="line">20:23:58 kernel: Couldn&apos;t get size: 0x800000000000000e</span><br><span class="line">20:23:58 kernel: MODSIGN: Couldn&apos;t get UEFI db list</span><br><span class="line">20:23:58 kernel: Couldn&apos;t get size: 0x800000000000000e</span><br></pre></td></tr></table></figure>
+<h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p>windows kernel-power 41</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>第一反应是主板过热或者电源功率不足 , 经过cpu,fpu,gpu双烤后否定这种可能</p>
+<p>测试内存时黑屏重启 , 定位问题出在内存</p>
+<p>但是内存设定和以前是一模一样的 , 想了一会后尝试将内存先调到2133CL16测试 , 测试通过</p>
+<p>到这里就知道是内存时序的问题了</p>
+<h2 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h2><p>将时序从3000CL14调至2933CL14</p>
+<h2 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h2><p>同一个型号的不同的cpu对内存兼容性不同</p>
+<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>把内存时序调低后延迟提高了2ns , 内存copy变慢 , 这在情理之中 , 但内存读写速度居然提升了 , WTF , 实验误差吗?</p>
+<h1 id="尾记"><a href="#尾记" class="headerlink" title="尾记"></a>尾记</h1><p>虽然ryzen一代有各种小问题 , 但是改变了整个市场 , 使消费cpu多核性能快速提升</p>
+<p>后来做了下超频测试 , 发现换的CPU比原来的好多了 , 默认电压3700MHz能过P95半小时测试</p>
+<p>最后</p>
+<font color="#FF0000">AMD YES!</font>
+
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/23.html" title="AMD YES?">https://uesugierii.github.io/articles/23.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+            <a href="/tags/Debug/" rel="tag"># Debug</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/22.html" rel="next" title="Pycharm运行tensorflow找不到libcublas.so.10.0">
+                <i class="fa fa-chevron-left"></i> Pycharm运行tensorflow找不到libcublas.so.10.0
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/24.html" rel="prev" title="AMD YES">
+                AMD YES <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个问题"><span class="nav-number">1.</span> <span class="nav-text">第一个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#现象"><span class="nav-number">1.1.1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误日志"><span class="nav-number">1.1.2.</span> <span class="nav-text">错误日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试程序"><span class="nav-number">1.3.</span> <span class="nav-text">测试程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志"><span class="nav-number">1.3.1.</span> <span class="nav-text">日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">1.4.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#换CPU后测试"><span class="nav-number">1.5.</span> <span class="nav-text">换CPU后测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">1.6.</span> <span class="nav-text">原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二个问题"><span class="nav-number">2.</span> <span class="nav-text">第二个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#现象-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误日志-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">错误日志</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-1"><span class="nav-number">2.3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因-1"><span class="nav-number">2.4.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PS"><span class="nav-number">2.5.</span> <span class="nav-text">PS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#尾记"><span class="nav-number">3.</span> <span class="nav-text">尾记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

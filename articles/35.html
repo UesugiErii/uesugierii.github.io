@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
+<meta name="keywords" content="shor算法,量子计算,Quantum Computing,Coursera,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子计算笔记Week4(coursera)">
+<meta property="og:url" content="https://uesugierii.github.io/articles/35.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uesugierii.github.io/images/35/4.png">
+<meta property="og:updated_time" content="2020-01-14T13:52:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="量子计算笔记Week4(coursera)">
+<meta name="twitter:description" content="第四周将学习shor算法 官方笔记我放在最后 前言本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了 对于RSA算法部分, 看wiki的RSA加密算法理解起来更快 官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的Quantum Fourier transform是正的, x0">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/35/4.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/35.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>量子计算笔记Week4(coursera) | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/35.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">量子计算笔记Week4(coursera)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-13T00:00:00+08:00">2020-01-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-14 21:52:38" itemprop="dateModified" datetime="2020-01-14T21:52:38+08:00">2020-01-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>第四周将学习shor算法</p>
+<p>官方笔记我放在最后</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章全是数学推导, 所以本文会没什么内容, 官方笔记已经很详细了</p>
+<p>对于RSA算法部分, 看wiki的<a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">RSA加密算法</a>理解起来更快</p>
+<font color="#CD5C5C">官方在讲量子傅里叶(Quantum Fourier transform)变换时, 课件以及pdf笔记中的QFT是反的, 所以原来的x0会变成y2, wiki的<a href="https://en.wikipedia.org/wiki/Quantum_Fourier_transform" target="_blank" rel="noopener">Quantum Fourier transform</a>是正的, x0变换后是y0, 最后的shor算法例子中的QFT也是正的</font>
+
+<h2 id="官方笔记错误"><a href="#官方笔记错误" class="headerlink" title="官方笔记错误"></a>官方笔记错误</h2><p>公式(8)下面文字下的那一行公式左边e的指数少了一个负号(下文图片中我已修复)</p>
+<h2 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h2><p>在公式(22)下面证明r的唯一性那个地方我感觉有点不太对, 有公式(20)可知good y与k是一一对应的, 若存在不同的r, 式子应写成$$\left| \frac{k}{r_1} - \frac{k}{r_2}\right| = \frac{k|r_2-r_1|}{r_1 * r_2} \geq \frac{1}{r_1 * r_2} = \frac{1}{N}$$从而证明了r的唯一性</p>
+<p>对于官方笔记的证明方法, 如果$a = 3, r_1=10, b=6, r_2=20$不就为0了?</p>
+<h2 id="第三页证明"><a href="#第三页证明" class="headerlink" title="第三页证明"></a>第三页证明</h2><p>关于第三页, 我用自己的话重新讲一遍证明过程, 官方笔记和课件感觉有点难理解</p>
+<p>官方笔记第三页对a的概率证明应该是本章最难的东西了</p>
+<h3 id="数学知识预备"><a href="#数学知识预备" class="headerlink" title="数学知识预备"></a>数学知识预备</h3><h4 id="Multiplicative-order"><a href="#Multiplicative-order" class="headerlink" title="Multiplicative order"></a>Multiplicative order</h4><p><a href="https://en.wikipedia.org/wiki/Multiplicative_order" target="_blank" rel="noopener">Multiplicative order</a></p>
+<p>比如对于下面这句话的理解(第三页第三行)</p>
+<p>$r_1$ and $r_2$ are the orders of $a_1$ and $a_2$ in the rings $\mathbb{Z_p}$ and $\mathbb{Z_q}$.</p>
+<p>即, 使$a_1^{r} \equiv 1 (mod\ n)$成立的最小的正整数为$r_1$, r2同理</p>
+<h3 id="Fermat’s-little-theorem"><a href="#Fermat’s-little-theorem" class="headerlink" title="Fermat’s little theorem"></a>Fermat’s little theorem</h3><p><a href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">费马小定理</a></p>
+<p>看上面链接公式就可以理解第三页倒数第二行中间的话了(The order of b is $2^{k_p}s_p$)</p>
+<h4 id="Primitive-root-modulo-n"><a href="#Primitive-root-modulo-n" class="headerlink" title="Primitive root modulo n"></a>Primitive root modulo n</h4><p><a href="https://en.wikipedia.org/wiki/Primitive_root_modulo_n" target="_blank" rel="noopener">Primitive root modulo n</a></p>
+<p>比如对于下面这句话的理解(第三页倒数第三行)</p>
+<p>Let $b$ be the primitive element of the field $\mathbb{Z_p}$</p>
+<p>即当$b^{m_p}$中的${m_p}$从1到$p-1$取一遍时, 那么$b^{m_p}(mod\ p)$的值也从1到$p-1$取一遍, 顺序会乱(想要直观一点可以直接看上面wiki链接里的例子)</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当我们随机取一个a时, 满足下列条件(3)(4)的概率是多少?</p>
+<p>$$r = 0(2) \tag{3}$$</p>
+<p>$$(a^{r/2}+1)\neq0(N) \tag{4}$$</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>下面证明中用$(p)$表示$(mod\ p)$, $r\mid s$表示s能整除r</p>
+<p>现在我们已经随机选择了a</p>
+<p>已知</p>
+<p>r is the order of the element a in the ring $\mathbb{Z_n}$</p>
+<p>$$a^r = 1(N)\tag{1}$$</p>
+<p>$$N=pq$$</p>
+<p>开始求概率</p>
+<p>$$a_1 = a(p)\tag{2}$$</p>
+<p>$$a_2 = a(q)$$</p>
+<p>$r_1$ and $r_2$ are the orders of $a_1$ and $a_2$ in the rings $\mathbb{Z_p}$ and $\mathbb{Z_q}$.</p>
+<p>即</p>
+<p>$$a_1^{r_1}(p) = 1\tag{3x}$$</p>
+<p>$$a_2^{r_2}(q) = 1$$</p>
+<p>由(1)可知, $a^r(p) = 1$</p>
+<p>由(2)可知, $a = pk_1 + a_1$, 将其带入上一行的式子</p>
+<p>$$(pk_1+a_1)^r(p) = 1 \Longrightarrow a_1^r(p) = 1$$</p>
+<p>又因为$r_1$和$r_2$是order, 故r是$r_1$的倍数, 同理r是$r_2$的倍数</p>
+<p>构造$s = kr_1r_2$</p>
+<p>$$a^s(p) = (pk_1 + a_1)^s(p) = a_1^{kr_1r_2}(p) = (a^{r_1})^{kr_2}(p)$$</p>
+<p>又因为(3x)</p>
+<p>所以$a^s(p) = 1$, 等价于</p>
+<p>$$a^s = pk_1+1 \tag{5}$$</p>
+<p>同理</p>
+<p>$$a^s = qk_2+1 \tag{6}$$</p>
+<p>(5)(6)左边相等, 所以右边相等, 即</p>
+<p>$$pk_1 = qk_2 \tag{7}$$</p>
+<p>p,q 互质, 所以k1一定是q的倍数</p>
+<p>将(5)改写为</p>
+<p>$$a^s = pq\frac{k_1}{q} + 1 \Longrightarrow a^s = 1(pq) \Longrightarrow r\mid s$$</p>
+<p>即对于任意s都能整除r, 又因为s和r都是$r_1$和$r_2$的倍数, 且对任意s成立, 所以</p>
+<p>$$r = LCM(r_1, r_2)$$</p>
+<p>我们接下来把$r_1$和$r_2$进行分解(把里面的2提出来, 比如$5 = 2^0<em>5$, $28 = 2^2</em>7$)</p>
+<p>$$r_1 = 2^{c_1}odd_1, c_1\geq0 \tag{8}$$</p>
+<p>$$r_2 = 2^{c_2}odd_2, c_2\geq0 \tag{9}$$</p>
+<p>如果$c_1 \neq c_2$(比如$c_1 &gt; c_2$), 则同时满足了(3)(4)</p>
+<p>$$r = 2r_2int$$</p>
+<p>$$a^{r/2}=a^{r_2int}=1(q) \Longrightarrow a^{r/2}\neq-1(q) \Longrightarrow a^{r/2}\neq-1(pq)$$</p>
+<p>$c_1$和$c_2$取决与a, 下面让我们来计算$c_1 \neq c_2$的概率</p>
+<p>首先将p用另外一种形式表达</p>
+<p>$$p=2^{k_p}s_p+1,\ \ s_p=1(2)$$</p>
+<p>令$b$ be the primitive element of the field $\mathbb{Z_p}$, 由上面的<a href="https://en.wikipedia.org/wiki/Primitive_root_modulo_n" target="_blank" rel="noopener">Primitive root modulo n</a>知, 可将$a_1$用另外一种方法表示出来</p>
+<p>$$a_1 = b^{m_p}(p),\ \ m_p \in {1,\cdots,2^{k_p}s_p}$$</p>
+<p>将上面这个式子带入(3x)</p>
+<p>$$b^{m_pr_1} = 1(p)$$</p>
+<p>由费马小定理可知</p>
+<p>$$b^{p-1} \equiv 1(p) \Longrightarrow b^{2^{k_p}s_p} \equiv 1(p)$$</p>
+<p>再根据Primitive root modulo n可知$2^{k_p}s_p$是order(因为只有当指数为p-1时才为1, 其余时为其他数字, 而p-1就是最小的正整数, 即为order)</p>
+<p>故$m_pr_1 = 0(2^{k_p}s_p)$</p>
+<p>同理可得$m_qr_2 = 0(2^{k_q}s_q)$</p>
+<p>$$\begin{cases}<br>m_pr_1 = k_12^{k_p}s_p\\<br>m_qr_2 = k_22^{k_q}s_q\\<br>\end{cases}<br>$$</p>
+<p>回忆一下, 我们只是想知道(8)(9)中含有不同的2个数的概率</p>
+<p>最糟糕的情况, 也就是$r_1$和$r_2$有相同2个数的概率最大时候, 此时右边$k_1 = k_2 = k_q = k_p = 1$, 即右边只有一个2, 如果右边有很多个2, 那么$r_1$和$r_2$有相同2个数的概率会非常小</p>
+<p>在最糟糕的情况下, $r_1$和$r_2$都分到2和$r_1$和$r_2$都没分到时$c_1$和$c_2$相等, $m_p$和$r_2$分到或$m_q$和$r_1$分到时$c_1$和$c_2$不相等</p>
+<p>最糟糕的情况下概率为1/2</p>
+<p>为什么$k_p$或$k_q$不能为0?</p>
+<p>如果为0, 即p或q为2, 不用量子计算机也能快速分解, 所以$k_p \geq 1$, $k_q \geq 1$</p>
+<h2 id="官方笔记"><a href="#官方笔记" class="headerlink" title="官方笔记"></a>官方笔记</h2><p><img src="/images/35/4.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/35.html" title="量子计算笔记Week4(coursera)">https://uesugierii.github.io/articles/35.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/量子计算/" rel="tag"># 量子计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/34.html" rel="next" title="量子计算笔记Week3(coursera)">
+                <i class="fa fa-chevron-left"></i> 量子计算笔记Week3(coursera)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/36.html" rel="prev" title="量子计算笔记Week5(coursera)">
+                量子计算笔记Week5(coursera) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记错误"><span class="nav-number">2.</span> <span class="nav-text">官方笔记错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人思考"><span class="nav-number">3.</span> <span class="nav-text">个人思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三页证明"><span class="nav-number">4.</span> <span class="nav-text">第三页证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学知识预备"><span class="nav-number">4.1.</span> <span class="nav-text">数学知识预备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiplicative-order"><span class="nav-number">4.1.1.</span> <span class="nav-text">Multiplicative order</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fermat’s-little-theorem"><span class="nav-number">4.2.</span> <span class="nav-text">Fermat’s little theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Primitive-root-modulo-n"><span class="nav-number">4.2.1.</span> <span class="nav-text">Primitive root modulo n</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">4.3.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">4.4.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方笔记"><span class="nav-number">5.</span> <span class="nav-text">官方笔记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

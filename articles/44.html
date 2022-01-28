@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言第1, 6, 8章章我没做笔记, 第一章我觉得不重要, 第六章对现在的我没用, 第八章细节太多没必要做笔记 文中所有图X-X或式均是对应书上的图或式, 因为现在还没有盗版, 所以我没办法把图片弄上去 第二章整体结构见P.13图2-1 协同过滤基于用户的协同过滤相似的人喜欢同一件物品 算法流程见P16,17, 及式2-4 缺点 用户数往往大于商品数, 存储计算消耗大  数据稀疏, 难以找到相似用">
+<meta name="keywords" content="深度学习推荐系统,深度学习,推荐系统,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&lt;&lt;深度学习推荐系统&gt;&gt;笔记">
+<meta property="og:url" content="https://uesugierii.github.io/articles/44.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="前言第1, 6, 8章章我没做笔记, 第一章我觉得不重要, 第六章对现在的我没用, 第八章细节太多没必要做笔记 文中所有图X-X或式均是对应书上的图或式, 因为现在还没有盗版, 所以我没办法把图片弄上去 第二章整体结构见P.13图2-1 协同过滤基于用户的协同过滤相似的人喜欢同一件物品 算法流程见P16,17, 及式2-4 缺点 用户数往往大于商品数, 存储计算消耗大  数据稀疏, 难以找到相似用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-02-25T13:44:05.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&lt;&lt;深度学习推荐系统&gt;&gt;笔记">
+<meta name="twitter:description" content="前言第1, 6, 8章章我没做笔记, 第一章我觉得不重要, 第六章对现在的我没用, 第八章细节太多没必要做笔记 文中所有图X-X或式均是对应书上的图或式, 因为现在还没有盗版, 所以我没办法把图片弄上去 第二章整体结构见P.13图2-1 协同过滤基于用户的协同过滤相似的人喜欢同一件物品 算法流程见P16,17, 及式2-4 缺点 用户数往往大于商品数, 存储计算消耗大  数据稀疏, 难以找到相似用">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/44.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title><<深度学习推荐系统>>笔记 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/44.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"><<深度学习推荐系统>>笔记
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-26T00:00:00+08:00">2020-08-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-02-25 21:44:05" itemprop="dateModified" datetime="2021-02-25T21:44:05+08:00">2021-02-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>第1, 6, 8章章我没做笔记, 第一章我觉得不重要, 第六章对现在的我没用, 第八章细节太多没必要做笔记</p>
+<p>文中所有图X-X或式均是对应书上的图或式, 因为现在还没有盗版, 所以我没办法把图片弄上去</p>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><p>整体结构见P.13图2-1</p>
+<h2 id="协同过滤"><a href="#协同过滤" class="headerlink" title="协同过滤"></a>协同过滤</h2><h3 id="基于用户的协同过滤"><a href="#基于用户的协同过滤" class="headerlink" title="基于用户的协同过滤"></a>基于用户的协同过滤</h3><p><code>相似的人喜欢同一件物品</code></p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>见P16,17, 及<strong>式2-4</strong></p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li><p>用户数往往大于商品数, 存储计算消耗大</p>
+</li>
+<li><p>数据稀疏, 难以找到相似用户, 不适用那些反馈困难情况(酒店预定, 大件物品)</p>
+</li>
+</ol>
+<h3 id="基于物品的协同过滤"><a href="#基于物品的协同过滤" class="headerlink" title="基于物品的协同过滤"></a>基于物品的协同过滤</h3><p><code>同一个人喜欢相似的东西</code></p>
+<h4 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h4><p>见P18,19, 及<strong>式2-5</strong>(感觉式2-5有问题, 少除了一个相似度和)</p>
+<h3 id="基于物品的协同过滤和基于用户的协同过滤应用场景比较-2-2-5"><a href="#基于物品的协同过滤和基于用户的协同过滤应用场景比较-2-2-5" class="headerlink" title="基于物品的协同过滤和基于用户的协同过滤应用场景比较(2.2.5)"></a>基于物品的协同过滤和基于用户的协同过滤应用场景比较(2.2.5)</h3><p>基于用户适用于发现热点(例如新闻推荐)</p>
+<p>基于物品适用于兴趣变化稳定(例如电商,视频网站)</p>
+<h3 id="协同过滤缺点-2-2-6"><a href="#协同过滤缺点-2-2-6" class="headerlink" title="协同过滤缺点(2.2.6)"></a>协同过滤缺点(2.2.6)</h3><ol>
+<li>不具有强泛化性</li>
+</ol>
+<p>热门商品向量中的分量多, 容易和很多商品相似, 冷门商品向量中的分量少, 很少与其他商品产生相似性, 导致很少被推荐</p>
+<p>例子见P.20</p>
+<ol start="2">
+<li>无法利用用户其他特征(例如年龄性别)</li>
+</ol>
+<h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><p>用更稠密的隐向量表示商品和用户, 解决协同过滤的缺点</p>
+<p>矩阵分解方法主要有特征值分解, 奇异值分解, 梯度下降</p>
+<h3 id="矩阵分解方法"><a href="#矩阵分解方法" class="headerlink" title="矩阵分解方法"></a>矩阵分解方法</h3><h4 id="特征值分解"><a href="#特征值分解" class="headerlink" title="特征值分解"></a>特征值分解</h4><p>要求是方阵, 故淘汰</p>
+<h4 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h4><p>不要求方阵, 但有以下缺点</p>
+<ol>
+<li><p>要求稠密</p>
+</li>
+<li><p>计算复杂度高, 达到O(mn^2)</p>
+</li>
+</ol>
+<p>故采用梯度下降作为矩阵分解的主要方法</p>
+<h4 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h4><p>见式2-8</p>
+<p><a href="https://github.com/gbolmier/funk-svd" target="_blank" rel="noopener">funk-svd</a></p>
+<h3 id="消除用户和物品打分的方差"><a href="#消除用户和物品打分的方差" class="headerlink" title="消除用户和物品打分的方差"></a>消除用户和物品打分的方差</h3><p>不同人打分体系不一样, 有些人觉得3分很低, 有些人觉得1分很低</p>
+<p>引入偏差b消除影响, 见式2-10和2-11</p>
+<h3 id="矩阵分解优缺点"><a href="#矩阵分解优缺点" class="headerlink" title="矩阵分解优缺点"></a>矩阵分解优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li><p>泛化能力强</p>
+</li>
+<li><p>空间复杂度低, 从O(n^2)降到O((m+n)*k), k为降维后的维数</p>
+</li>
+<li><p>更好的扩展性和灵活性</p>
+</li>
+</ol>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li><p>无法利用用户其他特征(例如年龄性别)</p>
+</li>
+<li><p>缺乏用户历史行为时, 无法进行有效的推荐(冷启动问题)</p>
+</li>
+</ol>
+<h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><p>解决了无法利用用户其他特征(例如年龄性别)的缺点</p>
+<p>流程见P.28(其实就是机器学习的逻辑回归)</p>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ol>
+<li><p>数学含义上的支撑</p>
+</li>
+<li><p>可解释性强</p>
+</li>
+<li><p>容易并行化, 模型简单, 训练开销小</p>
+</li>
+</ol>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><p>表达能力不强, 无法进行特征交叉, 特征筛选等高级操作, 不可避免的造成信息的损失</p>
+<h2 id="辛普森悖论"><a href="#辛普森悖论" class="headerlink" title="辛普森悖论"></a>辛普森悖论</h2><p>P.33</p>
+<p>证明了高维度特征交叉的重要性</p>
+<h2 id="POLY2"><a href="#POLY2" class="headerlink" title="POLY2"></a>POLY2</h2><p>将两两特征相互暴力组合, 每个组合设置一个权重, 见式2-20</p>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li><p>当原先数据稀疏时, 这样组合会导致组合后的特征更加稀疏, 从而导致需要更多的数据训练, 容易无法收敛</p>
+</li>
+<li><p>权重数量从n增加到n^2, 极大增加了训练复杂度</p>
+</li>
+</ol>
+<h2 id="FM"><a href="#FM" class="headerlink" title="FM"></a>FM</h2><p>为每个特征学习了一个隐权重向量, 用两个向量的内积取代了POLY2中对应的权重系数(详见式2-21)</p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ol>
+<li><p>将权重数量从n^2降低到nk</p>
+</li>
+<li><p>更好的解决稀疏性问题, 泛化能力大大提高</p>
+</li>
+</ol>
+<h2 id="FFM"><a href="#FFM" class="headerlink" title="FFM"></a>FFM</h2><p>引入了特征域感知</p>
+<p>先将特征分成一个个域(Field), 每个特征对不同的域有不同的隐向量, 当与另一个特征结合时, 采用的隐向量, 取决与另一个特征属于哪一个域</p>
+<p>$$w_{ij} = V^{T}_{i,f_j}V_{j,f_i}$$</p>
+<p>详见式2-22和P.38的例子</p>
+<h3 id="与FM比较"><a href="#与FM比较" class="headerlink" title="与FM比较"></a>与FM比较</h3><p>计算复杂度从FM的kn升高到kn^2, 参数数量增加到nkf个(f为域个数)</p>
+<p>使模型表达能力更强</p>
+<p>POLY2, FM, FFM算法流程比较总结见P.39</p>
+<h2 id="GBDT-LR"><a href="#GBDT-LR" class="headerlink" title="GBDT+LR"></a>GBDT+LR</h2><p>FM模型族虽然可以引申到更高阶特征交叉, 但由于组合爆炸问题难以实现</p>
+<p>而GBDT则既可以提高特征交叉维度, 又能避免组合爆炸</p>
+<h3 id="特征转换过程"><a href="#特征转换过程" class="headerlink" title="特征转换过程"></a>特征转换过程</h3><ol>
+<li><p>用训练数据训练几颗子树</p>
+</li>
+<li><p>将原始特征向量输入每颗子树, 在每个子树中, 落入哪个叶子节点就生成对应的one-hot向量, 再将这些向量拼接形成新特征向量(详见P.43图2-17)</p>
+</li>
+</ol>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>推进了特征工程模块化这一重要趋势, 不必在特征过程上投入过多的人工筛选和模型设计的精力, 实现真正的端到端训练</p>
+<h2 id="LS-PLM"><a href="#LS-PLM" class="headerlink" title="LS-PLM"></a>LS-PLM</h2><p>灵感来源, 女装购物数据和数码购物数据往往没什么相关性(也许有呢, 狗头)</p>
+<p>故对于数据可以先聚类再逻辑回归, 见式2-23</p>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ol>
+<li><p>端到端的非线性学习能力(见P.45图2-18)</p>
+</li>
+<li><p>模型稀疏性强, 建模时引入了L1和L2范数, 导致参数系数, 使模型效率更高</p>
+</li>
+</ol>
+<h3 id="另一个角度理解LS-PLM"><a href="#另一个角度理解LS-PLM" class="headerlink" title="另一个角度理解LS-PLM"></a>另一个角度理解LS-PLM</h3><p>LS-PLM可以看作使一个加入了注意力机制的三层神经网络模型, 输入为特征向量, 中间为m个单元的隐层, m为分片(聚类)的个数, 输出为单一神经元</p>
+<p>注意力机制在哪应用呢?在隐层和输出层之间, 神经元之间的权重是由分片函数得出的注意力得分来确定的. 也就是说, 样本属于哪个分片的概率就是其注意力得分</p>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><h2 id="Autorec"><a href="#Autorec" class="headerlink" title="Autorec"></a>Autorec</h2><p>即使用一个单隐层的自编码器先编码向量后解码, 用解码后的向量作为预测值(向量既可以是行向量, 也可以是列向量, 分别对应基于用户和基于物品)</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>式3-3, 式3-5</p>
+<h3 id="基于用户和基于物品比较"><a href="#基于用户和基于物品比较" class="headerlink" title="基于用户和基于物品比较"></a>基于用户和基于物品比较</h3><p>基于用户的只需要一次模型推断, 但缺点式用户向量的稀疏性可能影响效果</p>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><p>模型过于简单, 表达能力不足</p>
+<h2 id="Deep-Crossing"><a href="#Deep-Crossing" class="headerlink" title="Deep Crossing"></a>Deep Crossing</h2><h3 id="整体结构-图3-6"><a href="#整体结构-图3-6" class="headerlink" title="整体结构(图3-6)"></a>整体结构(图3-6)</h3><p>输入数据主要有3类, 稀疏型, 其他型, 数值型, 对于前两者, 先通过embedding层变稠密, 然后与数值型相拼接, 之后输入一个深度残差网络</p>
+<h3 id="意义-1"><a href="#意义-1" class="headerlink" title="意义"></a>意义</h3><p>现在看来模型很简单, 但在当时具有重要意义</p>
+<ol>
+<li><p>没有人工特征工程的参与</p>
+</li>
+<li><p>相比之前介绍的FM族只具有二阶特征交叉能力, Deep Crossing可以通过调整神经网络的深度进行特征之间的深度交叉, 这也是Deep Crossing名称的由来</p>
+</li>
+</ol>
+<h2 id="NeuralCF"><a href="#NeuralCF" class="headerlink" title="NeuralCF"></a>NeuralCF</h2><p>在第二章的矩阵分解模型中, 直接使用某用户隐向量和某物品隐向量内积作为评分预测</p>
+<p>我们可以用更复杂的操作来充分利用两个隐向量中的信息</p>
+<h3 id="创新1"><a href="#创新1" class="headerlink" title="创新1"></a>创新1</h3><p>我们可以将这两个隐向量传入深度神经网络, 输出预测值, 得到原始NeuralCF模型</p>
+<p>这样的模型可以使用户向量和物品向量充分交叉, 得到更多组合信息, 同时引入更多非线性特征</p>
+<h3 id="创新2"><a href="#创新2" class="headerlink" title="创新2"></a>创新2</h3><p>我们也还可以将两个隐向量逐元素相乘, 等到另一种互操作形式</p>
+<h3 id="创新总结"><a href="#创新总结" class="headerlink" title="创新总结"></a>创新总结</h3><p>说白了就是原版方法没有充分利用两个隐向量, 在此模型中搞一些新的互操作形式来利用这两个向量</p>
+<h3 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h3><p>见P.65页图3-10</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点: 不同的互操作层有助于特征的交叉组合和利用</p>
+<p>缺点: 没有利用其他信息(年龄性别等), 对互操作种类没有做进一步探究和说明</p>
+<h2 id="PNN"><a href="#PNN" class="headerlink" title="PNN"></a>PNN</h2><p>整体结构见图3-12, 乘积层及模型具体细节见第3.5.2节</p>
+<p>我感觉这个模型并没有多少创新, 说白了就是定义了几种组合特征的方法, 计算后拼接再传入神经网络罢了</p>
+<h3 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h3><p>新定义了一个乘积层, 左边z是线性拼接, 右边p是特征的两两乘积组合(乘积可以是数学意义上的向量内积或外积)</p>
+<p>同时为了减少外积导致的参数增加带来的模型训练负担, 提出可以将p中所有的矩阵求平均来降维(相当于一个平均池化层)</p>
+<p>平均池化也有风险, 比如把年龄和地域两个不相关的特征平均后会丢失很多信息</p>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>优: 强调了特征间的交叉方式可以是多种多样的, 比如内外积</p>
+<p>缺: 无区别的交叉在一定程度上忽略了原始特征向量中包含的有价值信息</p>
+<h2 id="Wide-amp-Deep"><a href="#Wide-amp-Deep" class="headerlink" title="Wide&amp;Deep"></a>Wide&amp;Deep</h2><h3 id="模型的记忆能力与泛化能力-3-6-1"><a href="#模型的记忆能力与泛化能力-3-6-1" class="headerlink" title="模型的记忆能力与泛化能力(3.6.1)"></a>模型的记忆能力与泛化能力(3.6.1)</h3><p>“记忆能力”可以被理解为模型直接学习并利用历史数据中物品或特征的”共现频率”的能力</p>
+<p>“泛化能力”可以被理解为模型传递特征的相关性, 以及挖掘稀疏甚至从未出现过的稀有特征与最终标签相关性的能力</p>
+<p>我的理解: 其实记忆能力就是数据中的简单关系, 而泛化能力对应数据中的深层次关系</p>
+<h3 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h3><p>分为两部分, Wide部分简单, 使模型具有记忆能力, Deep部分复杂, 使模型具有泛化能力</p>
+<p>哪些数据输入哪部分也很关键, 需要深入挖掘的往往传入deep部分(比如年龄, 设备类型), 简单数据(如已安装应用, 曝光应用)则分别传入两部分</p>
+<p>详见图3-13, 3-14</p>
+<h3 id="Wide-amp-Deep变种-Deep-amp-Crossing"><a href="#Wide-amp-Deep变种-Deep-amp-Crossing" class="headerlink" title="Wide&amp;Deep变种-Deep&amp;Crossing"></a>Wide&amp;Deep变种-Deep&amp;Crossing</h3><p>主要思路使使用Cross网络替代原来的Wide部分</p>
+<p>结构见图3-15</p>
+<p>Cross层细节见式3-9, 图3-16</p>
+<h3 id="Wide-amp-Deep成功的关键"><a href="#Wide-amp-Deep成功的关键" class="headerlink" title="Wide&amp;Deep成功的关键"></a>Wide&amp;Deep成功的关键</h3><ol>
+<li><p>抓住了业务问题的本质特点, 能够融合传统模型记忆能力和深度学习模型泛化能力的优势</p>
+</li>
+<li><p>模型简单</p>
+</li>
+</ol>
+<h2 id="FNN"><a href="#FNN" class="headerlink" title="FNN"></a>FNN</h2><p>为了解决Embedding层收敛慢的问题, 使用FM训练好的各特征隐向量来初始化Embedding层的参数</p>
+<p>结构见图3-17, FM数学公式见式3-10, 初始化过程见图3-18</p>
+<h3 id="为什么Embedding层收敛慢"><a href="#为什么Embedding层收敛慢" class="headerlink" title="为什么Embedding层收敛慢"></a>为什么Embedding层收敛慢</h3><ol>
+<li><p>参数多</p>
+</li>
+<li><p>输入稀疏, 只有与非零特征相连的权重会被更新</p>
+</li>
+</ol>
+<h3 id="Wide-amp-Deep变种-DeepFM"><a href="#Wide-amp-Deep变种-DeepFM" class="headerlink" title="Wide&amp;Deep变种-DeepFM"></a>Wide&amp;Deep变种-DeepFM</h3><p>使用FM替代Wide&amp;Deep</p>
+<p>与Deep&amp;Crossing唯一区别是前者用FM替代, 后者用Cross网络替代</p>
+<p>结构见图3-19</p>
+<h3 id="Wide-amp-Deep变种-NFM"><a href="#Wide-amp-Deep变种-NFM" class="headerlink" title="Wide&amp;Deep变种-NFM"></a>Wide&amp;Deep变种-NFM</h3><p>修改Deep部分, 增加了一个特征交叉池化层, 结构见图3-21, 公式见式3-11</p>
+<p>在特征交叉池化层中, 用式3-11的方法来两两相互交叉特征并求和</p>
+<h2 id="引入注意力机制"><a href="#引入注意力机制" class="headerlink" title="引入注意力机制"></a>引入注意力机制</h2><h3 id="AFM"><a href="#AFM" class="headerlink" title="AFM"></a>AFM</h3><p>在上一节的NFM中, 我们对所有特征组合直接进行了求和</p>
+<p>但这没有考虑到不同的特征组合对于结果的影响重要程度是不一样的</p>
+<p>例如预测一个男性购买键盘的可能性, 那么”性别=男&amp;购买过鼠标”比”性别=男&amp;年龄=30”这一组合特征更重要</p>
+<p>故可以使用一个注意力网络来为每个特征组合分配权重, 相乘后再求和, 见式3-14</p>
+<p>AFM中的注意力网络, 输入为特征组合, 然后一个全连接层加relu, 最后一层为softmax输出层, 见式3-15</p>
+<h3 id="DIN"><a href="#DIN" class="headerlink" title="DIN"></a>DIN</h3><p>在AFM中, 所有交叉特征全部输入注意力网络得到注意力得分再乘以对应的交叉特征然后求和</p>
+<p>而DIN更面向实际应用, 将与某用户特征组及其相关的广告特征输入注意力网络, 得到该用户特征组中各特征权重, 再对应相乘然后求和, 对应的广告部分只做输入</p>
+<p>见图3-24, 红色的广告特征组只参与红色的用户特征组中每个特征的注意力得分的计算, 广告特征组不计算注意力得分, 直接求和</p>
+<h4 id="与AFM区别"><a href="#与AFM区别" class="headerlink" title="与AFM区别"></a>与AFM区别</h4><p>将特征进行了分组, 不同组之间不相关, 同时一组里有部分特征只做输入, 不计算注意力得分</p>
+<h2 id="结合序列模型-DIEN"><a href="#结合序列模型-DIEN" class="headerlink" title="结合序列模型-DIEN"></a>结合序列模型-DIEN</h2><h3 id="为什么需要序列模型"><a href="#为什么需要序列模型" class="headerlink" title="为什么需要序列模型?"></a>为什么需要序列模型?</h3><p>人的兴趣点随时间不断变化, 序列模型可以捕捉一些规律</p>
+<h3 id="DIEN架构"><a href="#DIEN架构" class="headerlink" title="DIEN架构"></a>DIEN架构</h3><p>核心部分见图3-25彩色部分, 从下到上一共三层</p>
+<ol>
+<li><p>行为序列层: 将原始序列转为Embedding序列</p>
+</li>
+<li><p>兴趣抽取层: 模拟用户兴趣迁移</p>
+</li>
+<li><p>兴趣进化层: 模拟与当前目标广告相关的兴趣计划过程</p>
+</li>
+</ol>
+<p>第一二层都蛮好理解的, 对于第三层, 我的理解是推送的广告会对人购物时的兴趣产生改变</p>
+<h2 id="结合强化学习-DRN"><a href="#结合强化学习-DRN" class="headerlink" title="结合强化学习-DRN"></a>结合强化学习-DRN</h2><h3 id="学习过程-图3-28"><a href="#学习过程-图3-28" class="headerlink" title="学习过程(图3-28)"></a>学习过程(图3-28)</h3><ol>
+<li><p>离线训练, 构造初始化模型</p>
+</li>
+<li><p>利用模型推荐, 收集反馈数据</p>
+</li>
+<li><p>利用2的反馈数据对模型进行微更新(minor update)</p>
+</li>
+<li><p>过一段时间后进行模型的主更新(major update)</p>
+</li>
+<li><p>重复2-4</p>
+</li>
+</ol>
+<h3 id="第三步的微更新细节"><a href="#第三步的微更新细节" class="headerlink" title="第三步的微更新细节"></a>第三步的微更新细节</h3><ol>
+<li><p>对当前网络Q添加随机扰动, 得到Q_hat</p>
+</li>
+<li><p>分别用Q和Q_hat生成推荐列表, 用Interleaving(7.5节)将两个推荐列表组合成一个推送给用户</p>
+</li>
+<li><p>收集用户反馈, 若Q_hat优于Q, 则替换, 否则保留Q</p>
+</li>
+</ol>
+<p>其实就是贪心的进化算法</p>
+<h2 id="本章总结"><a href="#本章总结" class="headerlink" title="本章总结"></a>本章总结</h2><p>见P.98 3.11节表3-2</p>
+<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><h2 id="什么是Embedding"><a href="#什么是Embedding" class="headerlink" title="什么是Embedding"></a>什么是Embedding</h2><p>用一个低维稠密向量表示一个对象(往往是高维稀疏向量)</p>
+<h2 id="Word2vec"><a href="#Word2vec" class="headerlink" title="Word2vec"></a>Word2vec</h2><p>用于将单词转化为稠密向量</p>
+<h3 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h3><p>每个词与相邻词关系最密切</p>
+<h3 id="模型结构-1"><a href="#模型结构-1" class="headerlink" title="模型结构"></a>模型结构</h3><p>分为CBOW(多对一), Skip-gram(一对多)</p>
+<p>详见图4-2</p>
+<h3 id="Skip-gram训练过程"><a href="#Skip-gram训练过程" class="headerlink" title="Skip-gram训练过程"></a>Skip-gram训练过程</h3><p>因为只与相邻词有关, 所以设置一个窗口c</p>
+<p>最大化似然式4-1</p>
+<p>概率由式4-2计算</p>
+<p>为了加快运算, 可以用一个神经网络表示过程</p>
+<p>输入为词语one-hot向量, 连接到一个隐层(无激活函数), 再连接到一个与输入同维度的输出(激活函数为softmax, 输出即为各单词概率), 然后通过反向传播训练</p>
+<p>训练完成后会得到两个大矩阵, 与输入相连的矩阵每行是词向量, 与输出相连的矩阵每列是词向量, 使用时将同一单词的两个词向量取平均或者拼接起来</p>
+<h3 id="负采样"><a href="#负采样" class="headerlink" title="负采样"></a>负采样</h3><p>在原始方法中, 最后的所有概率都会参与损失函数, 这需要巨大的计算量</p>
+<p>可以使用负样本方法, 在该方法中, 只采样几个负样本, 然后计算预测误差, 此时问题近似退化为一个二分类问题, 优化目标见式4-3</p>
+<h2 id="Item2vec"><a href="#Item2vec" class="headerlink" title="Item2vec"></a>Item2vec</h2><p>相比Word2vec利用次序列生成词Embedding. Item2vec利用的物品序列是有特定用户的浏览购买等行为产生的历史行为记录序列</p>
+<p>与Word2vec唯一区别就是没有了时间窗口的概念, 详见式4-4</p>
+<h2 id="广义Item2vec"><a href="#广义Item2vec" class="headerlink" title="广义Item2vec"></a>广义Item2vec</h2><p>用神经网络及更多输入来对物品进行Embedding</p>
+<h2 id="Graph-Embedding"><a href="#Graph-Embedding" class="headerlink" title="Graph Embedding"></a>Graph Embedding</h2><p>互联网中的数据往往呈现的是图结构, 所有需要有算法能对图中的节点进行Embedding</p>
+<h3 id="DeepWalk"><a href="#DeepWalk" class="headerlink" title="DeepWalk"></a>DeepWalk</h3><h4 id="算法流程-2"><a href="#算法流程-2" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li><p>通过用户行为序列构造图, 比如某人先买了A后买了B, 则可以用一条从A到B的有向边来表示, 如果有多次这样的行为, 则可以增加有向边的权重</p>
+</li>
+<li><p>在1生成的图中随机游走, 生成一系列新的序列</p>
+</li>
+<li><p>将2生成的序列输入Word2vec模型, 生成最终的物品Embedding向量</p>
+</li>
+</ol>
+<h4 id="随机游走跳转概率"><a href="#随机游走跳转概率" class="headerlink" title="随机游走跳转概率"></a>随机游走跳转概率</h4><p>对于有向图, 从某边出去的概率等于此边权重占此节点所有出边权重和比例</p>
+<p>对于无向图, 则为1除以与此节点相连的边数</p>
+<h3 id="Node2vec"><a href="#Node2vec" class="headerlink" title="Node2vec"></a>Node2vec</h3><p>在DeepWalk基础上更近一步, 出现了Node2vec, 它通过调整随机游走权重的方法使Graph Embedding的结果更倾向于体现网络的同质性(homophily)或结构性(structural equivalence)</p>
+<h4 id="同质性-amp-结构性"><a href="#同质性-amp-结构性" class="headerlink" title="同质性&amp;结构性"></a>同质性&amp;结构性</h4><p>同质性: 距离相近的节点的Embedding应尽量相似, 如图4-8, u应与s1234相似</p>
+<p>结构性: 结构上相似的节点的Embedding应尽量相似, 如图4-8, u应与s6相似</p>
+<p>为了让结果能够表达同质性, 需要在随机游走的过程中更倾向于DFS, 因为DFS更大概率在一个集团内部游走, 从而使一个集团内部节点的Embedding相似, 同时DFS能使随机游走到达远方的节点</p>
+<p>为了让结果能够表达结构性, 需要在随机游走的过程中更倾向于BFS, 因为BFS会更多的在当前节点的领域中游走, 相当于对当前节点周围的网络结构进行一次扫描</p>
+<h4 id="如何控制DFS和BFS倾向"><a href="#如何控制DFS和BFS倾向" class="headerlink" title="如何控制DFS和BFS倾向?"></a>如何控制DFS和BFS倾向?</h4><p>通过式4-6设置跳转概率</p>
+<p>p, q为超参数</p>
+<p>q被称为进出参数(in-out parameter), q越小, 越倾向DFS, 更注重表达网络的同质性</p>
+<p>p被称为返回参数(return parameter), p越小, 越倾向BFS, 更注重表达网络的结构性</p>
+<h4 id="实际应用中的同质性-amp-结构性的例子"><a href="#实际应用中的同质性-amp-结构性的例子" class="headerlink" title="实际应用中的同质性&amp;结构性的例子"></a>实际应用中的同质性&amp;结构性的例子</h4><p>同质性相同的物品很可能是同品类, 同属性, 或者经常被一同购买的商品</p>
+<p>结构性相同的物品则是各品类的爆款, 各品类的最佳凑单商品等拥有类似趋势或结构性属性的商品</p>
+<h3 id="EGES-阿里巴巴的综合性图嵌入方法"><a href="#EGES-阿里巴巴的综合性图嵌入方法" class="headerlink" title="EGES-阿里巴巴的综合性图嵌入方法"></a>EGES-阿里巴巴的综合性图嵌入方法</h3><p>基本思想是在DeepWalk生成的Graph Embedding上引入更多信息</p>
+<p>通过引入更多补充信息来丰富Embedding信息的来源, 从而使没有历史行为记录的商品获得较合理的初始Embedding</p>
+<p>通过用户行为序列和补充信息可以生成基于内容的知识图谱, 而基于知识图谱生成的物品向量可以被称为补充信息Embedding向量</p>
+<p>根据图上补充信息类别的不同, 可以有多个”补充信息Embedding向量”</p>
+<p>而多个Embedding向量可以通过类似于注意力机制的方法进行加权平均从而形成物品最后的Embedding向量</p>
+<h2 id="Embedding与深度学习推荐系统的结合"><a href="#Embedding与深度学习推荐系统的结合" class="headerlink" title="Embedding与深度学习推荐系统的结合"></a>Embedding与深度学习推荐系统的结合</h2><p>主要有三种方法结合, 见下面各小节</p>
+<h3 id="深度学习网络中的Embedding层"><a href="#深度学习网络中的Embedding层" class="headerlink" title="深度学习网络中的Embedding层"></a>深度学习网络中的Embedding层</h3><p>主要功能是将高维稀疏向量变成低维稠密向量</p>
+<h3 id="Embedding的预训练方法"><a href="#Embedding的预训练方法" class="headerlink" title="Embedding的预训练方法"></a>Embedding的预训练方法</h3><p>为了解决Embedding层训练开销大的问题, Embedding的训练往往独立于深度学习网络进行. 在得到稀疏特征的稠密表示后, 再与其他特征一起输入神经网络进行训练</p>
+<p>虽然将Embedding过程与深度神经网络的训练过程割裂会损失一定的信息, 但训练过程的独立性也带来了训练灵活度的提升</p>
+<p>举例来说, 用户和商品的Embedding很稳定, Embedding的训练频率不需要过高, 可以降低到周的级别, 但上层神经网络为了加快抓住最新的数据整体趋势信息, 往往需要高频训练甚至实时训练. 使用不同的训练频率更新Embedding模型和神经网络模型, 是训练开销和模型效果两者之间权衡后的最优方案</p>
+<h3 id="Embedding作为推荐系统召回层"><a href="#Embedding作为推荐系统召回层" class="headerlink" title="Embedding作为推荐系统召回层"></a>Embedding作为推荐系统召回层</h3><p>以youtube推荐系统为例, 见图4-14</p>
+<p>先通过离线训练, 可以得到用户向量和视频向量(用户向量为relu的输出, 视频向量为最后一层softmax参数层对应列向量(原理等同Word2vec图4-3的右半部分))</p>
+<p>模型部署时, 只需将用户Embedding和视频Embedding存储到线上内存数据库, 通过内积运算再排序的方法就可以得到物品的排序, 再通过取序列中Top N的视频就可以得到召回的候选集合</p>
+<p>但是出现了一个新问题, 假设视频总数为n, Embedding维度为k, 时间复杂度为O(kn), 当n达到百万甚至更高级别时, 这样的时间复杂度是无法接受的, 所以要用到下一节的方法来加速</p>
+<h2 id="局部敏感哈希"><a href="#局部敏感哈希" class="headerlink" title="局部敏感哈希"></a>局部敏感哈希</h2><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>先换一个角度思考问题, 因为用户和物品的Embedding向量位于同一个向量空间, 所以召回与用户向量最相似的物品Embedding向量的过程其实是在一个向量空间中搜索最近邻的过程</p>
+<p>容易想到用kd树来索引, 但这只能将时间复杂度降到O(log n), 且需要经常回溯, 过程复杂</p>
+<h3 id="局部敏感哈希算法-Locality-Sensitive-Hashing-LSH"><a href="#局部敏感哈希算法-Locality-Sensitive-Hashing-LSH" class="headerlink" title="局部敏感哈希算法(Locality Sensitive Hashing)(LSH)"></a>局部敏感哈希算法(Locality Sensitive Hashing)(LSH)</h3><p>基本思想是让相邻的点落入同一个桶中, 在搜索时, 只需要在同一个桶或者相邻的几个桶中进行搜索即可, 如果桶中元素个数在一个常数附近, 则时间复杂度可以降低到O(1)</p>
+<p>局部敏感哈希还基于一个结论: <strong>在欧式空间中, 将高维空间的点映射到低维空间, 原本相近的点在低维空间中肯定依然相近, 但原本远离的点则有一定概率变成相近的点</strong>(图4-15)</p>
+<p>对于一个Embedding向量, 可以使用式4-7, 式4-8进行分桶</p>
+<h4 id="多桶策略"><a href="#多桶策略" class="headerlink" title="多桶策略"></a>多桶策略</h4><p>映射损失了部分距离信息, 如果仅采用一个哈希函数进行分桶, 则必然存在相近点误判问题. 有效的解决办法是采用m个哈希函数同时进行分桶. 同时掉进m个哈希函数的同一个桶的两点, 是相似点的概率大大增加. 通过分桶找到最近邻的候选集合后, 就可以在有限的候选集合中通过遍历找到目标点真正的K近邻</p>
+<p>到底使用几个哈希函数, 使用’与’(既都在桶1内且又都在桶2内)还是’或’(都在桶1内或都在桶2内)条件生成候选集, 需要在准确率和召回率之间权衡, 才能得出结论</p>
+<h4 id="其他距离度量"><a href="#其他距离度量" class="headerlink" title="其他距离度量"></a>其他距离度量</h4><p>余弦相似度采用两向量的夹角衡量相似度, 因此可以使用固定间隔的超平面将向量空间分割成不同哈希桶</p>
+<p>局部敏感哈希的方法随距离定义的不同而有所不同, 但局部敏感哈希通过分桶方式保留部分距离信息, 大规模降低近邻点候选集的本质思想是通用的</p>
+<h2 id="本章总结-1"><a href="#本章总结-1" class="headerlink" title="本章总结"></a>本章总结</h2><p>P.126 表4-1</p>
+<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><h3 id="特征工程的原则"><a href="#特征工程的原则" class="headerlink" title="特征工程的原则"></a>特征工程的原则</h3><p>尽可能地让特征工程抽取出的一组特征能够保留推荐环境及用户行为过程中的所有有用信息，尽量摒弃冗余信息</p>
+<h3 id="特征工程的常用特征"><a href="#特征工程的常用特征" class="headerlink" title="特征工程的常用特征"></a>特征工程的常用特征</h3><ol>
+<li><p>用户行为数据(评分, 播放时长等)</p>
+</li>
+<li><p>用户关系数据(关注, 好友关系等)</p>
+</li>
+<li><p>属性, 标签类关系(性别年龄, 商品标签)</p>
+</li>
+<li><p>内容类数据(文字, 图片, 视频)</p>
+</li>
+<li><p>上下文信息(时间, 地点, 季节)</p>
+</li>
+<li><p>统计类特征(历史点击率, 历史转化率)</p>
+</li>
+<li><p>组合类特征(年龄+性别)</p>
+</li>
+</ol>
+<h3 id="常用特征处理办法"><a href="#常用特征处理办法" class="headerlink" title="常用特征处理办法"></a>常用特征处理办法</h3><h4 id="连续型"><a href="#连续型" class="headerlink" title="连续型"></a>连续型</h4><p>归一化, 离散化, 加非线性函数</p>
+<h4 id="类别型"><a href="#类别型" class="headerlink" title="类别型"></a>类别型</h4><p>one-hot, multi-hot, embedding</p>
+<h3 id="特征工程与业务理解"><a href="#特征工程与业务理解" class="headerlink" title="特征工程与业务理解"></a>特征工程与业务理解</h3><p>越符合业务越好</p>
+<h2 id="召回层主要策略"><a href="#召回层主要策略" class="headerlink" title="召回层主要策略"></a>召回层主要策略</h2><p>召回阶段负责将海量的候选集快速缩小为几百到几千的规模, 排序阶段则负责对缩小后的候选集进行精准排序(图5-4)</p>
+<h3 id="召回层特点"><a href="#召回层特点" class="headerlink" title="召回层特点"></a>召回层特点</h3><p>在召回程中, 计算速度和召回率是相互矛盾的两个指标</p>
+<p>为了提高计算速度, 需要召回策略尽量简单, 而为了提高召回率, 要求召回策略不能过于简单</p>
+<p>在权衡计算速度和召回率后, 目前工业界主流的召回方法是采用多个简单策略叠加的多路召回策略</p>
+<h3 id="多路召回策略"><a href="#多路召回策略" class="headerlink" title="多路召回策略"></a>多路召回策略</h3><p>就是指采用不同的策略, 特征和简单模型分别召回一部分候选集, 然后把候选集混合在一起供排序模型使用(图5-5)</p>
+<p>但仍有一个问题, 策略之间的信息是割裂的, 无法综合考虑不同策略对一个物品的影响, 于是基于embedding的召回方法给出了可行的方案</p>
+<h3 id="基于embedding的召回"><a href="#基于embedding的召回" class="headerlink" title="基于embedding的召回"></a>基于embedding的召回</h3><p>优点1: 可以把很多信息都融合进最终的embedding向量</p>
+<p>优点2: 评分的连续性. 在多路召回策略中不同召回策略产生的分值之间不具备可比性</p>
+<h2 id="推荐系统的实时性"><a href="#推荐系统的实时性" class="headerlink" title="推荐系统的实时性"></a>推荐系统的实时性</h2><h3 id="为什么实时性重要"><a href="#为什么实时性重要" class="headerlink" title="为什么实时性重要"></a>为什么实时性重要</h3><p>图5-6的实验表明了模型更新间隔越长, 推荐系统效果越差</p>
+<h3 id="重要性体现"><a href="#重要性体现" class="headerlink" title="重要性体现"></a>重要性体现</h3><ol>
+<li><p>推荐系统的更新速度越快, 代表用户最近习惯和爱好的特征更新越快, 越能为用户进行更有时效性的推荐</p>
+</li>
+<li><p>推荐系统更新得越快, 模型越容易发现最新流行的数据模式(data pattern), 越能让模型快速抓住最新的流行趋势</p>
+</li>
+</ol>
+<p>这两方面的原因直接对应着推荐系统实时性的两大要素:一是推荐系统“特征”的实时性；二是推荐系统“模型”的实时性</p>
+<h3 id="推荐系统特征的实时性"><a href="#推荐系统特征的实时性" class="headerlink" title="推荐系统特征的实时性"></a>推荐系统特征的实时性</h3><p>推荐系统特征的实时性指的是“实时”地收集和更新推荐模型的输入特征，使推荐系统总能使用最新的特征进行预测和推荐</p>
+<h4 id="客户端实时特征"><a href="#客户端实时特征" class="headerlink" title="客户端实时特征"></a>客户端实时特征</h4><p>如果客户端能够缓存 session内部的行为，将其作为与上下文特征同样的实时特征传给推荐服务器，那么推荐模型就能够实时地得到 session内部的行为特征，进行实时的推荐。这就是利用客户端实时特征进行实时推荐的优势所在</p>
+<h4 id="流计算平台的准实时特征处理"><a href="#流计算平台的准实时特征处理" class="headerlink" title="流计算平台的准实时特征处理"></a>流计算平台的准实时特征处理</h4><p>流计算平台并非完全实时的平台，但它的优势是能够进行一些简单的统计类特征的计算，比如一个物品在该时间窗口内的曝光次数，点击次数、一个用户在该时间窗口内的点击话题分布，等等</p>
+<p>流计算平台计算出的特征可以立刻存入特征数据库供推荐模型使用虽然无法实时地根据用户行为改变用户结果，但分钟级别的延迟基本可以保证推荐系统能够准实时地引入用户的近期行为</p>
+<h4 id="分布式批处理平台的全量特征处理"><a href="#分布式批处理平台的全量特征处理" class="headerlink" title="分布式批处理平台的全量特征处理"></a>分布式批处理平台的全量特征处理</h4><p>分布式批处理平台的计算结果的主要用途是:</p>
+<ol>
+<li><p>模型训练和离线评估</p>
+</li>
+<li><p>特征保存入特征数据库, 供之后的线上推荐模型使用</p>
+</li>
+</ol>
+<p>这一过程更多的是保证推荐系统特征的全面性</p>
+<h3 id="推荐系统模型的实时性"><a href="#推荐系统模型的实时性" class="headerlink" title="推荐系统模型的实时性"></a>推荐系统模型的实时性</h3><p>特征的实时性力图用更准确的特征描述用户、物品和相关场景，从而让推荐系统给出更符合当时场景的推荐结果</p>
+<p>模型的实时性则是希望更快地抓住全局层面的新数据模式，发现新的趋势和相关性</p>
+<p>以某电商网站“双11”的大量促销活动为例，特征的实时性会根据用户最近的行为更快地发现用户可能感兴趣的商品，但绝对不会发现一个刚刚流行起来的爆款商品、一个刚刚开始的促销活动，以及与该用户相似的人群最新的偏好。要发现这类全局性的数据变化，需要实时地更新推荐模型</p>
+<p>模型的实时性由弱到强的训练方式分别是全量更新、增量更新和在线学习（ Online Learning）(图5-8)</p>
+<h4 id="全量更新"><a href="#全量更新" class="headerlink" title="全量更新"></a>全量更新</h4><p>所有样本全部一起训练</p>
+<h4 id="增量更新"><a href="#增量更新" class="headerlink" title="增量更新"></a>增量更新</h4><p>增量更新仅将新加入的样本“喂”给模型进行增量训练</p>
+<p>缺点是: 增量更新的模型往往无法找到全局最优点，因此在实际的推荐系统中那么经常采用增量更新与全局更新相结合的方式，在进行了几轮增量更新后，在业务量较小的时间窗口进行全局更新，纠正模型在增量更新过程中积累的误差</p>
+<h4 id="在线学习"><a href="#在线学习" class="headerlink" title="在线学习"></a>在线学习</h4><p>获得一个新的样本的时更新模型, 但由于需要在线上环境进行模型的训练和大量模型相关参数的更新和存储，工程上的要求相对比较高</p>
+<p>在线学习的另一个附带问题是模型的稀疏性不强, 对于一个稀疏模型来讲, 如果使用SGD的方式进行模型更新，相比 batch的方式，容易产生大量小权重的特征，这就增大了模型体积，从而增大模型部署和更新的难度(有大量相关研究, 比如微软的FOBOS谷歌的FTRL等)</p>
+<p>在线学习的另一个方向是将强化学习与推荐系统结合</p>
+<h4 id="局部更新"><a href="#局部更新" class="headerlink" title="局部更新"></a>局部更新</h4><p>提高模型实时性的另一个改进方向是进行模型的局部更新，大致的思路是降低训练效率低的部分的更新频率，提高训练效率高的部分的更新频率这种方式(如Facebook的GBDT+LR模型)</p>
+<p>对于有embedding的神经网络, 业界往往采用embedding层单独预训练, embedding层以上的模型部分高频更新的混合策略</p>
+<h4 id="客户端模型实时更新"><a href="#客户端模型实时更新" class="headerlink" title="客户端模型实时更新"></a>客户端模型实时更新</h4><p>在深度学习推荐系统中，模型往往要接受用户Embedding和物品Embedding两个关键的特征向量</p>
+<p>对于物品 Embedding的更新，一般需要全局的数据，因此只能在服务器端进行更新</p>
+<p>而对用户Embedding来说，则更多依赖用户自身的数据, 那么把用户Embedding的更新过程移植到客户端米做，能实时地把用户最近的行为数据反映到用户的Embedding中来，从而可以在客户端通过实时改变用户Embedding的方式完成推荐结果的实时更新</p>
+<h2 id="如何设定推荐系统优化目标"><a href="#如何设定推荐系统优化目标" class="headerlink" title="如何设定推荐系统优化目标"></a>如何设定推荐系统优化目标</h2><p>说白了就是根据业务来设定</p>
+<p>Youtube用观看时长作为优化目标</p>
+<p>淘宝把CVR(转化率)和CTR(点击率)放在同一模型中(图5-11)一起优化</p>
+<h2 id="推荐系统中比模型更重要的是什么"><a href="#推荐系统中比模型更重要的是什么" class="headerlink" title="推荐系统中比模型更重要的是什么"></a>推荐系统中比模型更重要的是什么</h2><p>在构建推荐模型的过程中，从应用场景出发，基于用户行为和数据的特点，提出合理的改进模型的动机才是最重要的</p>
+<p>换句话说，推荐模型的结构不是构建一个好的推荐系统的“银弹”，真正的“银弹”是你对用户行为和应用场景的观察，基于这些观察，改进出最能表达这些观察的模型结构</p>
+<p>下面用三个例子对这句话做进一步的解释</p>
+<h3 id="Netflix"><a href="#Netflix" class="headerlink" title="Netflix"></a>Netflix</h3><p>他们发现除了影片排序, 最能影响点击率的要素是影片的海报预览图</p>
+<p>在具体优化过程中, 对不同用户根据喜好生成不同的预览图</p>
+<h3 id="Roku"><a href="#Roku" class="headerlink" title="Roku"></a>Roku</h3><p>对于一个新用户来说, 如果用户对某个类型的影片感兴趣，则必然会向右滑动鼠标或者遥控器（如图5-14中红色箭头所指），浏览这个类型下其他影片，这个滑动的动作很好地反映了用户对某类型影片的兴趣。引入这个动作，无疑对构建用户兴趣向量，解决数据稀疏问题，进而提高推荐系统的效果有正向的作用</p>
+<h3 id="阿里DIN"><a href="#阿里DIN" class="headerlink" title="阿里DIN"></a>阿里DIN</h3><p>天猫、淘宝作为综合性的电商网站，只有收集与候选物品相关的用户历史行为记录才是有价值的。基于这个出发点，引入相关物品的开关和权重结构，最终发现注意力机制恰巧是能够解释这个动机的最合适的技术结构</p>
+<p>反过来，如果单纯从技术角度出发，为了验证注意力机制是否有效而应用注意力机制，则有“本末倒置”的嫌疑，因为这不是业界解决问题的常规思路，而是试探性的技术验证过程，这种纯“猜测”型的验证无疑会大幅增加工作量</p>
+<h2 id="冷启动的解决方法"><a href="#冷启动的解决方法" class="headerlink" title="冷启动的解决方法"></a>冷启动的解决方法</h2><p>冷启动问题可分为3类</p>
+<ol>
+<li><p>用户冷启动，新用户注册后，没有历史行为数据时的个性化推荐</p>
+</li>
+<li><p>物品冷启动，系统加入新物品后（新的影片、新的商品等），在该商品还没有交互记录时，如何将该物品推荐给用户</p>
+</li>
+<li><p>系统冷启动，在推荐系统运行之初，缺乏所有相关历史数据时的推荐</p>
+</li>
+</ol>
+<p>冷启动策略可分为3类</p>
+<ol>
+<li><p>基于规则的冷启动过程</p>
+</li>
+<li><p>丰富冷启动过程中可获得的用户和物品特征</p>
+</li>
+<li><p>利用主动学习、迁移学习和“探索与利用”机制</p>
+</li>
+</ol>
+<h3 id="基于规则的冷启动过程"><a href="#基于规则的冷启动过程" class="headerlink" title="基于规则的冷启动过程"></a>基于规则的冷启动过程</h3><p>在用户冷启动场景下，可以使用“热门排行榜”“最近流行趋势”“最高评分”等榜单作为默认的推荐列表。事实上，大多数音乐、视频等应用都是采用这类方法作为冷启动的默认规则</p>
+<p>更进一步，可以参考专家意见建立一些个性化物品列表，根据用户有限的信息，例如注册时填写的年龄、性别、基于IP推断出的地址等信息做粗粒度的规则推荐。例如，利用点击率等目标构建一个用户属性的决策树，在每个决策树的叶节点建立冷启动榜单，在新用户完成注册后，根据用户有限的注册信息，寻找决策树上对应的叶节点榜单，完成用户冷启动过程</p>
+<p>Airbnb是全球最大的短租房中介平台。在新上线短租房时，会根据该房屋的属性对该短租房指定一个“聚类”，位于同样“聚类”中的房屋会有类似的推荐规则。那么，为冷启动短租房指定“聚类”所依靠的规则有如下三条</p>
+<p>（1）同样的价格范围。</p>
+<p>（2）相似的房屋属性（面积、房间数等）</p>
+<p>（3）距目标房源的距离在10公里以内。</p>
+<p>找到最符合上述规则的3个相似短租房，根据这3个已有短租房的聚类定位冷启动短租房的聚类</p>
+<h3 id="丰富冷启动过程中可获得的用户和物品特征"><a href="#丰富冷启动过程中可获得的用户和物品特征" class="headerlink" title="丰富冷启动过程中可获得的用户和物品特征"></a>丰富冷启动过程中可获得的用户和物品特征</h3><ol>
+<li><p>用户注册信息, 年龄职业等</p>
+</li>
+<li><p>第三方DMP（ Data Management Platform，数据管理平台）提供的用户信息</p>
+</li>
+<li><p>物品的内容特征, 物品的标签, 描述文字等</p>
+</li>
+<li><p>引导用户输入的冷启动特征, 比如让用户选择喜欢的音乐风格</p>
+</li>
+</ol>
+<h3 id="利用主动学习、迁移学习和“探索与利用”机制"><a href="#利用主动学习、迁移学习和“探索与利用”机制" class="headerlink" title="利用主动学习、迁移学习和“探索与利用”机制"></a>利用主动学习、迁移学习和“探索与利用”机制</h3><h4 id="主动学习-图5-15"><a href="#主动学习-图5-15" class="headerlink" title="主动学习(图5-15)"></a>主动学习(图5-15)</h4><p>在每个迭代过程中，系统会对每个潜在“查询”进行评估，看哪个查询能使加入该查询后的模型损失最小，就把该查询发送给外界，得到反馈后更新模型M</p>
+<p>在图5-16的例子中, 应该选择最大聚类d的中心节点作为推荐影片，因为通过主动问询用户对d中心节点的打分，可以得到用户对最大聚类d的反馈，使推荐系统的收益最大</p>
+<h4 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h4><p>迁移学习是在某领域知识不足的情况下，迁移其他领域的数据或知识，用于本领域的学习</p>
+<p>在5.4节介绍的ESSM模型中，阿里巴巴利用CTR数据生成了用户和物品的 Embedding然后共享给CVR模型，这本身就是迁移学习的思路。这就使得CVR模型在没有转化数据时能够用CTR模型的“知识”完成冷启动过程</p>
+<h4 id="探索与利用机制"><a href="#探索与利用机制" class="headerlink" title="探索与利用机制"></a>探索与利用机制</h4><p>探索与利用是在“探索新数据”和“利用旧数据”之间进行平衡，使系统既能利用旧数据进行推荐，达到推荐系统的商业目标，又能高效地探索冷启动的物品是否是“优质”物品，使冷启动物品获得曝光的倾向，快速收集冷启动数据</p>
+<h2 id="探索与利用"><a href="#探索与利用" class="headerlink" title="探索与利用"></a>探索与利用</h2><p>主要方法有3类</p>
+<ol>
+<li><p>传统的探索与利用方法, 如ε贪心, Thompson Sampling(汤普森采样), UCB等</p>
+</li>
+<li><p>个性化的探索与利用方法, 结合用户, 上下文等因素基础上进行探索与利用</p>
+</li>
+<li><p>基于模型的探索与利用方法, 将探索与利用融入推荐模型之中</p>
+</li>
+</ol>
+<h3 id="传统的探索与利用方法"><a href="#传统的探索与利用方法" class="headerlink" title="传统的探索与利用方法"></a>传统的探索与利用方法</h3><p><a href="https://en.wikipedia.org/wiki/Multi-armed_bandit" target="_blank" rel="noopener">Multi-armed bandit</a></p>
+<h4 id="ε-Greedy算法"><a href="#ε-Greedy算法" class="headerlink" title="ε-Greedy算法"></a>ε-Greedy算法</h4><p>ε概率在所有老虎机中随机选择, 1-ε概率选择目前为止平均收益最大的老虎机</p>
+<h4 id="Thompson-Sampling"><a href="#Thompson-Sampling" class="headerlink" title="Thompson Sampling"></a>Thompson Sampling</h4><p><a href="https://zh.wikipedia.org/wiki/%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C" target="_blank" rel="noopener">共轭先验</a></p>
+<p>强烈推荐, <a href="https://www.zhihu.com/question/30269898/answer/123261564" target="_blank" rel="noopener">如何通俗理解 beta 分布？</a></p>
+<p>因为beta分布是伯努利分布的先验分布, 我们可以认为要求的伯努利分布的参数p是从beta分布中采样得到的, 当我们有越来越多的先验知识时, beta分布会越来越倾向于一个尖峰, 即伯努利分布的参数越来越确定</p>
+<p><strong>就是说beta分布可以看作一个概率的概率分布</strong></p>
+<p>用每台老虎机的beta分布来生成一个随机数, 选取最大的那个\</p>
+<p>在图5-18的例子中, 对于以及很确定的老虎机来说, 随机生成的值不会太偏离中心(action 1 2), 而对于action3, 虽然收益期望最低, 如果只从利用的方面考虑, 是不应该选择3的, 但3有很多不确定性, 3的概率分布有一部分在12的右侧, 通过Thompson Sampling选择3这一老虎机的概率并不小, 从而实现了探索(即Thompson Sampling对不确定分布的倾向性)</p>
+<h4 id="UCB算法"><a href="#UCB算法" class="headerlink" title="UCB算法"></a>UCB算法</h4><p>与Thompson Sampling一样, UCB也利用了分布的不确定性作为探索强弱程度的依据</p>
+<p>基于式5-3选择老虎机, 第一项偏向于历史平均高的老虎机, 第二项偏向于更不确定的老虎机, 以此达到探索与利用的平衡</p>
+<p>书上P.170也只是证明了样本均值与实际均值偏差大于UCB上界的概率小于t^(-4), 严格证明很复杂</p>
+<h3 id="个性化的探索与利用方法"><a href="#个性化的探索与利用方法" class="headerlink" title="个性化的探索与利用方法"></a>个性化的探索与利用方法</h3><p>有点难, TODO</p>
+<h3 id="基于模型的探索与利用方法"><a href="#基于模型的探索与利用方法" class="headerlink" title="基于模型的探索与利用方法"></a>基于模型的探索与利用方法</h3><p>就是前面提到过的参数随机扰动的DRN</p>
+<h3 id="探索与利用在推荐系统中应用"><a href="#探索与利用在推荐系统中应用" class="headerlink" title="探索与利用在推荐系统中应用"></a>探索与利用在推荐系统中应用</h3><ol>
+<li><p>物品冷启动, 探索与利用算法对新物品和长尾物品有天然的倾向性</p>
+</li>
+<li><p>发掘用户新兴趣</p>
+</li>
+<li><p>增加结果多样性</p>
+</li>
+</ol>
+<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><h2 id="离线评估方法与基本评价指标"><a href="#离线评估方法与基本评价指标" class="headerlink" title="离线评估方法与基本评价指标"></a>离线评估方法与基本评价指标</h2><h3 id="离线评估方法"><a href="#离线评估方法" class="headerlink" title="离线评估方法"></a>离线评估方法</h3><h4 id="holdout"><a href="#holdout" class="headerlink" title="holdout"></a>holdout</h4><p>一部分训练, 剩下的测试</p>
+<h4 id="交叉检验"><a href="#交叉检验" class="headerlink" title="交叉检验"></a>交叉检验</h4><p>k-fold交叉验证: 样本呢均匀分为k份, 每次选一份当测试集其余当训练集, 依次遍历k个子集, 最终结果取平均</p>
+<p>留一验证: 样本每次留一个当测试, 其余当训练, 依次遍历n个样本, 最终结果取平均</p>
+<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h4><p>对于总数为n的样本集, 进行n次有放回的随机采样, 得到大小为n的训练集, 在n次采样中, 有样本被重复采样, 有样本没被采样, 没被采样的当作测试集</p>
+<h3 id="离线评估指标"><a href="#离线评估指标" class="headerlink" title="离线评估指标"></a>离线评估指标</h3><h4 id="准确率"><a href="#准确率" class="headerlink" title="准确率"></a>准确率</h4><p>分类正确个数/样本总数</p>
+<h4 id="精确率和召回率"><a href="#精确率和召回率" class="headerlink" title="精确率和召回率"></a>精确率和召回率</h4><p>精确率: 分类正确的正样本数/预测为正样本数</p>
+<p>召回率: 分类正确的正样本数/真正总正样本数</p>
+<h4 id="均方根误差"><a href="#均方根误差" class="headerlink" title="均方根误差"></a>均方根误差</h4><p>式7-3</p>
+<p>为了防止个别偏离程度大的点对结果产生影响, 提出了MAPE, 式7-4, 即对每个点的误差进行了归一化</p>
+<h4 id="对数损失函数"><a href="#对数损失函数" class="headerlink" title="对数损失函数"></a>对数损失函数</h4><p>logloss, 式7-5</p>
+<h2 id="直接评估推荐序列的离线指标"><a href="#直接评估推荐序列的离线指标" class="headerlink" title="直接评估推荐序列的离线指标"></a>直接评估推荐序列的离线指标</h2><p>上一节介绍了推荐系统主要的离线评测方法和常用的评估指标，但无论是准确率、RMSE、还是 LogLoss都更多地将推荐模型视作类似于点击率预估的预测模型，而不是一个排序模型</p>
+<h3 id="PR曲线"><a href="#PR曲线" class="headerlink" title="PR曲线"></a>PR曲线</h3><p>P-R曲线的横轴是召回率，纵轴是精确率。对于一个排序模型来说，其p-r曲线上的一个点代表”在某一阈值下，模型将大于该阈值的结果判定为正样本，将小于该阈值的结果判定为负样本时，排序结果对应的召回率和精确率”</p>
+<p>通过计算P-R曲线下的面积(Area Under Curve, AUC)来比较模型好坏</p>
+<h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><p>假阳性率(False Positive Rate, FPR) = 负类被预测为正类个数/真实负样本数</p>
+<p>真阳性率(True Positive Rate, TPR) = 分类正确的正样本数/真实正样本数</p>
+<p>横轴是假阳性率，纵轴是真阳性率</p>
+<p>同P-R曲线一样, ROC曲线也是通过不断移动模型正样本阈值生成的</p>
+<p>通过ROC曲线的AUC来比较模型好坏</p>
+<h4 id="绘制ROC曲线的方法"><a href="#绘制ROC曲线的方法" class="headerlink" title="绘制ROC曲线的方法"></a>绘制ROC曲线的方法</h4><p>首先，根据样本标签统计出正负样本的数量，假设正样本数量为P，负样本数量为N；接下来，把横轴的刻度间隔设置为1/N，纵轴的刻度间隔设置为1/P, 再根据模型输出的预测概率对样本进行排序（从高到低）；依次遍历样本，同时从零点开始绘制ROC曲线，每遇到一个正样本就沿纵轴方向绘制一个刻度间隔的曲线，每遇到一个负样本就沿横轴方向绘制一个刻度间隔的曲线，直到遍历完所有样本，曲线最终停在(1，1)这个点，整个ROC曲线绘制完成</p>
+<h3 id="平均精度均值"><a href="#平均精度均值" class="headerlink" title="平均精度均值"></a>平均精度均值</h3><h4 id="平均精度-Average-precision-AP"><a href="#平均精度-Average-precision-AP" class="headerlink" title="平均精度(Average precision, AP)"></a>平均精度(Average precision, AP)</h4><p>假设系统给某用户返回了如下结果</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">推荐序列次序</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">真实标签</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">精确率</td>
+<td style="text-align:center">1/1</td>
+<td style="text-align:center">1/2</td>
+<td style="text-align:center">1/3</td>
+<td style="text-align:center">2/4</td>
+<td style="text-align:center">3/5</td>
+<td style="text-align:center">4/6</td>
+</tr>
+</tbody>
+</table>
+<p>AP的计算只取正样本处的精确率进行平均, 即 AP = (1/1 + 2/4 + 3/5 + 4/6)/4 = 0.6917</p>
+<h4 id="平均精度均值-mean-Average-precision-mAP"><a href="#平均精度均值-mean-Average-precision-mAP" class="headerlink" title="平均精度均值(mean Average precision, mAP)"></a>平均精度均值(mean Average precision, mAP)</h4><p>如果推荐系统对测试集中的每个用户都进行样本排序，那么每个用户都会计算出一个AP值，再对所有用户的AP值进行平均，就得到了mAP。也就是说，mAP是对平均精度的平均</p>
+<h3 id="合理选择评估指标"><a href="#合理选择评估指标" class="headerlink" title="合理选择评估指标"></a>合理选择评估指标</h3><p>除了本节介绍的P-R曲线、ROC曲线，mAP这三个常用指标，推荐系统指标还包括归一化折扣累计收益, 覆盖率, 多样性等等。在真正的离线实验中，虽然要通过不同角度评估模型，但也没必要选择过多的指标评估模型，更没必要为了专门优化某个指标浪费过多时间</p>
+<p>离线评估的目的在于快速定位问题，快速排除不可行的思路，为线上评估找到“靠谱”的候选者。因此，根据业务场景选择2～4个有代表性的离线指标，进行高效率的离线实验才是离线评估正确的“打开方式”</p>
+<h2 id="更接近线上环境的离线评估方法–Replay"><a href="#更接近线上环境的离线评估方法–Replay" class="headerlink" title="更接近线上环境的离线评估方法–Replay"></a>更接近线上环境的离线评估方法–Replay</h2><p>离线评估的重点式让离线评估的结果能够尽量接近线上结果</p>
+<h3 id="动态离线评估方法"><a href="#动态离线评估方法" class="headerlink" title="动态离线评估方法"></a>动态离线评估方法</h3><p>见图7-4</p>
+<p>如果模型更新的频率持续加快，快到接收到样本后就更新。整个动态评估的过程也变成逐一样本回放的精准线上仿真过程, 这就是经典的仿真式离线评估方法— Replay</p>
+<h4 id="个人观点"><a href="#个人观点" class="headerlink" title="个人观点"></a>个人观点</h4><p>其实这样也并不是很完美, 这就像强化学习里的离轨学习了, 因为动态训练的数据分布和动态离线评估时推给用户的数据分布不一样</p>
+<h3 id="Replay方法注意点"><a href="#Replay方法注意点" class="headerlink" title="Replay方法注意点"></a>Replay方法注意点</h3><p>样本中不能包含任何”未来信息”</p>
+<p>举例来说， Replay方法使用8月1日到8月31日的样本数据进行重放，在样本中包含一个特征—“历史CTR”，这个特征的计算只能通过历史数据生成。例如，8月20日的样本就只能使用8月1日到8月19日的数据生成”历史CTR”这个特征，而绝不能使用8月20日以后的数据生成这个特征</p>
+<h2 id="A-B测试与线上评估指标"><a href="#A-B测试与线上评估指标" class="headerlink" title="A/B测试与线上评估指标"></a>A/B测试与线上评估指标</h2><p>无论离线评估如何仿真线上环境，终究无法完全还原线上的所有变量。对几乎所有互联网公司来说，线上A/B测试都是验证新模块、新功能、新产品是否有效的主要测试方法</p>
+<h3 id="什么是A-B测试"><a href="#什么是A-B测试" class="headerlink" title="什么是A/B测试"></a>什么是A/B测试</h3><p>将用户分组, 分为实验组和对照组, 然后比较结果</p>
+<h3 id="分组原则"><a href="#分组原则" class="headerlink" title="分组原则"></a>分组原则</h3><h4 id="层与层之间正交"><a href="#层与层之间正交" class="headerlink" title="层与层之间正交"></a>层与层之间正交</h4><p>比如前端和算法都在做A/B测试, 那么在算法层如何分组与前端层如何分组无关</p>
+<h4 id="同层之间流量互斥"><a href="#同层之间流量互斥" class="headerlink" title="同层之间流量互斥"></a>同层之间流量互斥</h4><p>比如前端做A/B测试, 有一个原版页面作为对照组, 有两个页面作为实验组, 那么当某个用户被确定分组后, 他是不会改变所属组的, 即他不可能访问到另外两个页面</p>
+<h3 id="线上A-B测试的评估指标"><a href="#线上A-B测试的评估指标" class="headerlink" title="线上A/B测试的评估指标"></a>线上A/B测试的评估指标</h3><p>业务核心指标, 如点击率转化率, 播放时长等</p>
+<h2 id="快速线上评估方法–Interleaving"><a href="#快速线上评估方法–Interleaving" class="headerlink" title="快速线上评估方法–Interleaving"></a>快速线上评估方法–Interleaving</h2><h3 id="为什么提出Interleaving"><a href="#为什么提出Interleaving" class="headerlink" title="为什么提出Interleaving"></a>为什么提出Interleaving</h3><ol>
+<li><p>A/B测试太耗资源了</p>
+</li>
+<li><p>A/B两组间用户的微小不平衡, 可能对结论产生不成比例的影响</p>
+</li>
+</ol>
+<h3 id="什么是Interleaving"><a href="#什么是Interleaving" class="headerlink" title="什么是Interleaving"></a>什么是Interleaving</h3><p>不区分A/B组, 而是把不同的被测对象同时提供给受试者, 最后根据受试者喜好得出评估结果, 见图7-8</p>
+<p>需要注意的是, 要以相同的概率让算法A和算法B在排序上交替领先, 见图7-9</p>
+<h3 id="Interleaving方法与传统A-B测试灵敏度比较"><a href="#Interleaving方法与传统A-B测试灵敏度比较" class="headerlink" title="Interleaving方法与传统A/B测试灵敏度比较"></a>Interleaving方法与传统A/B测试灵敏度比较</h3><p>Netflix的一项实验表明Interleaving方法只需更少的样本(为A/B样本数的1%)就能确定用户更偏爱哪个算法, 见图7-10</p>
+<h3 id="Interleaving方法指标与A-B指标的相关性"><a href="#Interleaving方法指标与A-B指标的相关性" class="headerlink" title="Interleaving方法指标与A/B指标的相关性"></a>Interleaving方法指标与A/B指标的相关性</h3><p>见图7-11, 可以发现, Interleaving方法指标与A/B指标之间存在非常强的相关性</p>
+<h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h4><p>所需样本少, 测试速度快, 与A/B测试结果无明显区别</p>
+<h4 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li><p>工程实现的框架较传统A/B测试复杂</p>
+</li>
+<li><p>Interleaving方法只是对“用户对算法推荐结果偏好程度”的相对测量不能得出一个算法真实的表现. 如果希望知道算法A能够将用户整体的观看时长提高了多少，将用户的留存率提高了多少，那么使用 Interleaving方法是无法得出结论的, 只能使用线上A/B测试</p>
+</li>
+</ol>
+<h2 id="本章总结-2"><a href="#本章总结-2" class="headerlink" title="本章总结"></a>本章总结</h2><p>见图7-12</p>
+<h1 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h1><p>图9-1, 图9-2</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/44.html" title="<<深度学习推荐系统>>笔记">https://uesugierii.github.io/articles/44.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Note/" rel="tag"># Note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/43.html" rel="next" title="安卓删除无法删除的文件">
+                <i class="fa fa-chevron-left"></i> 安卓删除无法删除的文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/45.html" rel="prev" title="docker+tensorflow+pycharm完美配置">
+                docker+tensorflow+pycharm完美配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协同过滤"><span class="nav-number">2.1.</span> <span class="nav-text">协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于用户的协同过滤"><span class="nav-number">2.1.1.</span> <span class="nav-text">基于用户的协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于物品的协同过滤"><span class="nav-number">2.1.2.</span> <span class="nav-text">基于物品的协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程-1"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于物品的协同过滤和基于用户的协同过滤应用场景比较-2-2-5"><span class="nav-number">2.1.3.</span> <span class="nav-text">基于物品的协同过滤和基于用户的协同过滤应用场景比较(2.2.5)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协同过滤缺点-2-2-6"><span class="nav-number">2.1.4.</span> <span class="nav-text">协同过滤缺点(2.2.6)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵分解"><span class="nav-number">2.2.</span> <span class="nav-text">矩阵分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵分解方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">矩阵分解方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特征值分解"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">特征值分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#奇异值分解"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">奇异值分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">梯度下降</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除用户和物品打分的方差"><span class="nav-number">2.2.2.</span> <span class="nav-text">消除用户和物品打分的方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵分解优缺点"><span class="nav-number">2.2.3.</span> <span class="nav-text">矩阵分解优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点-1"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑回归"><span class="nav-number">2.3.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辛普森悖论"><span class="nav-number">2.4.</span> <span class="nav-text">辛普森悖论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POLY2"><span class="nav-number">2.5.</span> <span class="nav-text">POLY2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点-3"><span class="nav-number">2.5.1.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FM"><span class="nav-number">2.6.</span> <span class="nav-text">FM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点-2"><span class="nav-number">2.6.1.</span> <span class="nav-text">优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFM"><span class="nav-number">2.7.</span> <span class="nav-text">FFM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与FM比较"><span class="nav-number">2.7.1.</span> <span class="nav-text">与FM比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GBDT-LR"><span class="nav-number">2.8.</span> <span class="nav-text">GBDT+LR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征转换过程"><span class="nav-number">2.8.1.</span> <span class="nav-text">特征转换过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#意义"><span class="nav-number">2.8.2.</span> <span class="nav-text">意义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LS-PLM"><span class="nav-number">2.9.</span> <span class="nav-text">LS-PLM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点-3"><span class="nav-number">2.9.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另一个角度理解LS-PLM"><span class="nav-number">2.9.2.</span> <span class="nav-text">另一个角度理解LS-PLM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章"><span class="nav-number">3.</span> <span class="nav-text">第三章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Autorec"><span class="nav-number">3.1.</span> <span class="nav-text">Autorec</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">3.1.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于用户和基于物品比较"><span class="nav-number">3.1.2.</span> <span class="nav-text">基于用户和基于物品比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点-4"><span class="nav-number">3.1.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Crossing"><span class="nav-number">3.2.</span> <span class="nav-text">Deep Crossing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体结构-图3-6"><span class="nav-number">3.2.1.</span> <span class="nav-text">整体结构(图3-6)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#意义-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">意义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeuralCF"><span class="nav-number">3.3.</span> <span class="nav-text">NeuralCF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创新1"><span class="nav-number">3.3.1.</span> <span class="nav-text">创新1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创新2"><span class="nav-number">3.3.2.</span> <span class="nav-text">创新2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创新总结"><span class="nav-number">3.3.3.</span> <span class="nav-text">创新总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总体结构"><span class="nav-number">3.3.4.</span> <span class="nav-text">总体结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">3.3.5.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PNN"><span class="nav-number">3.4.</span> <span class="nav-text">PNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创新点"><span class="nav-number">3.4.1.</span> <span class="nav-text">创新点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wide-amp-Deep"><span class="nav-number">3.5.</span> <span class="nav-text">Wide&amp;Deep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型的记忆能力与泛化能力-3-6-1"><span class="nav-number">3.5.1.</span> <span class="nav-text">模型的记忆能力与泛化能力(3.6.1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型结构"><span class="nav-number">3.5.2.</span> <span class="nav-text">模型结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wide-amp-Deep变种-Deep-amp-Crossing"><span class="nav-number">3.5.3.</span> <span class="nav-text">Wide&amp;Deep变种-Deep&amp;Crossing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wide-amp-Deep成功的关键"><span class="nav-number">3.5.4.</span> <span class="nav-text">Wide&amp;Deep成功的关键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FNN"><span class="nav-number">3.6.</span> <span class="nav-text">FNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么Embedding层收敛慢"><span class="nav-number">3.6.1.</span> <span class="nav-text">为什么Embedding层收敛慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wide-amp-Deep变种-DeepFM"><span class="nav-number">3.6.2.</span> <span class="nav-text">Wide&amp;Deep变种-DeepFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wide-amp-Deep变种-NFM"><span class="nav-number">3.6.3.</span> <span class="nav-text">Wide&amp;Deep变种-NFM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入注意力机制"><span class="nav-number">3.7.</span> <span class="nav-text">引入注意力机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AFM"><span class="nav-number">3.7.1.</span> <span class="nav-text">AFM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DIN"><span class="nav-number">3.7.2.</span> <span class="nav-text">DIN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与AFM区别"><span class="nav-number">3.7.2.1.</span> <span class="nav-text">与AFM区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合序列模型-DIEN"><span class="nav-number">3.8.</span> <span class="nav-text">结合序列模型-DIEN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要序列模型"><span class="nav-number">3.8.1.</span> <span class="nav-text">为什么需要序列模型?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DIEN架构"><span class="nav-number">3.8.2.</span> <span class="nav-text">DIEN架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合强化学习-DRN"><span class="nav-number">3.9.</span> <span class="nav-text">结合强化学习-DRN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习过程-图3-28"><span class="nav-number">3.9.1.</span> <span class="nav-text">学习过程(图3-28)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步的微更新细节"><span class="nav-number">3.9.2.</span> <span class="nav-text">第三步的微更新细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本章总结"><span class="nav-number">3.10.</span> <span class="nav-text">本章总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章"><span class="nav-number">4.</span> <span class="nav-text">第四章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Embedding"><span class="nav-number">4.1.</span> <span class="nav-text">什么是Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word2vec"><span class="nav-number">4.2.</span> <span class="nav-text">Word2vec</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本假设"><span class="nav-number">4.2.1.</span> <span class="nav-text">基本假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型结构-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">模型结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skip-gram训练过程"><span class="nav-number">4.2.3.</span> <span class="nav-text">Skip-gram训练过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负采样"><span class="nav-number">4.2.4.</span> <span class="nav-text">负采样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Item2vec"><span class="nav-number">4.3.</span> <span class="nav-text">Item2vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广义Item2vec"><span class="nav-number">4.4.</span> <span class="nav-text">广义Item2vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Embedding"><span class="nav-number">4.5.</span> <span class="nav-text">Graph Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DeepWalk"><span class="nav-number">4.5.1.</span> <span class="nav-text">DeepWalk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程-2"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机游走跳转概率"><span class="nav-number">4.5.1.2.</span> <span class="nav-text">随机游走跳转概率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node2vec"><span class="nav-number">4.5.2.</span> <span class="nav-text">Node2vec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同质性-amp-结构性"><span class="nav-number">4.5.2.1.</span> <span class="nav-text">同质性&amp;结构性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何控制DFS和BFS倾向"><span class="nav-number">4.5.2.2.</span> <span class="nav-text">如何控制DFS和BFS倾向?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实际应用中的同质性-amp-结构性的例子"><span class="nav-number">4.5.2.3.</span> <span class="nav-text">实际应用中的同质性&amp;结构性的例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EGES-阿里巴巴的综合性图嵌入方法"><span class="nav-number">4.5.3.</span> <span class="nav-text">EGES-阿里巴巴的综合性图嵌入方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding与深度学习推荐系统的结合"><span class="nav-number">4.6.</span> <span class="nav-text">Embedding与深度学习推荐系统的结合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习网络中的Embedding层"><span class="nav-number">4.6.1.</span> <span class="nav-text">深度学习网络中的Embedding层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedding的预训练方法"><span class="nav-number">4.6.2.</span> <span class="nav-text">Embedding的预训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedding作为推荐系统召回层"><span class="nav-number">4.6.3.</span> <span class="nav-text">Embedding作为推荐系统召回层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部敏感哈希"><span class="nav-number">4.7.</span> <span class="nav-text">局部敏感哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">4.7.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部敏感哈希算法-Locality-Sensitive-Hashing-LSH"><span class="nav-number">4.7.2.</span> <span class="nav-text">局部敏感哈希算法(Locality Sensitive Hashing)(LSH)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多桶策略"><span class="nav-number">4.7.2.1.</span> <span class="nav-text">多桶策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他距离度量"><span class="nav-number">4.7.2.2.</span> <span class="nav-text">其他距离度量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本章总结-1"><span class="nav-number">4.8.</span> <span class="nav-text">本章总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章"><span class="nav-number">5.</span> <span class="nav-text">第五章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征工程"><span class="nav-number">5.1.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征工程的原则"><span class="nav-number">5.1.1.</span> <span class="nav-text">特征工程的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征工程的常用特征"><span class="nav-number">5.1.2.</span> <span class="nav-text">特征工程的常用特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用特征处理办法"><span class="nav-number">5.1.3.</span> <span class="nav-text">常用特征处理办法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连续型"><span class="nav-number">5.1.3.1.</span> <span class="nav-text">连续型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类别型"><span class="nav-number">5.1.3.2.</span> <span class="nav-text">类别型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征工程与业务理解"><span class="nav-number">5.1.4.</span> <span class="nav-text">特征工程与业务理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#召回层主要策略"><span class="nav-number">5.2.</span> <span class="nav-text">召回层主要策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#召回层特点"><span class="nav-number">5.2.1.</span> <span class="nav-text">召回层特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路召回策略"><span class="nav-number">5.2.2.</span> <span class="nav-text">多路召回策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于embedding的召回"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于embedding的召回</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐系统的实时性"><span class="nav-number">5.3.</span> <span class="nav-text">推荐系统的实时性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么实时性重要"><span class="nav-number">5.3.1.</span> <span class="nav-text">为什么实时性重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重要性体现"><span class="nav-number">5.3.2.</span> <span class="nav-text">重要性体现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐系统特征的实时性"><span class="nav-number">5.3.3.</span> <span class="nav-text">推荐系统特征的实时性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端实时特征"><span class="nav-number">5.3.3.1.</span> <span class="nav-text">客户端实时特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流计算平台的准实时特征处理"><span class="nav-number">5.3.3.2.</span> <span class="nav-text">流计算平台的准实时特征处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式批处理平台的全量特征处理"><span class="nav-number">5.3.3.3.</span> <span class="nav-text">分布式批处理平台的全量特征处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐系统模型的实时性"><span class="nav-number">5.3.4.</span> <span class="nav-text">推荐系统模型的实时性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全量更新"><span class="nav-number">5.3.4.1.</span> <span class="nav-text">全量更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量更新"><span class="nav-number">5.3.4.2.</span> <span class="nav-text">增量更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在线学习"><span class="nav-number">5.3.4.3.</span> <span class="nav-text">在线学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#局部更新"><span class="nav-number">5.3.4.4.</span> <span class="nav-text">局部更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端模型实时更新"><span class="nav-number">5.3.4.5.</span> <span class="nav-text">客户端模型实时更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何设定推荐系统优化目标"><span class="nav-number">5.4.</span> <span class="nav-text">如何设定推荐系统优化目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐系统中比模型更重要的是什么"><span class="nav-number">5.5.</span> <span class="nav-text">推荐系统中比模型更重要的是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Netflix"><span class="nav-number">5.5.1.</span> <span class="nav-text">Netflix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Roku"><span class="nav-number">5.5.2.</span> <span class="nav-text">Roku</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里DIN"><span class="nav-number">5.5.3.</span> <span class="nav-text">阿里DIN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冷启动的解决方法"><span class="nav-number">5.6.</span> <span class="nav-text">冷启动的解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于规则的冷启动过程"><span class="nav-number">5.6.1.</span> <span class="nav-text">基于规则的冷启动过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丰富冷启动过程中可获得的用户和物品特征"><span class="nav-number">5.6.2.</span> <span class="nav-text">丰富冷启动过程中可获得的用户和物品特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用主动学习、迁移学习和“探索与利用”机制"><span class="nav-number">5.6.3.</span> <span class="nav-text">利用主动学习、迁移学习和“探索与利用”机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主动学习-图5-15"><span class="nav-number">5.6.3.1.</span> <span class="nav-text">主动学习(图5-15)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迁移学习"><span class="nav-number">5.6.3.2.</span> <span class="nav-text">迁移学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#探索与利用机制"><span class="nav-number">5.6.3.3.</span> <span class="nav-text">探索与利用机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#探索与利用"><span class="nav-number">5.7.</span> <span class="nav-text">探索与利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统的探索与利用方法"><span class="nav-number">5.7.1.</span> <span class="nav-text">传统的探索与利用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ε-Greedy算法"><span class="nav-number">5.7.1.1.</span> <span class="nav-text">ε-Greedy算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thompson-Sampling"><span class="nav-number">5.7.1.2.</span> <span class="nav-text">Thompson Sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UCB算法"><span class="nav-number">5.7.1.3.</span> <span class="nav-text">UCB算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个性化的探索与利用方法"><span class="nav-number">5.7.2.</span> <span class="nav-text">个性化的探索与利用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于模型的探索与利用方法"><span class="nav-number">5.7.3.</span> <span class="nav-text">基于模型的探索与利用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索与利用在推荐系统中应用"><span class="nav-number">5.7.4.</span> <span class="nav-text">探索与利用在推荐系统中应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七章"><span class="nav-number">6.</span> <span class="nav-text">第七章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#离线评估方法与基本评价指标"><span class="nav-number">6.1.</span> <span class="nav-text">离线评估方法与基本评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#离线评估方法"><span class="nav-number">6.1.1.</span> <span class="nav-text">离线评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#holdout"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">holdout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#交叉检验"><span class="nav-number">6.1.1.2.</span> <span class="nav-text">交叉检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自助法"><span class="nav-number">6.1.1.3.</span> <span class="nav-text">自助法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离线评估指标"><span class="nav-number">6.1.2.</span> <span class="nav-text">离线评估指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准确率"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">准确率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#精确率和召回率"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">精确率和召回率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均方根误差"><span class="nav-number">6.1.2.3.</span> <span class="nav-text">均方根误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数损失函数"><span class="nav-number">6.1.2.4.</span> <span class="nav-text">对数损失函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接评估推荐序列的离线指标"><span class="nav-number">6.2.</span> <span class="nav-text">直接评估推荐序列的离线指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PR曲线"><span class="nav-number">6.2.1.</span> <span class="nav-text">PR曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC曲线"><span class="nav-number">6.2.2.</span> <span class="nav-text">ROC曲线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绘制ROC曲线的方法"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">绘制ROC曲线的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平均精度均值"><span class="nav-number">6.2.3.</span> <span class="nav-text">平均精度均值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#平均精度-Average-precision-AP"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">平均精度(Average precision, AP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平均精度均值-mean-Average-precision-mAP"><span class="nav-number">6.2.3.2.</span> <span class="nav-text">平均精度均值(mean Average precision, mAP)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合理选择评估指标"><span class="nav-number">6.2.4.</span> <span class="nav-text">合理选择评估指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更接近线上环境的离线评估方法–Replay"><span class="nav-number">6.3.</span> <span class="nav-text">更接近线上环境的离线评估方法–Replay</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态离线评估方法"><span class="nav-number">6.3.1.</span> <span class="nav-text">动态离线评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#个人观点"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">个人观点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replay方法注意点"><span class="nav-number">6.3.2.</span> <span class="nav-text">Replay方法注意点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-B测试与线上评估指标"><span class="nav-number">6.4.</span> <span class="nav-text">A/B测试与线上评估指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是A-B测试"><span class="nav-number">6.4.1.</span> <span class="nav-text">什么是A/B测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组原则"><span class="nav-number">6.4.2.</span> <span class="nav-text">分组原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#层与层之间正交"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">层与层之间正交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同层之间流量互斥"><span class="nav-number">6.4.2.2.</span> <span class="nav-text">同层之间流量互斥</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线上A-B测试的评估指标"><span class="nav-number">6.4.3.</span> <span class="nav-text">线上A/B测试的评估指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速线上评估方法–Interleaving"><span class="nav-number">6.5.</span> <span class="nav-text">快速线上评估方法–Interleaving</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么提出Interleaving"><span class="nav-number">6.5.1.</span> <span class="nav-text">为什么提出Interleaving</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Interleaving"><span class="nav-number">6.5.2.</span> <span class="nav-text">什么是Interleaving</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interleaving方法与传统A-B测试灵敏度比较"><span class="nav-number">6.5.3.</span> <span class="nav-text">Interleaving方法与传统A/B测试灵敏度比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interleaving方法指标与A-B指标的相关性"><span class="nav-number">6.5.4.</span> <span class="nav-text">Interleaving方法指标与A/B指标的相关性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点-2"><span class="nav-number">6.5.5.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-4"><span class="nav-number">6.5.5.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点-5"><span class="nav-number">6.5.5.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本章总结-2"><span class="nav-number">6.6.</span> <span class="nav-text">本章总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九章"><span class="nav-number">7.</span> <span class="nav-text">第九章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

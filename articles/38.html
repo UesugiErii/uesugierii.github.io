@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言本文主要记录《强化学习》第二版的第二章练习答案，后面的章节的答案都可以在下面的参考资料中找到 所有答案均是自己结合网上给出的，不能保证全部正确 参考资料： https://github.com/iamhectorotero/rlai-exercises https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutto">
+<meta name="keywords" content="强化学习,[object Object],练习答案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习 第二章练习答案">
+<meta property="og:url" content="https://uesugierii.github.io/articles/38.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="前言本文主要记录《强化学习》第二版的第二章练习答案，后面的章节的答案都可以在下面的参考资料中找到 所有答案均是自己结合网上给出的，不能保证全部正确 参考资料： https://github.com/iamhectorotero/rlai-exercises https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutto">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uesugierii.github.io/images/38/2-9.png">
+<meta property="og:updated_time" content="2020-04-04T11:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习 第二章练习答案">
+<meta name="twitter:description" content="前言本文主要记录《强化学习》第二版的第二章练习答案，后面的章节的答案都可以在下面的参考资料中找到 所有答案均是自己结合网上给出的，不能保证全部正确 参考资料： https://github.com/iamhectorotero/rlai-exercises https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutto">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/38/2-9.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/38.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>强化学习 第二章练习答案 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/38.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">强化学习 第二章练习答案
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-03T00:00:00+08:00">2020-04-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-04-04 19:52:08" itemprop="dateModified" datetime="2020-04-04T19:52:08+08:00">2020-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2020/" itemprop="url" rel="index"><span itemprop="name">2020</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要记录《强化学习》第二版的第二章练习答案，后面的章节的答案都可以在下面的参考资料中找到</p>
+<p><font color="#CD5C5C">所有答案均是自己结合网上给出的，不能保证全部正确</font><br></p>
+<p>参考资料：</p>
+<p><code>https://github.com/iamhectorotero/rlai-exercises</code></p>
+<p><code>https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutton-Exercise-Solutions</code></p>
+<p>在线阅读：</p>
+<p><code>https://rl.qiwihui.com/zh_CN/latest/index.html</code></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="练习2-1"><a href="#练习2-1" class="headerlink" title="练习2.1"></a>练习2.1</h3><p>Q：在$\epsilon$贪心动作选择中，在有两个动作及$\epsilon=0.5$的情况下，贪心动作被选择的概率是多少？</p>
+<p>A：0.5的概率开发，然后选择贪心动作。0.5的概率试探，试探时有0.5概率选择贪心动作。$0.5+0.5*0.5=0.75$</p>
+<h3 id="练习2-2"><a href="#练习2-2" class="headerlink" title="练习2.2"></a>练习2.2</h3><p>Q：赌博机的例子 考虑一个$k=4$的多臂赌博机问题，记做1，2，3，4。 将一个赌博机算法应用与这个问题，算法使用$\epsilon$贪心动作选择，基于采样平均的动作价值估计，对于所有a，初始估计为 Q1(a)=0。假设动作及收益的最初顺序是 A1=1，R1=1，A2=2， R2=1，A3=2，R3=2，A4=2， R4=2，A5=3，R5=0。在其中的某些案例中可能发生了$\epsilon$的情形导致一个动作被随机选择。请回答，在哪些时刻中这种情形肯定发生了？在哪些时刻中这些情形可能发生了？</p>
+<p>A：45肯定发生了，123可能发生。</p>
+<p>最初对于所有的动作评估都是0，对于第一次，可能试探（随机选几个）也可能没试探（最高的里面随机选一个），第二三步同理。第四步不可能是开发，如果是开发，则应该在34中随机选一个动作。同理第五步不是开发，如果是开发，则一定是选择最高的2（此时估计为1/3）</p>
+<h3 id="练习2-3"><a href="#练习2-3" class="headerlink" title="练习2.3"></a>练习2.3</h3><p>Q：在图2.2所示的比较中，从累积收益和选择最佳动作的可能性的角度考虑，哪种方法会在长期表现最好？好多少？定量地表达你的答案。</p>
+<p>A：Epsilon-0.01长期表现更好，0.01有99%的概率选择最优动作，而0.1只有90%概率选择最优动作</p>
+<h3 id="练习2-4"><a href="#练习2-4" class="headerlink" title="练习2.4"></a>练习2.4</h3><p>Q：如果步长参数$\alpha_n$不是常数，那么估计的$Q_n$就是对于之前得到的收益的加权平均，其权值与公式（2.6）给出的不同。作为对公式2.6的推广，一般情况下，对于这样的步长参数序列，之前的每一次收益的部长分别是多少？</p>
+<p>A：1/n，见公式2.3</p>
+<h3 id="练习2-6"><a href="#练习2-6" class="headerlink" title="练习2.6"></a>练习2.6</h3><p>Q：神秘的尖峰 图2.3中展示的结果应该是相当可靠的，因为他们是2000个独立随机的10臂赌博机任务的平均值。那么为什么乐观初始化方法在曲线的早期会出现振荡和峰值呢？换句话说，是什么使得这种方法在特定的早期步骤中表现的特别好或更糟？</p>
+<p>A：10臂，对于最好的那个，价值估计下降比较慢，当其他9个下降很快低于最优的那个估计时，会一直选择最优动作。当最优动作下降时，其他9个需要不停的采样下降，9个都下降到比最优还低需要一定的时间，在这段时间里，最优的臂不会被选择。前面的两种过程反复交替，出现震荡。</p>
+<h3 id="练习2-7"><a href="#练习2-7" class="headerlink" title="练习2.7"></a>练习2.7</h3><p>Q：无偏恒定步长 在本章的大多数案例中，我们使用采样平均来估计动作的价值，这是因为采样平均不会像恒定步长那样产生偏差，参见式2.6中的分析。然而，采样平均并不是完全令人满意的解决方案。在非平稳的问题中，他可能会表现的很差。我们是否有办法技能既能利用恒定步长在非平稳过程中的优势，又能有效避免他的误差呢？一种可行的办法是利用如下的步长来处理某个特定动作的第n个收益</p>
+<p>$$\beta_n = \frac{\alpha}{\overline o_n}$$</p>
+<p>其中，$\alpha&gt;0$一个传统的恒定步长，$\overline o_n$是一个从零时刻开始计算的修正系数</p>
+<p>$$\overline o_n = \overline o_{n-1} + \alpha\left ( 1- \overline o_{n-1} \right )$$</p>
+<p>对$n \geq 0$，满足$\overline o_0 = 0$</p>
+<p>通过类似与式2.6类似的分析方法，试证明$Q_n$是一个对初始值无偏的指数近因加权平均</p>
+<p>A：</p>
+<p>先将上面的公式变形成为</p>
+<p>$$\overline o_{n}-1=\left( 1-\alpha \right) \left( \overline o_{n-1}-1\right)$$</p>
+<p>通过这个比例关系我们可以求出$\overline o_n$的通项公式</p>
+<p>$$\overline o_{n}=1-\left( 1-\alpha \right) ^{n}$$</p>
+<p>$$<br>\begin {split}<br>Q_{n+1} &amp;= Q_{n}+\dfrac {\alpha }{\overline o_n}\left[ R_{n}-Q_{n}\right] \\<br>  &amp;= \dfrac {\alpha }{\overline o_n}R_{n}+\left( 1-\dfrac {\alpha }{\overline o_n}\right) Q_{n}\\<br>  &amp;= \dfrac {\alpha }{\overline o_n}R_{n} + \frac{\left ( 1-\alpha\right ) \overline o_{n-1}}{\overline o_n} \begin{bmatrix}\frac{\alpha}{\overline o_{n-1}}+\left ( 1-\frac{\alpha}{\overline o_{n-1}}\right )Q_{n-1}\end{bmatrix}\\<br> &amp;= \dfrac {\alpha }{\overline o_n}R_{n}+\dfrac {\alpha \left ( 1-\alpha\right )}{\overline o_n}R_{n-1}+ \begin{bmatrix}\frac{\left ( 1-\alpha\right )^2 {\overline o_{n-2}}}{\overline o_n}\end{bmatrix}Q_{n-1} \\<br> &amp;=\sum_{i=1}^{n} {\frac{\alpha \left ( 1-\alpha\right )^{n-i}}{\overline o_n}R_i} + \frac{\left ( 1-\alpha\right )^n \overline o_0}{\overline o_n}Q_1<br>\end {split}<br>$$</p>
+<p>因为$\overline o_0 = 0$，所以上面等号右边的右半部分为0，至此，对初始值无偏证明完毕。接下来证明指数近因加权平均。</p>
+<p>注意$R_i$左边上面是一个等比数列，求和得$1-\left( 1-\alpha \right) ^{n}$，和等于$\overline o_{n}$，所以左边系数和为1,右边为0。至此，指数近因加权平均证明完毕。</p>
+<h3 id="练习2-8"><a href="#练习2-8" class="headerlink" title="练习2.8"></a>练习2.8</h3><p>Q：USB尖峰 在图2.4中，UCB算法的表现在第11步的时候有一个非常明显的尖峰。为什么会产生这个尖峰呢？请注意，你必须同时解释为什么收益在第11步时会增加，以及为什么在后续的若干步中会减少，你的答案才是令人满意的。提示如果$c=1$，那么这个尖峰就不会那么突出了。</p>
+<p>A：前10次把每个臂都试了一次，第11次时很有可能选择最优臂，出现峰值。第11次被选中的臂右边值变小，导致难以被再次选中，后面几次选择较差臂，平均收益开始下降。当c=1时，探索的影响因素小了，导致好的臂在后续几次很有可能再次被选中，使尖峰不突出</p>
+<h3 id="练习2-9"><a href="#练习2-9" class="headerlink" title="练习2.9"></a>练习2.9</h3><p>Q：证明在两种动作的情况下，softmax分布与通常在统计学和人工神经网络中使用的logistic或sigmoid函数给出的结果相同</p>
+<p>A：</p>
+<p><img src="/images/38/2-9.png" alt=""></p>
+<h3 id="练习2-10"><a href="#练习2-10" class="headerlink" title="练习2.10"></a>练习2.10</h3><p>Q：Suppose you face a 2-armed bandit task whose true action values change randomly from time step to time step. Specifically, suppose that, for any time step, the true values of action 1 and 2 are respectively 0.1 and 0.2 with probability 0.5 (case A), and 0.9 and 0.8 with probability 0.5 (case B). If you are not able to tell which case you face at any step, what is the best expectation of success you can achieve and how should you behave to achieve it? Now suppose that on each step you are told whether you are facing case A or case B (although you still don’t know the true action values). This is an associative search task. What is the best expectation of success you can achieve in this task, and how should you behave to achieve it?</p>
+<p>A：第一种情况下，无法确定处于情况A还是B，此时不管选哪个臂，期望成功值都是$0.5 = 0.5<em>0.1+0.5</em>0.9=0.5<em>0.2+0.5</em>0.8$，只需随机选择臂即可。</p>
+<p>第二种情况下，相当与有两台赌博机。情况A和B分开学习，最优成功值为$0.5<em>0.2+0.5</em>0.9=0.55$，情况A时选动作2,情况B时选动作1。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/38.html" title="强化学习 第二章练习答案">https://uesugierii.github.io/articles/38.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/37.html" rel="next" title="Linux安装android SDK及Appium配置">
+                <i class="fa fa-chevron-left"></i> Linux安装android SDK及Appium配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/41.html" rel="prev" title="docker命令总结">
+                docker命令总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-1"><span class="nav-number">2.1.</span> <span class="nav-text">练习2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-2"><span class="nav-number">2.2.</span> <span class="nav-text">练习2.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-3"><span class="nav-number">2.3.</span> <span class="nav-text">练习2.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-4"><span class="nav-number">2.4.</span> <span class="nav-text">练习2.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-6"><span class="nav-number">2.5.</span> <span class="nav-text">练习2.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-7"><span class="nav-number">2.6.</span> <span class="nav-text">练习2.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-8"><span class="nav-number">2.7.</span> <span class="nav-text">练习2.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-9"><span class="nav-number">2.8.</span> <span class="nav-text">练习2.9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#练习2-10"><span class="nav-number">2.9.</span> <span class="nav-text">练习2.10</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="starblast是一款网页2D开飞机战斗的游戏.国外服务器,延迟高的话要用加速器或VPN或SSR.先简单介绍一下游戏,基础知识要了解.然后介绍一些技巧. 官方提供了文档WIKI. 所有房间 矿石最基本的东西,红红的那个就是了. 来源只有打石头,杀人,打野怪 模式1.生存模式  最后生存的人为胜利者,游戏房间开始45分钟或者有某个玩家达到7级时开始生存模式.进入生存模式后死亡无法复活,无法升级7级">
+<meta name="keywords" content="starblast,starblast.io,攻略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="starblast攻略">
+<meta property="og:url" content="https://uesugierii.github.io/articles/3.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="starblast是一款网页2D开飞机战斗的游戏.国外服务器,延迟高的话要用加速器或VPN或SSR.先简单介绍一下游戏,基础知识要了解.然后介绍一些技巧. 官方提供了文档WIKI. 所有房间 矿石最基本的东西,红红的那个就是了. 来源只有打石头,杀人,打野怪 模式1.生存模式  最后生存的人为胜利者,游戏房间开始45分钟或者有某个玩家达到7级时开始生存模式.进入生存模式后死亡无法复活,无法升级7级">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/rank.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/1.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/2.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/3.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/4.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/5.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/6.png">
+<meta property="og:image" content="https://uesugierii.github.io/images/3/7.png">
+<meta property="og:updated_time" content="2020-01-08T13:29:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="starblast攻略">
+<meta name="twitter:description" content="starblast是一款网页2D开飞机战斗的游戏.国外服务器,延迟高的话要用加速器或VPN或SSR.先简单介绍一下游戏,基础知识要了解.然后介绍一些技巧. 官方提供了文档WIKI. 所有房间 矿石最基本的东西,红红的那个就是了. 来源只有打石头,杀人,打野怪 模式1.生存模式  最后生存的人为胜利者,游戏房间开始45分钟或者有某个玩家达到7级时开始生存模式.进入生存模式后死亡无法复活,无法升级7级">
+<meta name="twitter:image" content="https://uesugierii.github.io/images/3/rank.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/3.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>starblast攻略 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">starblast攻略
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-16T00:00:00+08:00">2018-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-08 21:29:25" itemprop="dateModified" datetime="2020-01-08T21:29:25+08:00">2020-01-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://starblast.io/" target="_blank" rel="noopener">starblast</a>是一款网页2D开飞机战斗的游戏.国外服务器,延迟高的话要用加速器或VPN或SSR.先简单介绍一下游戏,基础知识要了解.然后介绍一些技巧.</p>
+<p>官方提供了文档<a href="https://starblastio.gamepedia.com/Starblast.io_Wiki" target="_blank" rel="noopener">WIKI</a>.</p>
+<p><a href="https://starblast-shipyard.github.io/sectorListing/" target="_blank" rel="noopener">所有房间</a></p>
+<h2 id="矿石"><a href="#矿石" class="headerlink" title="矿石"></a>矿石</h2><p>最基本的东西,红红的那个就是了.</p>
+<p>来源只有打石头,杀人,打野怪</p>
+<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><p>1.生存模式</p>
+<blockquote>
+<p>最后生存的人为胜利者,游戏房间开始45分钟或者有某个玩家达到7级时开始生存模式.进入生存模式后死亡无法复活,无法升级7级,地图不断变小.</p>
+</blockquote>
+<p>2.团队模式</p>
+<blockquote>
+<p>3支队伍,最后只剩自己基地就赢了.基地等级初始1级,上限4级.基地1级时玩家战机最多3级,基地每升级一级,玩家可升级飞机上限提高1级,当基地4级且满矿石时,玩家可以升级7级.此模式中可以选择激光模式,一种进攻,一种治疗.</p>
+</blockquote>
+<p>3.Invasion</p>
+<blockquote>
+<p>入侵模式,就是打副本一样的,但是玩的人太少,一个人很难通关(tm居然有人能一个人通关).打石头和野怪会掉落道具和宝石.Youtube有个<a href="https://www.youtube.com/watch?v=zSHI-Q3uG5k" target="_blank" rel="noopener">攻略视频</a>.</p>
+</blockquote>
+<p>4.大死斗模式</p>
+<blockquote>
+<p>开始选飞机(同等级中的随机几架),技能全满.杀死目标得2分,杀死其他人得1分.先到12分的人胜利.</p>
+</blockquote>
+<p>5.特殊模式(MOD)</p>
+<blockquote>
+<p>这篇文章不提</p>
+</blockquote>
+<p>6.自定义模式</p>
+<blockquote>
+<p>精英指挥官(就是冲钱的会员)可以创建自定义房间(前3中模式里的一种),自定义房间各个数值可以调节.</p>
+</blockquote>
+<h2 id="飞船"><a href="#飞船" class="headerlink" title="飞船"></a>飞船</h2><h3 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h3><p>下面两个页面有详细介绍.当遇到weektest的时候(比如某架飞机被削弱),这些信息不一定及时更新.</p>
+<p><a href="https://starblastio.gamepedia.com/Ships" target="_blank" rel="noopener">ships</a><br><a href="https://starblast-shipyard.github.io/shipTree/" target="_blank" rel="noopener">shipsTree</a></p>
+<p>我感觉第二个更加直观方便.</p>
+<h3 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h3><p>1.护盾容量</p>
+<blockquote>
+<p>护盾可以理解为血量,当你没有护盾时,就会掉矿石,如果都没就死亡.</p>
+</blockquote>
+<p>2.护盾再生速度</p>
+<p>3.能量容量</p>
+<blockquote>
+<p>能量就是用来发射射线的(Barracuda除外).</p>
+</blockquote>
+<p>4.能量再生速度</p>
+<p>5.武器伤害</p>
+<blockquote>
+<p>单个射线威力,威力越大,射线越粗(特殊模式中部分飞船除外)</p>
+</blockquote>
+<p>6.武器速度</p>
+<blockquote>
+<p>射线飞行速度</p>
+</blockquote>
+<p>7.飞船速度</p>
+<p>8.飞船敏捷</p>
+<blockquote>
+<p>加速度和飞机转向速度</p>
+</blockquote>
+<h3 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h3><p>左键开火,右键飞行,ctrl决定是否滑行,鼠标滚轮切换道具</p>
+<h3 id="升级所需矿石"><a href="#升级所需矿石" class="headerlink" title="升级所需矿石"></a>升级所需矿石</h3><p>1-&gt;2&emsp;&emsp;&emsp;&emsp;&emsp;20</p>
+<p>2-&gt;3&emsp;&emsp;&emsp;&emsp;&emsp;80</p>
+<p>3-&gt;4&emsp;&emsp;&emsp;&emsp;&emsp;180</p>
+<p>4-&gt;5&emsp;&emsp;&emsp;&emsp;&emsp;320</p>
+<p>5-&gt;6&emsp;&emsp;&emsp;&emsp;&emsp;500</p>
+<p>6-&gt;7&emsp;&emsp;&emsp;&emsp;&emsp;720</p>
+<h3 id="生命-大死斗除外"><a href="#生命-大死斗除外" class="headerlink" title="生命(大死斗除外)"></a>生命(大死斗除外)</h3><p>每级初始3条(最近改了,团队4条,有些模式5条),到-1时降级.买一条命需要升级到下一等级所需矿石数.</p>
+<h2 id="道具"><a href="#道具" class="headerlink" title="道具"></a>道具</h2><ol>
+<li><p>100矿石4枚火箭</p>
+</li>
+<li><p>120矿石1攻击或防御或挖矿机器人</p>
+</li>
+<li><p>100矿石8太空雷</p>
+</li>
+<li><p>250矿石2导弹</p>
+</li>
+<li><p>200矿石4巨型太空雷</p>
+</li>
+<li><p>500矿石1鱼雷</p>
+</li>
+</ol>
+<p>攻击机器人看到人就打,防御机器人挨子弹,挖矿机器人只有当你按住左键时才会向矿石开火.</p>
+<p>越贵威力越大,导弹和鱼雷发射后不是马上生效的(防止你脸对脸发射).</p>
+<p>现在地雷也不是马上生效了.小的3秒,大的5秒后有效.</p>
+<h2 id="如何充值会员"><a href="#如何充值会员" class="headerlink" title="如何充值会员"></a>如何充值会员</h2><p>直接买10美元,中国 steam 36元.</p>
+<p>注意只有买了会员才能上全球排名,而全球排名只与大死斗模式有关联.</p>
+<h2 id="攻略and技巧"><a href="#攻略and技巧" class="headerlink" title="攻略and技巧"></a>攻略and技巧</h2><p>首推当然是官方总结的:<a href="https://starblastio.gamepedia.com/Strategies" target="_blank" rel="noopener">Strategies</a></p>
+<p>下面是我总结的技巧:  </p>
+<ol>
+<li><p>当你遇到主炮时,第一反应应该是假设他会向你开火,并急转弯躲避第一炮,之后你可以通过撞击来让他难以瞄准</p>
+</li>
+<li><p>团队模式要巧妙利用无敌时间,比如撞人,挖矿</p>
+</li>
+<li><p>滑行很重要,多练习</p>
+</li>
+<li><p>道具使用后是有初速度的.</p>
+</li>
+<li><p>雷达</p>
+</li>
+<li><p>大死斗时尽量把对手往石头上撞</p>
+</li>
+<li><p>团队模式买道具的地方可以切换飞机为医疗机,在大型团战时医疗非常有用,挖矿机器人等也可以被治疗</p>
+</li>
+<li><p>团队可以通过抓落单和攻击地方基地骚扰对面,使他们没法安心挖矿</p>
+</li>
+<li><p>A-Speedster是我最推荐的在alpha center war里</p>
+</li>
+<li><p>火箭鱼雷这些是可以打爆,就算没有爆,也会有微量的速度距离偏移</p>
+</li>
+<li><p>威力 这个技能根据自己喜好点,关键在于找到自己的节奏,比如我对于U-Sniper喜欢不点或点2次,对于A-SpeedSter喜欢点3次.</p>
+</li>
+<li><p>一个人治疗,一个人撞击石头挖矿是很高效的</p>
+</li>
+<li><p>团队模式不要一味升级,知道什么时候应该进攻,进攻谁,什么时候应该挖矿</p>
+</li>
+</ol>
+<h2 id="图片欣赏"><a href="#图片欣赏" class="headerlink" title="图片欣赏"></a>图片欣赏</h2><p>我的游戏昵称 R.S ,在亚洲排行榜可以找到我</p>
+<p>这些图片都是特殊模式的,一般模式截图没什么纪念意义</p>
+<p>先炫耀以下自己的排名(名次高是因为有些高手隔一段时间才上一次分)</p>
+<p><img src="/images/3/rank.png" alt=""></p>
+<p><img src="/images/3/1.png" alt=""></p>
+<p><img src="/images/3/2.png" alt=""></p>
+<p><img src="/images/3/3.png" alt=""></p>
+<p><img src="/images/3/4.png" alt=""></p>
+<p><img src="/images/3/5.png" alt=""></p>
+<p><img src="/images/3/6.png" alt=""></p>
+<p><img src="/images/3/7.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/3.html" title="starblast攻略">https://uesugierii.github.io/articles/3.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Game/" rel="tag"># Game</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/1.html" rel="next" title="远离国产"大"软件">
+                <i class="fa fa-chevron-left"></i> 远离国产"大"软件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/5.html" rel="prev" title="Windows使用技巧">
+                Windows使用技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#矿石"><span class="nav-number">1.</span> <span class="nav-text">矿石</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式"><span class="nav-number">2.</span> <span class="nav-text">模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#飞船"><span class="nav-number">3.</span> <span class="nav-text">飞船</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类别"><span class="nav-number">3.1.</span> <span class="nav-text">类别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技能"><span class="nav-number">3.2.</span> <span class="nav-text">技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制"><span class="nav-number">3.3.</span> <span class="nav-text">控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级所需矿石"><span class="nav-number">3.4.</span> <span class="nav-text">升级所需矿石</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命-大死斗除外"><span class="nav-number">3.5.</span> <span class="nav-text">生命(大死斗除外)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#道具"><span class="nav-number">4.</span> <span class="nav-text">道具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何充值会员"><span class="nav-number">5.</span> <span class="nav-text">如何充值会员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻略and技巧"><span class="nav-number">6.</span> <span class="nav-text">攻略and技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片欣赏"><span class="nav-number">7.</span> <span class="nav-text">图片欣赏</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
