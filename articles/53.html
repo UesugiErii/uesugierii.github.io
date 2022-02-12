@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="总结自 Leetcode深入浅出设计模式 其他优秀参考资料:  设计模式(菜鸟教程) python-patterns 图说设计模式 前言本文是浓缩笔记, 方便日后回忆, 且主要以Python语言视角去考虑, 具体学习请参考上述链接中的内容 构建型模式主要讲述一些创建类时的模式 结构型模式主要讲述如何将类或者对象结合在一起形成更大的结构 行为型模式不仅仅关注类和对象的结构，而且重点关注它们之间的相互">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式笔记">
+<meta property="og:url" content="https://uesugierii.github.io/articles/53.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="总结自 Leetcode深入浅出设计模式 其他优秀参考资料:  设计模式(菜鸟教程) python-patterns 图说设计模式 前言本文是浓缩笔记, 方便日后回忆, 且主要以Python语言视角去考虑, 具体学习请参考上述链接中的内容 构建型模式主要讲述一些创建类时的模式 结构型模式主要讲述如何将类或者对象结合在一起形成更大的结构 行为型模式不仅仅关注类和对象的结构，而且重点关注它们之间的相互">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-02-12T12:17:46.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式笔记">
+<meta name="twitter:description" content="总结自 Leetcode深入浅出设计模式 其他优秀参考资料:  设计模式(菜鸟教程) python-patterns 图说设计模式 前言本文是浓缩笔记, 方便日后回忆, 且主要以Python语言视角去考虑, 具体学习请参考上述链接中的内容 构建型模式主要讲述一些创建类时的模式 结构型模式主要讲述如何将类或者对象结合在一起形成更大的结构 行为型模式不仅仅关注类和对象的结构，而且重点关注它们之间的相互">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/53.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>设计模式笔记 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/53.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">设计模式笔记
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-02-12 00:00:00 / 修改时间：20:17:46" itemprop="dateCreated datePublished" datetime="2022-02-12T00:00:00+08:00">2022-02-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2022/" itemprop="url" rel="index"><span itemprop="name">2022</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结自 <a href="https://leetcode-cn.com/leetbook/detail/design-patterns/" target="_blank" rel="noopener">Leetcode深入浅出设计模式</a></p>
+<p>其他优秀参考资料: </p>
+<p><a href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">设计模式(菜鸟教程)</a></p>
+<p><a href="https://github.com/faif/python-patterns" target="_blank" rel="noopener">python-patterns</a></p>
+<p><a href="https://design-patterns.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="noopener">图说设计模式</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本文是浓缩笔记, 方便日后回忆, 且主要以Python语言视角去考虑, 具体学习请参考上述链接中的内容</strong></p>
+<p>构建型模式主要讲述一些创建类时的模式</p>
+<p>结构型模式主要讲述如何将类或者对象结合在一起形成更大的结构</p>
+<p>行为型模式不仅仅关注类和对象的结构，而且重点关注它们之间的相互作用</p>
+<h3 id="六大原则-Six-principles"><a href="#六大原则-Six-principles" class="headerlink" title="六大原则(Six principles)"></a>六大原则(Six principles)</h3><ul>
+<li><p>开闭原则：一个软件实体如类、模块和函数应该对修改封闭，对扩展开放。</p>
+</li>
+<li><p>单一职责原则：一个类只做一件事，一个类应该只有一个引起它修改的原因。</p>
+</li>
+<li><p>里氏替换原则：子类应该可以完全替换父类。也就是说在使用继承时，只扩展新功能，而不要破坏父类原有的功能。</p>
+</li>
+<li><p>依赖倒置原则：细节应该依赖于抽象，抽象不应依赖于细节。把抽象层放在程序设计的高层，并保持稳定，程序的细节变化由低层的实现层来完成。</p>
+</li>
+<li><p>迪米特法则：又名“最少知道原则”，一个类不应知道自己操作的类的细节，换言之，只和朋友谈话，不和朋友的朋友谈话。</p>
+</li>
+<li><p>接口隔离原则：客户端不应依赖它不需要的接口。一个类对另一个类的依赖应该建立在最小的接口上。接口隔离原则（ISP）拆分非常庞大臃肿的接口成为更小的和更具体的接口，这样客户（client）将会只需要知道他们感兴趣的方法。</p>
+</li>
+</ul>
+<h2 id="构建型模式-Creational-Patterns"><a href="#构建型模式-Creational-Patterns" class="headerlink" title="构建型模式(Creational Patterns)"></a>构建型模式(Creational Patterns)</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>多个类需要初始化时, 不对每个类单独初始化, 而是再用一个大的工厂类包装, 当需要哪个类的实例时, 就调用工厂类的实例生成相应类的实例</p>
+<h3 id="工厂模式-Factory"><a href="#工厂模式-Factory" class="headerlink" title="工厂模式(Factory)"></a>工厂模式(Factory)</h3><p>每个工厂类用方法对每个类的实例化进行包装(一一对应), 需要哪个类的实例就调用哪个类的工厂类实例进行生产</p>
+<h3 id="抽象工厂模式-Abstract-factory"><a href="#抽象工厂模式-Abstract-factory" class="headerlink" title="抽象工厂模式(Abstract factory)"></a>抽象工厂模式(Abstract factory)</h3><p>对所有工厂类再进行一层抽象</p>
+<p><strong>抽象工厂模式适用于增加同类工厂这样的横向扩展需求，不适合新增功能这样的纵向扩展。因为在工厂里增加新方法就对所以已经实现工厂的类都有影响。</strong></p>
+<h3 id="单例模式-Singleton"><a href="#单例模式-Singleton" class="headerlink" title="单例模式(Singleton)"></a>单例模式(Singleton)</h3><p>单例模式非常常见，某个对象全局只需要一个实例时，就可以使用单例模式</p>
+<p>使用类的静态方法返回实例, 有以下两种方法</p>
+<p>饿汉式：变量在声明时便初始化</p>
+<p>懒汉式：先声明一个空变量，需要用时才初始化(按需加载，避免了内存浪费)</p>
+<p><strong>懒汉式需要注意线程安全</strong></p>
+<h3 id="建造者模式-Builder"><a href="#建造者模式-Builder" class="headerlink" title="建造者模式(Builder)"></a>建造者模式(Builder)</h3><p>定义: 将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示</p>
+<p>建造者模式用于创建过程稳定，但配置多变的对象, 好处是不用担心忘了指定某个配置，保证了构建过程是稳定的</p>
+<p>可以定义多个Builder对应不同的配置(减少一大串的传参)</p>
+<h3 id="原型模式-Prototype"><a href="#原型模式-Prototype" class="headerlink" title="原型模式(Prototype)"></a>原型模式(Prototype)</h3><p>定义：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象</p>
+<p>其实就是对类实现一个clone()方法, 这样当我们想要与原来的类的实例一模一样(各种内部变量一样)的实例的时候, 直接调用clone()方法即可</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>工厂方法模式：为每一类对象建立工厂，将对象交由工厂创建，客户端只和工厂打交道</p>
+</li>
+<li><p>抽象工厂模式：为每一类工厂提取出抽象接口，使得新增工厂、替换工厂变得非常容易</p>
+</li>
+<li><p>单例模式：全局使用同一个对象，分为饿汉式和懒汉式。懒汉式有双检锁和内部类两种实现方式</p>
+</li>
+<li><p>建造者模式：用于创建构造过程稳定的对象，不同的 Builder 可以定义不同的配置</p>
+</li>
+<li><p>原型模式：为一个类定义 clone 方法，使得创建相同的对象更方便</p>
+</li>
+</ul>
+<h2 id="结构型模式-Structural-Patterns"><a href="#结构型模式-Structural-Patterns" class="headerlink" title="结构型模式(Structural Patterns)"></a>结构型模式(Structural Patterns)</h2><h3 id="适配器模式-Adapter"><a href="#适配器模式-Adapter" class="headerlink" title="适配器模式(Adapter)"></a>适配器模式(Adapter)</h3><p>定义: 将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作</p>
+<h3 id="桥接模式-Bridge"><a href="#桥接模式-Bridge" class="headerlink" title="桥接模式(Bridge)"></a>桥接模式(Bridge)</h3><p>定义: 将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体模式或接口模式</p>
+<p>有些易变的类(颜色, 形状)没必要搞继承, 可以将易变的类实例化(定义的”实现部分”)后赋值给其他类(定义的”抽象部分”)的实例变量</p>
+<h3 id="组合模式-Composite"><a href="#组合模式-Composite" class="headerlink" title="组合模式(Composite)"></a>组合模式(Composite)</h3><p>定义：又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构</p>
+<p>相似的类搞成树结构</p>
+<p>又有两种子方式: 透明方式与安全方式. </p>
+<p>透明方式枝节点声明所有管理子对象的方法, 违背了接口隔离原则（即全部继承接口方法）。但是可以统一接口调用</p>
+<p>安全方式枝节点只声明必要方法, 叶节点按需声明自己所需方法</p>
+<p>个人觉得Python应该用安全方式, 因为Python不用区分是叶子结点还是枝节点</p>
+<h3 id="装饰模式-Decorator"><a href="#装饰模式-Decorator" class="headerlink" title="装饰模式(Decorator)"></a>装饰模式(Decorator)</h3><p>定义: 动态地给一个对象增加一些额外的职责，就增加对象功能来说，装饰模式比生成子类实现更为灵活</p>
+<p>用类对其他类的实例进行包装, 有以下两种方式</p>
+<ul>
+<li><p>透明装饰模式: 用于增强功能的装饰模式, 仅用于增强功能，并不会改变原有类的功能, 可以无限装饰</p>
+</li>
+<li><p>半透明装饰模式: 没有修改原有的功能，扩展了新的功能, 无法多次装饰</p>
+</li>
+</ul>
+<h3 id="外观模式-Facade"><a href="#外观模式-Facade" class="headerlink" title="外观模式(Facade)"></a>外观模式(Facade)</h3><p>定义: 外部与一个子系统的通信必须通过一个统一的外观对象进行，为子系统中的一组接口提供一个一致的界面，外观模式定义了一个高层接口，这个接口使得这一子系统更加容易使用</p>
+<p>即封装</p>
+<h3 id="享元模式-Flyweight"><a href="#享元模式-Flyweight" class="headerlink" title="享元模式(Flyweight)"></a><a href="https://github.com/faif/python-patterns/blob/master/patterns/structural/flyweight.py" target="_blank" rel="noopener">享元模式(Flyweight)</a></h3><p>定义: 运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式</p>
+<p>享元模式，就是用个map存对象。不生成新的重复的对象给别人，从map中找以前的给别人。和单例的差别是，单例只维护一个对象，享元维护n个对象。</p>
+<h3 id="代理模式-Proxy"><a href="#代理模式-Proxy" class="headerlink" title="代理模式(Proxy)"></a>代理模式(Proxy)</h3><p>定义: 给某一个对象提供一个代理，并由代理对象控制对原对象的引用</p>
+<p>静态代理和装饰模式一模一样, 不同在于装饰模式是为了增强功能或添加功能，代理模式主要是为了加以控制</p>
+<p>动态代理与静态代理的原理一模一样, 只是使用了反射技术节省代码量</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>适配器模式：用于有相关性但不兼容的接口</p>
+</li>
+<li><p>桥接模式：用于同等级的接口互相组合</p>
+</li>
+<li><p>组合模式：用于整体与部分的结构</p>
+</li>
+<li><p>外观模式：体现封装的思想</p>
+</li>
+<li><p>享元模式：体现面向对象的可复用性</p>
+</li>
+<li><p>代理模式：主要用于对某个对象加以控制</p>
+</li>
+</ul>
+<h2 id="行为型模式-Behavioral-Patterns"><a href="#行为型模式-Behavioral-Patterns" class="headerlink" title="行为型模式(Behavioral Patterns)"></a>行为型模式(Behavioral Patterns)</h2><h3 id="责任链模式-Chain-of-responsibility"><a href="#责任链模式-Chain-of-responsibility" class="headerlink" title="责任链模式(Chain of responsibility)"></a><a href="https://github.com/faif/python-patterns/blob/master/patterns/behavioral/chain_of_responsibility.py" target="_blank" rel="noopener">责任链模式(Chain of responsibility)</a></h3><p>定义: 使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止</p>
+<p>责任链主要用于处理<strong>职责相同，程度不同的类</strong></p>
+<h3 id="命令模式-Command"><a href="#命令模式-Command" class="headerlink" title="命令模式(Command)"></a>命令模式(Command)</h3><p>定义: 将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销的操作</p>
+<p>本质是封装”方法调用”: 原先是一个类管理使用好几个类, 命令模式中对被调用类的方法使用新的类进行了进一步封装</p>
+<p>优点: 降低系统的耦合度, 扩展性强, 封装”方法调用”，方便实现 Undo 和 Redo 操作, 灵活性强，可以实现宏命令</p>
+<p>缺点: 会产生大量命令类。增加了系统的复杂性</p>
+<h3 id="解释器模式-Interpreter"><a href="#解释器模式-Interpreter" class="headerlink" title="解释器模式(Interpreter)"></a>解释器模式(Interpreter)</h3><p>定义: 给定一门语言，定义它的文法的一种表示，并定义一个解释器，该解释器使用该表示来解释语言中的句子</p>
+<p>用类的方式解析语言的文法</p>
+<h3 id="迭代器模式-Iterator"><a href="#迭代器模式-Iterator" class="headerlink" title="迭代器模式(Iterator)"></a>迭代器模式(Iterator)</h3><p>定义: 提供一种方法访问一个容器对象中各个元素，而又不需暴露该对象的内部细节</p>
+<p>类提供next和hasNext方法在不暴露内部数据的情况下供他人<strong>依次</strong>访问各个元素</p>
+<h3 id="中介者模式-Mediator"><a href="#中介者模式-Mediator" class="headerlink" title="中介者模式(Mediator)"></a><a href="https://github.com/faif/python-patterns/blob/master/patterns/behavioral/mediator.py" target="_blank" rel="noopener">中介者模式(Mediator)</a></h3><p>定义: 定义一个中介对象来封装一系列对象之间的交互，使原有对象之间的耦合松散，且可以独立地改变它们之间的交互</p>
+<p>中介者模式的缺点也很明显：由于它将所有的职责都移到了中介者类中，也就是说中介类需要处理所有类之间的协调工作，这可能会使中介者演变成一个超级类。所以使用中介者模式时需要权衡利弊。</p>
+<h3 id="备忘录模式-Memento"><a href="#备忘录模式-Memento" class="headerlink" title="备忘录模式(Memento)"></a>备忘录模式(Memento)</h3><p>定义: 在不破坏封装的条件下，通过备忘录对象存储另外一个对象内部状态的快照，在将来合适的时候把这个对象还原到存储起来的状态</p>
+<h3 id="观察者模式-Observer"><a href="#观察者模式-Observer" class="headerlink" title="观察者模式(Observer)"></a><a href="https://github.com/faif/python-patterns/blob/master/patterns/behavioral/observer.py" target="_blank" rel="noopener">观察者模式(Observer)</a></h3><p>定义: 定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新</p>
+<p>对被观察对象的父类实现一个方法, 此方法会在指定条件下被调用并通知所以已绑定的观察者</p>
+<h3 id="状态模式-State"><a href="#状态模式-State" class="headerlink" title="状态模式(State)"></a>状态模式(State)</h3><p>定义: 当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类</p>
+<p>将与特定状态相关的行为封装到一个状态对象中, 当状态改变时, 内部变量绑定的对象也变了, 从而改变其行为(调用绑定对象的地方对于绑定对象的改变是不知道的也无需知道, 因为调用的方式不变)</p>
+<h3 id="策略模式-Strategy"><a href="#策略模式-Strategy" class="headerlink" title="策略模式(Strategy)"></a>策略模式(Strategy)</h3><p>定义: 定义了一系列算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化</p>
+<p>通过结合工厂模式, 传入参数改变对象内部策略的选择和使用</p>
+<p>与状态模式模式很像，对比如下</p>
+<p>*使用策略模式时，程序只需选择一种策略就可以完成某件事。也就是说每个策略类都是完整的，都能独立完成这件事情，如上文所言，强调的是<code>殊途同归</code></p>
+<p>*使用状态模式时，程序需要在不同的状态下不断切换才能完成某件事，每个状态类只能完成这件事的一部分，需要所有的状态类组合起来才能完整的完成这件事，强调的是<code>随势而动</code></p>
+<h3 id="模板方法模式-Template-method"><a href="#模板方法模式-Template-method" class="headerlink" title="模板方法模式(Template method)"></a>模板方法模式(Template method)</h3><p>定义: 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤</p>
+<p>被继承的父类定义大体的逻辑过程, 其中一些步骤由子类具体实现</p>
+<p>官方例子蛮好的, 直接抄过来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板父类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">LeaveRequest</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"本人"</span>);</span><br><span class="line">        System.out.print(name());</span><br><span class="line">        System.out.print(<span class="string">"因"</span>);</span><br><span class="line">        System.out.print(reason());</span><br><span class="line">        System.out.print(<span class="string">"需请假"</span>);</span><br><span class="line">        System.out.print(duration());</span><br><span class="line">        System.out.print(<span class="string">"天，望批准"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> String <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> String <span class="title">reason</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> String <span class="title">duration</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类实现细节</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLeaveRequest</span> <span class="keyword">extends</span> <span class="title">LeaveRequest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"阿笠"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">String <span class="title">reason</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"参加力扣周赛"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">String <span class="title">duration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"0.5"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="comment">// 输出：本人阿笠因参加力扣周赛需请假0.5天，望批准</span></span><br><span class="line"><span class="keyword">new</span> MyLeaveRequest().request();</span><br></pre></td></tr></table></figure>
+<h3 id="访问者模式-Visitor"><a href="#访问者模式-Visitor" class="headerlink" title="访问者模式(Visitor)"></a><a href="https://github.com/faif/python-patterns/blob/master/patterns/behavioral/visitor.py" target="_blank" rel="noopener">访问者模式(Visitor)</a></h3><p>定义: 表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作</p>
+<p>在访问者中定义如何处理某对象结构中的各元素, 对于定义后半句, 新操作则可以用新的访问者类实现</p>
+<h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>责任链模式：处理职责相同，程度不同的对象，使其在一条链上传递</p>
+</li>
+<li><p>命令模式：封装“方法调用”，将行为请求者和行为实现者解耦</p>
+</li>
+<li><p>解释器模式：定义自己的语法规则</p>
+</li>
+<li><p>迭代器模式：定义 next() 方法和 hasNext() 方法，让外部类使用这两个方法来遍历列表，以达到隐藏列表内部细节的目的</p>
+</li>
+<li><p>中介者模式：通过引入中介者，将网状耦合结构变成星型结构</p>
+</li>
+<li><p>备忘录模式：存储对象的状态，以便恢复</p>
+</li>
+<li><p>观察者模式：处理一对多的依赖关系，被观察的对象改变时，多个观察者都能收到通知</p>
+</li>
+<li><p>状态模式：关于多态的设计模式，每个状态类处理对象的一种状态</p>
+</li>
+<li><p>策略模式：殊途同归，用多种方法做同一件事</p>
+</li>
+<li><p>模板方法模式：关于继承的设计模式，父类是子类的模板</p>
+</li>
+<li><p>访问者模式：将数据的结构和对数据的操作分离</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/53.html" title="设计模式笔记">https://uesugierii.github.io/articles/53.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Note/" rel="tag"># Note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/52.html" rel="next" title="推荐系统处理数据总结">
+                <i class="fa fa-chevron-left"></i> 推荐系统处理数据总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#六大原则-Six-principles"><span class="nav-number">1.1.</span> <span class="nav-text">六大原则(Six principles)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建型模式-Creational-Patterns"><span class="nav-number">2.</span> <span class="nav-text">构建型模式(Creational Patterns)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式"><span class="nav-number">2.1.</span> <span class="nav-text">简单工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式-Factory"><span class="nav-number">2.2.</span> <span class="nav-text">工厂模式(Factory)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式-Abstract-factory"><span class="nav-number">2.3.</span> <span class="nav-text">抽象工厂模式(Abstract factory)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式-Singleton"><span class="nav-number">2.4.</span> <span class="nav-text">单例模式(Singleton)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者模式-Builder"><span class="nav-number">2.5.</span> <span class="nav-text">建造者模式(Builder)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式-Prototype"><span class="nav-number">2.6.</span> <span class="nav-text">原型模式(Prototype)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.7.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构型模式-Structural-Patterns"><span class="nav-number">3.</span> <span class="nav-text">结构型模式(Structural Patterns)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式-Adapter"><span class="nav-number">3.1.</span> <span class="nav-text">适配器模式(Adapter)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式-Bridge"><span class="nav-number">3.2.</span> <span class="nav-text">桥接模式(Bridge)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合模式-Composite"><span class="nav-number">3.3.</span> <span class="nav-text">组合模式(Composite)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式-Decorator"><span class="nav-number">3.4.</span> <span class="nav-text">装饰模式(Decorator)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外观模式-Facade"><span class="nav-number">3.5.</span> <span class="nav-text">外观模式(Facade)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#享元模式-Flyweight"><span class="nav-number">3.6.</span> <span class="nav-text">享元模式(Flyweight)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式-Proxy"><span class="nav-number">3.7.</span> <span class="nav-text">代理模式(Proxy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">3.8.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行为型模式-Behavioral-Patterns"><span class="nav-number">4.</span> <span class="nav-text">行为型模式(Behavioral Patterns)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#责任链模式-Chain-of-responsibility"><span class="nav-number">4.1.</span> <span class="nav-text">责任链模式(Chain of responsibility)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式-Command"><span class="nav-number">4.2.</span> <span class="nav-text">命令模式(Command)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释器模式-Interpreter"><span class="nav-number">4.3.</span> <span class="nav-text">解释器模式(Interpreter)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器模式-Iterator"><span class="nav-number">4.4.</span> <span class="nav-text">迭代器模式(Iterator)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中介者模式-Mediator"><span class="nav-number">4.5.</span> <span class="nav-text">中介者模式(Mediator)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备忘录模式-Memento"><span class="nav-number">4.6.</span> <span class="nav-text">备忘录模式(Memento)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式-Observer"><span class="nav-number">4.7.</span> <span class="nav-text">观察者模式(Observer)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态模式-State"><span class="nav-number">4.8.</span> <span class="nav-text">状态模式(State)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略模式-Strategy"><span class="nav-number">4.9.</span> <span class="nav-text">策略模式(Strategy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板方法模式-Template-method"><span class="nav-number">4.10.</span> <span class="nav-text">模板方法模式(Template method)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问者模式-Visitor"><span class="nav-number">4.11.</span> <span class="nav-text">访问者模式(Visitor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-2"><span class="nav-number">4.12.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
