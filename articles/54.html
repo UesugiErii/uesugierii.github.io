@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文主要目的是分享一组数据和相关代码. 这组数据当使用前4个数据当初始聚类中心时最后只会收敛到3个聚类中心, 当更改初始聚类中心后不会发生此情况, 我也尝试大量生成随机数据想统计这种情况发生概率, 但是一次也没有重现成功 数据下载地址https://github.com/UesugiErii/uesugierii.github.io/tree/master/code/54/data 聚类代码123">
+<meta name="keywords" content="k-means,聚类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k-means聚类收敛至k-1个中心">
+<meta property="og:url" content="https://uesugierii.github.io/articles/54.html">
+<meta property="og:site_name" content="zx&#39;s blog">
+<meta property="og:description" content="本文主要目的是分享一组数据和相关代码. 这组数据当使用前4个数据当初始聚类中心时最后只会收敛到3个聚类中心, 当更改初始聚类中心后不会发生此情况, 我也尝试大量生成随机数据想统计这种情况发生概率, 但是一次也没有重现成功 数据下载地址https://github.com/UesugiErii/uesugierii.github.io/tree/master/code/54/data 聚类代码123">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-02-22T11:28:02.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k-means聚类收敛至k-1个中心">
+<meta name="twitter:description" content="本文主要目的是分享一组数据和相关代码. 这组数据当使用前4个数据当初始聚类中心时最后只会收敛到3个聚类中心, 当更改初始聚类中心后不会发生此情况, 我也尝试大量生成随机数据想统计这种情况发生概率, 但是一次也没有重现成功 数据下载地址https://github.com/UesugiErii/uesugierii.github.io/tree/master/code/54/data 聚类代码123">
+
+
+
+
+
+
+  <link rel="canonical" href="https://uesugierii.github.io/articles/54.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>k-means聚类收敛至k-1个中心 | zx's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124055729-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124055729-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uesugierii.github.io/articles/54.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zx">
+      <meta itemprop="description" content="编程,技巧,杂谈">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">k-means聚类收敛至k-1个中心
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-02-22 00:00:00 / 修改时间：19:28:02" itemprop="dateCreated datePublished" datetime="2022-02-22T00:00:00+08:00">2022-02-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2022/" itemprop="url" rel="index"><span itemprop="name">2022</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要目的是分享一组数据和相关代码. 这组数据当使用前4个数据当初始聚类中心时最后只会收敛到3个聚类中心, 当更改初始聚类中心后不会发生此情况, 我也尝试大量生成随机数据想统计这种情况发生概率, 但是一次也没有重现成功</p>
+<h2 id="数据下载地址"><a href="#数据下载地址" class="headerlink" title="数据下载地址"></a>数据下载地址</h2><p><a href="https://github.com/UesugiErii/uesugierii.github.io/tree/master/code/54/data" target="_blank" rel="noopener">https://github.com/UesugiErii/uesugierii.github.io/tree/master/code/54/data</a></p>
+<h2 id="聚类代码"><a href="#聚类代码" class="headerlink" title="聚类代码"></a>聚类代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">'0'</span></span><br><span class="line">os.environ[<span class="string">"TF_FORCE_GPU_ALLOW_GROWTH"</span>] = <span class="string">"true"</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vector.pkl'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = pickle.load(f)</span><br><span class="line"></span><br><span class="line">print(data.shape)  <span class="comment"># (20, 64)</span></span><br><span class="line"></span><br><span class="line">data = data[<span class="keyword">None</span>, :, :]</span><br><span class="line">k = <span class="number">4</span>  <span class="comment"># 最终结果的聚类中心数</span></span><br><span class="line">n = <span class="number">20</span>  <span class="comment"># 数据长度</span></span><br><span class="line">mask = np.ones((<span class="number">1</span>, <span class="number">20</span>), dtype=np.float32)</span><br><span class="line">mask[<span class="number">0</span>, <span class="number">9</span>:] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">data = tf.multiply(data, mask[:, :, <span class="keyword">None</span>])</span><br><span class="line"></span><br><span class="line">num_segments = <span class="number">1</span> + k  <span class="comment"># 几个聚类中心, 开始的1对应值0是给padding的(用mask0遮住的)</span></span><br><span class="line">centers = data[:, :k, :]  <span class="comment"># bs, k, dim</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># belong 代表每行数据中每个物品属于第几个聚类</span></span><br><span class="line">last_belong = tf.zeros((data.shape[<span class="number">0</span>], n), dtype=tf.int32)</span><br><span class="line">belong = tf.ones((data.shape[<span class="number">0</span>], n), dtype=tf.int32)</span><br><span class="line"></span><br><span class="line">iter_n = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> tf.reduce_any(tf.not_equal(last_belong, belong)):</span><br><span class="line">    distance = tf.reduce_sum(</span><br><span class="line">        tf.math.square(</span><br><span class="line">            tf.tile(data[:, :, <span class="keyword">None</span>, :], [<span class="number">1</span>, <span class="number">1</span>, k, <span class="number">1</span>])</span><br><span class="line">            -</span><br><span class="line">            tf.tile(centers[:, <span class="keyword">None</span>, :, :], [<span class="number">1</span>, n, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">        ),</span><br><span class="line">        axis=<span class="number">-1</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    last_belong = belong</span><br><span class="line"></span><br><span class="line">    belong = tf.argmin(distance, axis=<span class="number">-1</span>, output_type=tf.dtypes.int32) + <span class="number">1</span></span><br><span class="line">    belong = tf.multiply(belong, tf.cast(mask, belong.dtype))</span><br><span class="line"></span><br><span class="line">    num_rows = tf.shape(belong)[<span class="number">0</span>]</span><br><span class="line">    rows_idx = tf.range(num_rows)</span><br><span class="line">    segment_ids_per_row = belong + num_segments * tf.expand_dims(rows_idx, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    centers = tf.math.unsorted_segment_mean(data, segment_ids_per_row, num_segments * num_rows)</span><br><span class="line">    centers = tf.reshape(centers, (num_rows, num_segments, data.shape[<span class="number">-1</span>]))</span><br><span class="line"></span><br><span class="line">    centers = centers[:, <span class="number">1</span>:, :]</span><br><span class="line"></span><br><span class="line">    iter_n += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    print(belong)</span><br><span class="line"></span><br><span class="line"><span class="comment"># tf.Tensor([[1 2 3 4 2 2 1 2 4 0 0 0 0 0 0 0 0 0 0 0]], shape=(1, 20), dtype=int32)</span></span><br><span class="line"><span class="comment"># tf.Tensor([[1 3 3 1 3 4 1 4 4 0 0 0 0 0 0 0 0 0 0 0]], shape=(1, 20), dtype=int32)</span></span><br><span class="line"><span class="comment"># tf.Tensor([[1 3 3 1 3 4 1 4 4 0 0 0 0 0 0 0 0 0 0 0]], shape=(1, 20), dtype=int32)</span></span><br></pre></td></tr></table></figure>
+<h2 id="统计出现频率"><a href="#统计出现频率" class="headerlink" title="统计出现频率"></a>统计出现频率</h2><p>我用了下面这段代码大量生成随机数据想统计上述情况出现的概率, 但是一次也没出现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 尝试随机生成数据, 测试聚类后中心小于目标值的概率</span></span><br><span class="line"><span class="comment"># 3.py加速版本</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">'0'</span></span><br><span class="line">os.environ[<span class="string">"TF_FORCE_GPU_ALLOW_GROWTH"</span>] = <span class="string">"true"</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">k = <span class="number">4</span>  <span class="comment"># 最终结果的聚类中心数</span></span><br><span class="line">n = <span class="number">20</span>  <span class="comment"># 数据长度</span></span><br><span class="line">batch_size = <span class="number">20480</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@tf.function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    data = tf.random.normal(shape=(batch_size, n, <span class="number">64</span>), mean=<span class="number">0.0</span>, stddev=<span class="number">0.01</span>, dtype=tf.dtypes.float32)</span><br><span class="line"></span><br><span class="line">    len_ = tf.cast(tf.experimental.numpy.random.randint(<span class="number">7</span>, n, dtype=tf.experimental.numpy.int32), tf.dtypes.int32)</span><br><span class="line">    mask1 = tf.ones((batch_size, len_), dtype=np.float32)</span><br><span class="line">    mask0 = tf.zeros((batch_size, n - len_), dtype=np.float32)</span><br><span class="line">    mask = tf.concat([mask1, mask0], axis=<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">    data = tf.multiply(data, mask[:, :, <span class="keyword">None</span>])</span><br><span class="line"></span><br><span class="line">    num_segments = <span class="number">1</span> + k  <span class="comment"># 几个聚类中心, 开始的1对应值0是给padding的(用mask0遮住的)</span></span><br><span class="line">    centers = data[:, :k, :]  <span class="comment"># bs, k, dim</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># belong 代表每行数据中每个物品属于第几个聚类</span></span><br><span class="line">    last_belong = tf.zeros((data.shape[<span class="number">0</span>], n), dtype=tf.int32)</span><br><span class="line">    belong = tf.ones((data.shape[<span class="number">0</span>], n), dtype=tf.int32)</span><br><span class="line"></span><br><span class="line">    iter_n = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> tf.reduce_any(tf.not_equal(last_belong, belong)):</span><br><span class="line">        distance = tf.reduce_sum(</span><br><span class="line">            tf.math.square(</span><br><span class="line">                tf.tile(data[:, :, <span class="keyword">None</span>, :], [<span class="number">1</span>, <span class="number">1</span>, k, <span class="number">1</span>])</span><br><span class="line">                -</span><br><span class="line">                tf.tile(centers[:, <span class="keyword">None</span>, :, :], [<span class="number">1</span>, n, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">            ),</span><br><span class="line">            axis=<span class="number">-1</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        last_belong = belong</span><br><span class="line"></span><br><span class="line">        belong = tf.argmin(distance, axis=<span class="number">-1</span>, output_type=tf.dtypes.int32) + <span class="number">1</span></span><br><span class="line">        belong = tf.multiply(belong, tf.cast(mask, belong.dtype))</span><br><span class="line"></span><br><span class="line">        num_rows = tf.shape(belong)[<span class="number">0</span>]</span><br><span class="line">        rows_idx = tf.range(num_rows)</span><br><span class="line">        segment_ids_per_row = belong + num_segments * tf.expand_dims(rows_idx, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        centers = tf.math.unsorted_segment_mean(data, segment_ids_per_row, num_segments * num_rows)</span><br><span class="line">        centers = tf.reshape(centers, (num_rows, num_segments, data.shape[<span class="number">-1</span>]))</span><br><span class="line"></span><br><span class="line">        centers = centers[:, <span class="number">1</span>:, :]</span><br><span class="line"></span><br><span class="line">        iter_n += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(belong)</span></span><br><span class="line"></span><br><span class="line">    belong = tf.stop_gradient(belong)</span><br><span class="line"></span><br><span class="line">    found = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ni <span class="keyword">in</span> range(<span class="number">1</span>, k + <span class="number">1</span>):</span><br><span class="line">        local_mask = tf.equal(belong, ni)</span><br><span class="line">        found += batch_size - tf.math.reduce_sum(</span><br><span class="line">            tf.cast(tf.math.reduce_any(local_mask, axis=<span class="number">1</span>), tf.int32),</span><br><span class="line">            axis=<span class="number">0</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> found</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">total = <span class="number">0</span></span><br><span class="line">total_found = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    total += <span class="number">1</span></span><br><span class="line">    total_found += f()</span><br><span class="line">    <span class="keyword">if</span> total % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">        print(total_found, total)</span><br></pre></td></tr></table></figure>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorboard.plugins <span class="keyword">import</span> projector</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vector.pkl'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = pickle.load(f)</span><br><span class="line">d = d[:<span class="number">9</span>, :]</span><br><span class="line"></span><br><span class="line">log_dir = <span class="string">'/home/zx/workspace/tfb'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(log_dir):</span><br><span class="line">    os.makedirs(log_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Save Labels separately on a line-by-line manner.</span></span><br><span class="line"><span class="keyword">with</span> open(os.path.join(log_dir, <span class="string">'metadata.tsv'</span>), <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(d.shape[<span class="number">0</span>]):</span><br><span class="line">        f.write(<span class="string">f"<span class="subst">&#123;i&#125;</span>\n"</span>)</span><br><span class="line"></span><br><span class="line">weights = tf.Variable(initial_value=d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a checkpoint from embedding, the filename and key are the</span></span><br><span class="line"><span class="comment"># name of the tensor.</span></span><br><span class="line">checkpoint = tf.train.Checkpoint(embedding=weights)</span><br><span class="line">checkpoint.save(os.path.join(log_dir, <span class="string">"embedding.ckpt"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up config.</span></span><br><span class="line">config = projector.ProjectorConfig()</span><br><span class="line">embedding = config.embeddings.add()</span><br><span class="line"><span class="comment"># The name of the tensor will be suffixed by `/.ATTRIBUTES/VARIABLE_VALUE`.</span></span><br><span class="line">embedding.tensor_name = <span class="string">"embedding/.ATTRIBUTES/VARIABLE_VALUE"</span></span><br><span class="line">embedding.metadata_path = <span class="string">'metadata.tsv'</span></span><br><span class="line">projector.visualize_embeddings(log_dir, config)</span><br><span class="line"></span><br><span class="line"><span class="comment"># tensorboard --host 0.0.0.0 --logdir /home/zx/workspace/tfb</span></span><br><span class="line"><span class="comment"># http://&#123;your_ip&#125;:6006/#projector</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zx</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://uesugierii.github.io/articles/54.html" title="k-means聚类收敛至k-1个中心">https://uesugierii.github.io/articles/54.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Note/" rel="tag"># Note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/53.html" rel="next" title="设计模式笔记">
+                <i class="fa fa-chevron-left"></i> 设计模式笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="zx" />
+            
+              <p class="site-author-name" itemprop="name">zx</p>
+              <p class="site-description motion-element" itemprop="description">编程,技巧,杂谈</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/UesugiErii" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据下载地址"><span class="nav-number">1.</span> <span class="nav-text">数据下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类代码"><span class="nav-number">2.</span> <span class="nav-text">聚类代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计出现频率"><span class="nav-number">3.</span> <span class="nav-text">统计出现频率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">4.</span> <span class="nav-text">可视化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zx</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
